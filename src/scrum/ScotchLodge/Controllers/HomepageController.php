@@ -23,19 +23,9 @@ class HomepageController extends Controller {
     $globals = $this->getGlobals();
 
     $prof_srv = new ProfileService($em, $app);
-    $members = $prof_srv->showalluser();
-    //$members = ProfileService::showalluser();
-    //$events = EventService::LatestEvents();
-    $events_five = EventService::LatestEvents(3);
-    $events_one = EventService::LatestEvent();
-
-    $commentSrvc = new CommentService($em, $app);
-    $comments = $commentSrvc->retrieveComments(3);
+    $members = $prof_srv->showalluser();    
     
-    $reviewSrvc = new WhiskyService($em, $app);
-    $reviews = $reviewSrvc->retrieveReviews(3);
-    
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events_five' => $events_five, 'comments' => $comments, 'reviews' => $reviews));
+    $this->getApp()->render('homepage.html.twig', ['members' => $members]);
   }
 
   public function simplifydRoutes($routes) {

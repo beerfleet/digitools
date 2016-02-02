@@ -1,7 +1,7 @@
 scrum\ScotchLodge\Entities\User:
   type: entity
   repositoryClass: scrum\ScotchLodge\Entities\Repo\UserRepo
-  table: whisky_user  
+  table: digi_user  
   id:
     id:
       type: integer
@@ -100,4 +100,3 @@ scrum\ScotchLodge\Entities\User:
       options:
         default: 0
         unsigned: true
-      

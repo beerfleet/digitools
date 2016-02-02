@@ -8,12 +8,12 @@
     <div class="container welcome">
       {% if globals.user is defined and globals.user is not null %}
       {% set user = globals.user %}
-        <h1>Have a drink, {{ globals.user.username }}</h1>
-      {% if user.isAdmin() %}
-        <span class="status">Logged in as admin</span>
-      {% else %}
-        <span class="status">Logged in as user</span>
-      {% endif %}
+        <h1>{{ globals.user.username }} is logged on</h1>
+        {% if user.isAdmin() %}
+          <span class="status">Logged in as admin</span>
+        {% else %}
+          <span class="status">Logged in as user</span>
+        {% endif %}
       {% else %}
         <h1>Welcome</h1>
       {% endif %}

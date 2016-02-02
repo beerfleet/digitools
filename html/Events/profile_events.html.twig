@@ -1,0 +1,30 @@
+{# THIS TEMPLATE EXPECTS 'events' objects #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  User Events
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container form">
+    <h1>Events made by <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': user.id} ) }}">{{ user.username }}</a> </h1>
+    {% for event in events %}
+      <div class="topline">
+          <b>
+              <a href="{{ globals.app.urlFor('show_event_by_id', {'id': event.id})}}">{{ event.title }}</a>
+          </b>
+      </div>
+      <div>
+          Datum: {{ event.event_date|date('d-m-Y') }}
+          {% if event.event_stop is not null %}
+              Tot: {{ event.event_stop|date('d-m-Y') }}
+          {% endif %}
+      </div>
+      <div>
+          {{ event.address }} - {{ event.postcode.postcode }} {{ event.postcode.town }}
+      </div>
+    {% endfor %}
+  </div>
+    
+{% endblock content %}

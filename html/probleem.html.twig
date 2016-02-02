@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+  {% block messages %}
+
+    {% block error_messages %}
+      {{ probleem }}
+    {% endblock error_messages %}
+
+  {% endblock messages %}
+{% endblock content %}

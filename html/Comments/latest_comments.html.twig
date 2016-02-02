@@ -1,0 +1,22 @@
+<div id="latest_comments" class="">
+  <h3>Latest Comments</h3>
+  {% set latest = comments.latest %}
+  <dl>
+    {% for comm in latest %}
+      	<dt>{{ whisky.review_date|date('Y-m-d') }} - 
+          <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.user.id } ) }}">{{ comm.user.username }}</a> said:
+      	</dt>
+      	<dd class="review">
+          {% if comm.review_comment is not null %}
+      		<a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comm.review_comment.whisky.id } ) }}">
+      			"{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}"
+      		</a>
+          {% else %}
+          <a href="{{ globals.app.urlFor('show_event_by_id', {'id': comm.event_comment.event.id } ) }}">
+            "{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}"
+          </a>
+          {% endif %}
+      	</dd>
+    {% endfor %}
+  </dl>
+</div>

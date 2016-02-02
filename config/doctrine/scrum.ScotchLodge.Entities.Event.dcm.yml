@@ -1,0 +1,59 @@
+scrum\ScotchLodge\Entities\Event:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Entities\Repo\ ...
+  table: event
+  
+  indexes:
+    title_idx:
+      columns: [ title ]
+    event_postcode_idx:
+      columns: [ postcode_id ]
+  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+        
+  manyToMany:
+    whiskys:
+      targetEntity: Whisky
+      mappedBy: events
+      
+  manyToOne:
+    postcode:
+      targetEntity: Postcode
+      inversedBy: events
+      joinColumn:
+        name: postcode_id
+        referencedColumnName: id
+        
+    created_by:
+      targetEntity: User
+      inversedBy: events_created
+      joinColumn:
+        name: created_by
+        referencedColumnName: id
+   
+  oneToMany:
+    event_comments:
+      targetEntity: CommentEvent
+      mappedBy: event
+      
+    event_presences:
+      targetEntity: EventPresence
+      mappedBy: event
+   
+  fields:
+    title:
+      type: string
+      length: 45
+    address:
+      type: string
+      length:
+    event_date:
+      type: datetime
+    event_stop:
+      type: datetime
+    description:
+      type: text

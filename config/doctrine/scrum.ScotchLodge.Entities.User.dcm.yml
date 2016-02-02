@@ -1,0 +1,103 @@
+scrum\ScotchLodge\Entities\User:
+  type: entity
+  repositoryClass: scrum\ScotchLodge\Entities\Repo\UserRepo
+  table: whisky_user  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  manyToOne:
+    postcode:
+      targetEntity: Postcode
+      inversedBy: users
+      joinColumn:
+        name: postcode_id
+        referencedColumnName: id
+
+  oneToMany:
+    user_likes:
+      targetEntity: CommentLike
+      mappedBy: user
+      
+    comments:
+      targetEntity: Comment
+      mappedBy: user
+
+    present_in_events:
+      targetEntity: EventPresence
+      mappedBy: user
+      
+    whisky_likes:
+      targetEntity: Whisky
+      mappedBy: user
+    
+    whiskys_created:
+      targetEntity: Whisky
+      mappedBy: created_by
+      
+    events_created:
+      targetEntity: Event
+      mappedBy: created_by
+     
+
+  fields:
+    username:
+      type: string
+      length: 12
+      unique: true
+      nullable: false
+    email:
+      type: string
+      length: 255
+      unique: true
+      nullable: false
+    enabled:
+      type: integer
+      options:
+        default: 1
+        unsigned: true
+    password:
+      type: string
+      length: 60
+    last_login:
+      type: datetime
+    first_name:
+      type: string
+      length: 45
+    surname:
+      type: string
+      length: 80
+    address:
+      type: string
+      length: 255
+    can_review:
+      type: integer
+      options:
+        default: 0
+        unsigned: true
+    can_create_category:
+      type: integer
+      options:
+        default: 0
+        unsigned: true
+    can_create_event:
+      type: integer
+      options:
+        default: 0
+        unsigned: true
+    is_admin:
+      type: integer
+      options:
+        default: 0
+        unsigned: true
+    password_token:
+      type: string
+      length: 64
+    is_deleted:
+      type: integer
+      options:
+        default: 0
+        unsigned: true
+      

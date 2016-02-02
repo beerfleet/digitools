@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Register
+{% endblock title %}
+
+{% block content %}
+
+  {% set app = globals.app %}
+
+  <div class="container form">
+    <h1>Whisky advanced search</h1>
+    <form action="{{ app.urlFor('advanced_search_whisky_result') }}" method="POST" novalidate>
+      <div class="form-group cf">
+
+        <label for="Region">Region</label>
+        <select class="form-control"  id="region" name="region" >
+          <option value="">All regions</option>
+          {% for region in regions %}
+            <option value="{{ region.id }}">{{ region.getName }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="distillery">Distillery</label>
+        <select class="form-control"  id="distillery" name="distillery" >
+          <option value="">All distilleries</option>
+          {% for distillery in distillerys %}
+            <option   value="{{ distillery.id }}">{{ distillery.getName }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="bottler">Bottler</label> 
+        <select class="form-control"  id="bottler" name="bottler" >
+          <option value="">All bottlers</option>
+          {% for bottler in bottlers %}
+            <option   value="{{ bottler.id }}">{{ bottler.name }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="barrel">Barrel</label> 
+        <select class="form-control"  id="barrel" name="barrel" >
+          <option value="">All barrels</option>
+          {% for barrel in barrels %}
+            <option   value="{{ barrel.id }}">{{ barrel.casktype }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="blend">Blend</label> 
+        <select class="form-control"  id="blend" name="blend" >
+          <option value="">All blends</option>
+          {% for blend in blends %}
+            <option   value="{{ blend.id }}">{{ blend.blend }}</option>
+          {% endfor %}
+        </select>
+
+        <div class="form-group">
+          <label for="min_age">Minimum age</label>
+          <input type="text" id="min_age" name="min_age" />
+        </div>
+
+        <div class="form-group">
+          <label for="max_age">Maximum age</label>
+          <input type="text" id="max_age" name="max_age" />
+        </div>
+
+      </div>
+      <input class="form-control btn submit btn-default" type="submit" id="verzend" name="search" value="Search" />
+    </form>
+    <a href="/" id="return_to_main" class="btn submit btn-default">
+      Return to main menu
+    </a> 
+  {% endblock content %}
+
+  {#<div class="form-group cf">
+    <div class="sliders cf">
+      <label for="age">Age:</label> 
+      <input id="age" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
+      <span id="ageCurrentSliderValLabel">Current age selected: <span id="ageSliderVal"></span> year</span>
+      <p>&nbsp;</p>
+      <label for="abv">ABV: </label> 
+      <input id="abv" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
+      <span id="abvCurrentSliderValLabel">Current value selected: <span id="abvSliderVal"></span> %</span>
+    </div>
+    <label for="name">Name</label>
+    <input class="form-control" type="text" id="name" name="name" value="" />        
+  </div>
+
+</form>
+</div>
+
+
+{#
+{% block extrajs %}   
+{# Slider for bootstrap http://seiyria.github.io/bootstrap-slider/ 
+<script type="text/javascript" src="/js/bootstrap/js/bootstrap-slider.js"></script>     
+<script>         
+$("#age").slider();
+$("#age").on("slide", function(slideEvt) {
+$("#ageSliderVal").text(slideEvt.value);
+});
+
+$("#abv").slider();
+$("#abv").on("slide", function(slideEvt) {
+$("#abvSliderVal").text(slideEvt.value);
+});
+
+</script>
+{% endblock extrajs %}
+#}

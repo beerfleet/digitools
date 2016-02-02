@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    New whisky
+{% endblock title %}
+
+{% block content %}
+  
+    {% set app = globals.app %}
+    
+    <div class="container form">
+      <h1>New Whisky</h1>
+      <form action="{{ app.urlFor('new_whisky_process') }}" method="POST" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input class="form-control" type="text" id="name" name="name" value="{% if app.request.isPost() %}{{app.request.post('name')}}{% endif %}" />
+          <label for="image">Image</label>
+          <input class="form-control" type="file" id="image" name="image" value="{% if app.request.isPost() %}{{app.request.post('image')}}{% endif %}" />
+          <label for="region">Region</label>
+          <select class="form-control" id="region" name="region">
+            {% for reg in regions %}
+                <option value="{{ reg.id }}" {% if reg.id == app.request.post('region') %} selected="selected" {% endif %}>{{ reg.name }}</option>
+            {% endfor %}
+          </select>
+          <label for="distillery">Distillery</label>
+          <select class="form-control" id="distillery" name="distillery">
+            {% for dist in distillerys %}
+                <option value="{{ dist.id }}" {% if dist.id == app.request.post('distillery') %} selected="selected" {% endif %}>{{ dist.name }}</option>
+            {% endfor %}
+          </select>
+          <label for="bottlery">Bottlery</label>
+          <select class="form-control" id="bottlery" name="bottlery">
+            {% for dist in distillerys %}
+                <option value="{{ dist.id }}" {% if dist.id == app.request.post('bottlery') %} selected="selected" {% endif %}>{{ dist.name }}</option>
+            {% endfor %}
+          </select>
+          <label for="price">Price</label>
+          <input class="form-control" type="number" id="price" name="price" value="{% if app.request.isPost() %}{{app.request.post('price')}}{% endif %}" />
+          <label for="age">Age</label>
+          <input class="form-control" type="number" id="age" name="age" value="{% if app.request.isPost() %}{{app.request.post('age')}}{% endif %}" />
+          <label for="alcohol">Alcohol</label>
+          <input class="form-control" type="number" id="alcohol" name="alcohol" value="{% if app.request.isPost() %}{{app.request.post('alcohol')}}{% endif %}" />
+          <label for="barrel">Barrel</label>
+          <select class="form-control" id="barrel" name="barrel">
+            {% for bar in barrels %}
+                <option value="{{ bar.id }}" {% if bar.id == app.request.post('barrel') %} selected="selected" {% endif %}>{{ bar.casktype }}</option>
+            {% endfor %}
+          </select>   
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description">{% if app.request.isPost() %}{{app.request.post('description')}}{% endif %}</textarea>          
+          <label for="blend">Blend</label>
+          <select class="form-control" id="blend" name="blend">
+            {% for blend in blends %}
+                <option value="{{ blend.id }}" {% if blend.id == app.request.post('blend') %} selected="selected" {% endif %}>{{ blend.blend }}</option>
+            {% endfor %}
+          </select>   
+          <label for="distilled">Date distilled</label>
+          <input class="form-control" type="date" min="{{"now"|date('d/m/Y')}}" id="distilled" name="distilled" value="{% if app.request.isPost() %}{{app.request.post('distilled')}}{% endif %}" />
+          <label for="bottled">Date bottled</label>
+          <input class="form-control" type="date" min="{{"now"|date('d/m/Y')}}" id="bottled" name="bottled" value="{% if app.request.isPost() %}{{app.request.post('bottled')}}{% endif %}" />
+          <label for="country">Country</label>
+          <select class="form-control" id="country" name="country">
+            {% for country in countries %}
+                <option value="{{ country.id }}" {% if country.id == app.request.post('country') %} selected="selected" {% endif %}>{{ country.country_name }}</option>
+            {% endfor %}
+          </select>   
+          <label for="capacity">Capacity</label>
+          <input class="form-control" type="number" id="capacity" name="capacity" value="{% if app.request.isPost() %}{{app.request.post('capacity')}}{% endif %}" />
+        
+        <div id="score">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        {% for category in categories %}         
+          {% set catid =  category.getID  %}
+          <label for="cat{{ catid }}">{{ category.category }}</label>  
+          <input id="cat{{ catid }}" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="0.5" data-slider-value="0" />
+          <input id="catparam{{ catid }}" name="catparam[]" type="hidden" value="" />
+          <span id="cat{{ catid }}CurrentSliderValLabel">Current value selected: <span id="cat{{ catid }}SliderVal"></span> / 10</span>                
+         <p>&nbsp;</p>
+            {% endfor %}
+            
+           
+          </div>
+             <button type="button" data-catid="2" class="btn btn-default" onClick="addcatinform()">Add a new category</button>
+            
+        </div>
+ 
+        <input class="form-control btn submit btn-default" type="submit" id="verzend" name="whisky" value="Add whisky" />
+
+      </form>
+    </div>
+{% endblock content %}
+
+
+{% block extrajs %}   
+    {# Slider for bootstrap http://seiyria.github.io/bootstrap-slider/ #}
+   <script type="text/javascript" src="/js/bootstrap/js/bootstrap-slider.js"></script>     
+   <script> 
+   {% for category in categories %}   
+    {% set catid =  category.getID  %}
+   $("#cat{{ catid }}").slider();
+   $("#cat{{ catid }}").on("slide", function(slideEvt) {
+   $("#cat{{ catid }}SliderVal").text(slideEvt.value);
+   $("#catparam{{ catid }}").val("{{ catid }}|"+slideEvt.value);
+   })
+   {% endfor %}
+   
+   </script>
+{% endblock extrajs %}

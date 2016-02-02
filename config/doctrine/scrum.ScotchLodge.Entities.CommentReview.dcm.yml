@@ -1,0 +1,25 @@
+scrum\ScotchLodge\Entities\CommentReview:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\ ...
+  table: comment_review  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+        
+  manyToOne:
+    whisky:
+      targetEntity: Whisky
+      inversedBy: comments
+      joinColumn:
+        name: whisky_id
+        referencedColumnName: id
+        
+  oneToOne:
+    comment:
+      targetEntity: Comment
+      inversedBy: review_comment
+      joinColumn:
+        name: comment_id
+        referencedColumnName: id

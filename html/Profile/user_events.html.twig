@@ -1,0 +1,25 @@
+{# THIS TEMPLATE EXPECTS 'events' objects #}
+
+{% if events|length > 0 %}
+  <div id="events" class="topline">
+    <h3>
+        User events
+        <span class="header_comment">
+            ( <a href="{{ globals.app.urlFor('profile_events',{ 'id': user.id})}}"> {{ events|length }}</a> )
+        </span>        
+    </h3>
+    {% for event in events|slice(0, 3) %}      
+      <div>
+          <b>
+              <a href="{{ globals.app.urlFor('show_event_by_id', {'id': event.id})}}">{{ event.title }}</a> - {{ event.postcode.town }}
+          </b>
+      </div>
+      <div>
+          {{ event.event_date|date('Y-m-d') }}
+      </div>
+      <div>
+          {{ event.description }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

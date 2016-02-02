@@ -1,0 +1,109 @@
+scrum\ScotchLodge\Entities\Whisky:
+  type: entity
+  repositoryClass: scrum\ScotchLodge\Entities\Repo\WhiskyRepo
+  table: whisky
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  manyToOne:
+    distillery:
+      targetEntity: Distillery
+      inversedBy: dist_whiskys
+      joinColumn:
+        name: distillery_id
+        referencedColumnName: id
+    
+    bottlery:
+      targetEntity: Distillery
+      inversedBy: bottl_whiskys
+      joinColumn:
+        name: bottlery_id
+        referencedColumnName: id
+        
+    barrel:
+      targetEntity: Barrel
+      inversedBy: barrel_whiskys
+      joinColumn:
+        name: barrel_id
+        referencedColumnName: id            
+      
+    region:
+      targetEntity: Region
+      inversedBy: region_whiskys
+      joinColumn:
+        name: region_id
+        referencedColumnName: id
+        
+    created_by:
+      targetEntity: User
+      inversedBy: whiskys_created
+      joinColumn:
+        name: created_by
+
+    blend:
+      targetEntity: Blend
+      inversedBy: blend_whiskys
+      joinColumn:
+        name: blend_id
+        referencedColumnName: id            
+
+    country:
+      targetEntity: Country
+      inversedBy: country_whiskys
+      joinColumn:
+        name: country_id
+        referencedColumnName: id
+        
+  manyToMany:
+    events:
+      targetEntity: Event
+      inversedBy: event_whiskys
+      joinTable:         
+        name: event_whiskys
+        joinColumns:
+          whisky_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          event_id:
+            referencedColumnName: id
+
+  oneToMany:
+    scores:
+      targetEntity: WhiskyScore
+      mappedBy: whisky
+    comments:
+      targetEntity: CommentReview
+      mappedBy: whisky
+    likes:
+      targetEntity: WhiskyLike
+      mappedBy: whisky
+
+  fields:
+    name:
+      type: string
+      length: 60    
+    image_path:
+      type: string
+      length: 255
+    price:
+      type: integer
+    age:
+      type: integer
+    alcohol:
+      type: integer
+    short_description:
+      type: text
+    view_count:
+      type: integer
+    review_date:
+      type: datetime
+    date_distilled:
+      type: datetime
+    date_bottled:
+      type: datetime
+    capacity:
+      type: integer
+ 

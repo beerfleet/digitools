@@ -1,0 +1,11 @@
+<div id="latest_reviews" class="">
+  <h3>Latest Reviews</h3>
+  {% set latest = reviews.latest %}  
+  <dl>
+    {% for rev in latest %}
+      {% set des = rev.short_description %}
+      <dt class="review_date">{{ rev.review_date|date('Y-m-d') }} - <a href="{{ globals.app.urlFor('show_whisky_by_id', {"id" : rev.getId } ) }}">{{ rev.name }}</a></dt>
+      <dd class="review"><a href="{{ globals.app.urlFor('show_whisky_by_id', {"id" : rev.getId } ) }}">"{{ des|length > 50 ? des|slice(0, 50) ~ '...' : des }}"</a></dd>
+    {% endfor %}
+  </dl>
+</div>

@@ -1,0 +1,32 @@
+scrum\ScotchLodge\Entities\WhiskyLike:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Entities\Repo\WhiskyRepo
+  table: whisky_like
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  uniqueConstraints:
+    idx_whisky_user_UNIQUE:
+      columns: [ whisky_id, user_id ]
+      
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy: whisky_likes
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+        
+    whisky:
+      targetEntity: Whisky
+      inversedBy: likes
+      joinColumn:
+        name: whisky_id
+        referencedColumnName: id
+        
+  fields:
+    state:
+      type: integer

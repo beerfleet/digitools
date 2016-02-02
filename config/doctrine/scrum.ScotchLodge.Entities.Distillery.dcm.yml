@@ -1,0 +1,37 @@
+scrum\ScotchLodge\Entities\Distillery:
+  type: entity
+  repositoryClass: scrum\ScotchLodge\Entities\Repo\WhiskyRepo
+  table: distillery
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO    
+  
+  oneToMany:
+    dist_whiskys:
+      targetEntity: Whisky
+      mappedBy: distillery
+      
+    bottl_whiskys:
+      targetEntity: Whisky
+      mappedBy: bottlery
+  
+  manyToOne:
+    country:
+      targetEntity: Country
+      inversedBy: distilleries
+      joinColumn:
+        name: country_id
+        referencedColumnName: id
+
+  fields:
+    name:
+      type: string
+      length: 80
+    address:
+      type: string
+      length: 255
+    postcode:
+      type: string
+      length: 10

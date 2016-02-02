@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit event
+{% endblock title %}
+
+{% block content %}
+  
+    {% set app = globals.app %}
+    
+    <div class="container form">
+      <h1>Edit event</h1>
+      <form action="{{ app.urlFor('edit_event_process',{'id':event.id}) }}" method="POST" novalidate>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" type="text" id="title" name="title" value="{{event.title}}" />
+          <label for="address">Address</label>
+          <input class="form-control" type="text" id="adres" name="address" value="{{event.address}}" />
+          <label for="postcode">Postcode</label>
+          <select class="form-control" id="postcode" name="postcode">
+            {% for pc in postcodes %}
+                <option value="{{ pc.id }}" {% if pc.id == event.postcode.id %} selected="selected" {% endif %}>{{ pc.postcode }} - {{ pc.town }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Event Date</label>
+          <input class="form-control" type="date" min="{{"now"|date('d-m-Y')}}" id="event_date" name="event_date" value="{{event.event_date|date('d-m-Y')}}" />
+          <label for="date">Event Date End</label>
+          <input class="form-control" type="date" min="{{"now"|date('d-m-Y')}}" id="event_stop" name="event_stop" value="{{event.event_stop|date('d-m-Y')}}" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description">{{ event.description }}</textarea>          
+        </div>
+        <!--
+        <div class="form-group">
+          <label for="whiskies">Whiskies at the event</label>
+          <select class="form-control" id="whiskies" name="whiskies[]" multiple="multiple">
+            {% for whisky in whiskies %}
+                <option value="{{ whisky.id }}" {% if whisky.id == event.whiskys.id %} selected="selected" {% endif %}>{{ whisky.name }} - {{ whisky.distillery.name }} {% if whisky.bottlery.name is not null %}- {{ whisky.bottlery.name }}{% endif %}</option>
+            {% endfor %}
+          </select>
+        </div>
+        -->
+        <input class="form-control submit btn btn-default" type="submit" id="verzend" name="event" value="Edit event" />
+
+      </form>
+    </div>
+{% endblock content %}

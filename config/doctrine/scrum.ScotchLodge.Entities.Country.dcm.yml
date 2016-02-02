@@ -1,0 +1,35 @@
+scrum\ScotchLodge\Entities\Country:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  table: country
+  indexes:
+    country_code_idx:
+      columns: [ country_code ]
+    country_name_idx:
+      columns: [ country_name ]
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  oneToMany:
+    regions:
+      targetEntity: Region
+      mappedBy: country
+        
+    distilleries:
+      targetEntity: Distillery
+      mappedBy: distillery
+
+    whiskies:
+      targetEntity: Whisky
+      mappedBy: country
+
+  fields:
+    country_code:
+      type: string
+      length: 2
+    country_name:
+      type: string
+      length: 100

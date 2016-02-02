@@ -1,0 +1,20 @@
+scrum\ScotchLodge\Entities\EventAnswer:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  table: event_answer
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+        
+  oneToMany:
+    users_present:
+      targetEntity: EventPresence
+      mappedBy: answer
+
+  fields:
+    answer:
+      type: string
+      length: 40
+  

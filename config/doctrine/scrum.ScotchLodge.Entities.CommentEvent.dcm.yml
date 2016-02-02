@@ -1,0 +1,26 @@
+scrum\ScotchLodge\Entities\CommentEvent:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\ ...
+  table: comment_event  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+        
+  manyToOne:
+    event:
+      targetEntity: Event
+      inversedBy: event_comments
+      joinColumn:
+        name: event_id
+        referencedColumnName: id
+  
+  oneToOne:
+    comment:
+      targetEntity: Comment
+      inversedBy: event_comment
+      joinColumn:
+        name: comment_id
+        referencedColumnName: id
+  

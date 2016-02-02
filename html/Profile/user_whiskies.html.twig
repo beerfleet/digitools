@@ -1,0 +1,20 @@
+{# THIS TEMPLATE EXPECTS 'reviews' objects #}
+
+{% if reviews|length > 0 %}
+  <div id="reviews" class="topline">
+    <h3>
+        User whiskies
+        <span class="header_comment">
+            ( <a href="{{ globals.app.urlFor('profile_whiskies',{ 'id': user.id})}}"> {{ reviews|length }}</a> )
+        </span>
+    </h3>
+    {% for whisky in reviews|slice(0, 3) %}
+      <div>
+          <a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': whisky.id})}}">{{ whisky.name }}</a>
+      </div>
+      <div class="margin-bottom-6">
+          {{ whisky.short_description|slice(0,250) }}{% if whisky.short_description|length > 250 %}...{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  List of categories
+{% endblock title %}
+{% set app = globals.app %}
+{% block content %}
+  <div class="container form">
+    <h1>List of categories</h1>
+    <div>
+        
+	    <div id="categorylist">
+	        {% for category in categories %}
+                    <div class="cat">
+                        <strong class="catname">{{ category.getCategory }}</strong>
+                        {% if globals.user.isAdmin() %}
+                        <img class="editcat" src="../img/edit.png" data-catid="{{ category.getId }}" onClick="editcat(this)">
+                        <img class="deletecat" src="../img/delete.png" data-catid="{{ category.getId }}" onClick="deletecat(this)">
+                    </div>
+                {% endif %}        
+	        {% endfor %}  
+	     </div>
+             <button type="button" data-catid="2" class="btn btn-default" onClick="addcat()">Add a new category</button>
+             
+	</div>
+
+    <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a>    
+  </div>
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Show Profile
+{% endblock title %}
+
+{% block content %}
+  {% if globals.user is defined and globals.user is not null %}
+    {% set user = globals.user %}
+  {% endif %}
+  <div class="container form">
+    <h1>My Profile</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+    <p>
+    <form action="{{ globals.app.urlFor('profile_edit_save') }}" method="post">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
+        <label for="email">E-mail</label> 
+        <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly />
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" />
+        <label for="password_repeat">Repeat password</label>
+        <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
+      </div>
+
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}"  />
+        <label for="surname"></label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" />
+      </div>
+
+      <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <select class="form-control" id="postcode" name="postcode">
+          {% for pc in postcodes %}
+            <option {% if pc.id == user.postcode.id %} selected {% endif %}  value="{{ pc.id }}">{{ pc.postcode }} -- {{ pc.town }}</option>
+          {% endfor %}
+        </select>
+        <label for="adres">Adres</label>
+        <input class="form-control" type="text" id="adres" name="address" value="{{ user.address }}"  />
+      </div>
+
+      <input class="form-control btn submit" type="submit" id="wijzig" name="save" value="Save" />
+    </form>
+    <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a>     
+  </div>
+{% endblock content %}

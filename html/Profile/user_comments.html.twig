@@ -1,0 +1,25 @@
+{# THIS TEMPLATE EXPECTS 'comments' objects #}
+
+{% if comments|length > 0 %}
+  <div id="comments" class="topline">
+    
+    <h3>User comments 
+      <span class="header_comment">
+        ( <a href="{{ globals.app.urlFor('profile_comments', {'id': user.id}) }}">{{ comments|length }}</a> )
+      </span> 
+    </h3>
+    {% for comment in comments|slice(0, 3) %}
+      <div><b>{{ comment.comment_date|date('Y-m-d') }}</b></div>
+      
+      {% if comment.review_comment is not null %}
+        <div><a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comment.review_comment.whisky.id } ) }}"><i>comment on whisky: {{ comment.review_comment.whisky.name }}</i></a></div>
+      {% endif %}
+      
+      {% if comment.event_comment is not null %}
+        <div><a href="{{ globals.app.urlFor('show_event_by_id', {'id': comment.event_comment.event.id} ) }}"><i>comment on event: {{ comment.event_comment.event.title }}</i></a></div>
+      {% endif %}
+      
+      <div class="margin-bottom-6">{{ comment.comment }}</div>
+    {% endfor %}
+  </div>
+{% endif %}

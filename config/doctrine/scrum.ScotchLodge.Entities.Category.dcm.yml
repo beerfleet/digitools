@@ -1,0 +1,23 @@
+scrum\ScotchLodge\Entities\Category:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Entities\Repo\CategoryRepo
+  table: category  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  uniqueConstraints:
+    idx_category_UNIQUE:
+      columns: [ category ]
+
+  oneToMany:
+    scores:
+      targetEntity: WhiskyScore
+      mappedBy: category
+    
+  fields:
+    category:
+      type: string
+      length: 45        

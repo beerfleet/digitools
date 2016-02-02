@@ -1,0 +1,35 @@
+{# THIS TEMPLATE EXPECTS 'whiskies' objects #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  User whiskies
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container form">
+    <h1>Whiskies made by <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': user.id} ) }}">{{ user.username }}</a> </h1>
+    {% for whisky in whiskies %}
+      <div class="topline">
+          <b>
+              <a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': whisky.id})}}">{{ whisky.name }}</a>
+          </b>
+      </div>
+      <div>
+          {% if whisky.region is not null %}
+              Region: {{ whisky.region.name }}
+          {% endif %}
+          {% if whisky.region is not null and whisky.country is not null %}
+              -
+          {% endif %}
+          {% if whisky.country is not null %}
+              Country: {{ whisky.country.name }}
+          {% endif %}
+      </div>
+      <div>
+          {{ whisky.short_description }}
+      </div>
+    {% endfor %}
+  </div>
+    
+{% endblock content %}

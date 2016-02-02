@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  ROUTE LIST
+{% endblock title %}
+
+{% block extracss %}
+  <link href="/js/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+{% endblock extracss %}
+
+{% block content %}
+  <div class="container">
+    <h1>Route List</h1>
+    <table id="route-tbl" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Route name</th>
+          <th>Route pattern</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for name, route in routes %}
+          <tr>
+            <td>{{ name }}</td>
+            <td>{{ route }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="/js/DataTables/js/jquery.dataTables.min.js">    
+  </script>
+  <script type="text/javascript">
+    $(function() {
+      $('#route-tbl').DataTable();
+    });
+  </script>
+{% endblock extrajs %}

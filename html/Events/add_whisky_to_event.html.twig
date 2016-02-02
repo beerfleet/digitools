@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    New whiskies to a event
+{% endblock title %}
+
+{% block content %}
+  
+    {% set app = globals.app %}
+    
+    <div class="container form">
+      <h1>Add whiskies to a event</h1>
+      <form action="{{ app.urlFor('add_whiskies_to_event_process') }}" method="POST" novalidate>
+        <div class="form-group">
+          <label for="event">Event</label>
+          <select class="form-control" id="event" name="event">
+            {% for event in events %}
+                <option value="{{ event.id }}" {% if event.id == app.request.post('event') %} selected="selected" {% endif %}>{{ event.title }} - {{ event.postcode.town }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="whiskies">Whiskies</label>
+          <select class="form-control" id="whiskies" name="whiskies" multiple="multiple">
+            {% for whisky in whiskies %}
+                <option value="{{ whisky.id }}" {% if whisky.id == app.request.post('whiskies') %} selected="selected" {% endif %}>{{ whisky.name }} - {{ whisky.distillery.name }} - {{ whisky.botterly.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <input class="form-control submit btn btn-default" type="submit" id="verzend" name="whiskyevent" value="Add whiskies to event" />
+
+      </form>
+    </div>
+{% endblock content %}

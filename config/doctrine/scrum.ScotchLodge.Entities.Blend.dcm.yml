@@ -1,0 +1,19 @@
+scrum\ScotchLodge\Entities\Blend:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  table: blend  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+        
+  oneToMany:
+    whiskies:
+      targetEntity: Whisky
+      mappedBy: blend
+        
+  fields:
+    blend:
+      type: string
+      length: 50        

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  List of members
+{% endblock title %}
+
+{% block content %}
+
+	<div class="list container form">
+	    <h1>Our fellow drunks:</h1>
+	    <ul> 
+	    	{% for member in members %}
+	        <li>
+	          	<a href="{{ globals.app.urlFor('profile_show_by_id', {'id': member.id } ) }}">
+	          		<div id="prof_pic" class="thumb">
+	          			<img src="http://static.comicvine.com/uploads/original/11114/111143722/3697177-kufu.jpg">
+	          		</div>
+	          		<p>{{ member.getFirstName() }} {{ member.getSurname() }} 
+	          		{% if globals.user is defined and globals.user is not null %}
+	            	{% if user.isAdmin() %}
+	            		<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}"><img src="../img/edit.png"></a>
+	            	{% endif %}
+	           		{% endif %}
+	           		</p>
+	          	</a>
+	        </li>        
+	      	{% endfor %}
+	    </ul>
+	</div>
+
+{% endblock content %}

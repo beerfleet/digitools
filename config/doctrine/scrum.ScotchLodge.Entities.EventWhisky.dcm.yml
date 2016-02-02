@@ -1,0 +1,17 @@
+scrum\ScotchLodge\Entities\EventWhisky:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  table: event_whiskys  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+     
+  oneToMany:
+    whisky:
+      targetEntity: Whisky
+      mappedBy: whisky
+    event:
+      targetEntity: Event
+      mappedBy: event

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  1 COL LAYOUT + RIGHT SIDEBAR
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div id="main-wrapper" class="col-sm-9">
+        {% block main_column %}
+        {% endblock main_column %}
+      </div>
+      <div id="sidebar-wrapper" class="col-sm-3">
+
+        {% block sidebar %}
+        {% endblock sidebar %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

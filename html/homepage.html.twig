@@ -1,0 +1,47 @@
+{% extends 'base_with_right_sidebar.html.twig' %}
+
+{% block title %}The Scotch Lodge{% endblock title %}
+
+
+  {% block main_column %}
+    
+    <div class="container welcome">
+      {% if globals.user is defined and globals.user is not null %}
+      {% set user = globals.user %}
+        <h1>Have a drink, {{ globals.user.username }}</h1>
+      {% if user.isAdmin() %}
+        <span class="status">Logged in as admin</span>
+      {% else %}
+        <span class="status">Logged in as user</span>
+      {% endif %}
+      {% else %}
+        <h1>Welcome</h1>
+      {% endif %}
+    </div>
+    <section id="latest_tabs" class="welcome cf">
+      <div class="latest_tab">
+        {% include 'Whisky/latest_reviews.html.twig' %}
+      </div>
+      <div class="latest_tab">
+        {% include 'Comments/latest_comments.html.twig' %}
+      </div>
+      <div class="latest_tab">
+        {% include 'Events/latest_events.html.twig'%}
+      </div>
+    </section>
+    <section id="" class="container welcome cf">
+      
+    </section>
+    
+  {% endblock main_column %}
+
+  {% block sidebar %}    
+      {% include 'menu.html.twig' %}  
+      {% include 'Comments/popular_comments.html.twig' %}
+      {% include 'Whisky/popular_reviews.html.twig' %}
+  {% endblock sidebar %}
+
+
+{% block extrajs %}
+  <script src="js/main.js"></script>
+{% endblock extrajs %}

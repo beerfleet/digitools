@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    New event
+{% endblock title %}
+
+{% block content %}
+  
+    {% set app = globals.app %}
+    
+    <div class="container form">
+      <h1>New event</h1>
+      <form action="{{ app.urlFor('new_event_process') }}" method="POST" novalidate>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" type="text" id="title" name="title" value="{% if app.request.isPost() %}{{app.request.post('title')}}{% endif %}" />
+          <label for="address">Address</label>
+          <input class="form-control" type="text" id="adres" name="address" value="{% if app.request.isPost() %}{{app.request.post('address')}}{% endif %}" />
+          <label for="postcode">Postcode</label>
+          <select class="form-control" id="postcode" name="postcode">
+            {% for pc in postcodes %}
+                <option value="{{ pc.id }}" {% if pc.id == app.request.post('postcode') %} selected="selected" {% endif %}>{{ pc.postcode }} - {{ pc.town }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Event Date</label>
+          <input class="form-control" type="date" min="{{"now"|date('d-m-Y')}}" id="event_date" name="event_date" value="{% if app.request.isPost() %}{{app.request.post('event_date')}}{% endif %}" />
+          <label for="date">Event Date End</label>
+          <input class="form-control" type="date" min="{{"now"|date('d-m-Y')}}" id="event_stop" name="event_stop" value="{% if app.request.isPost() %}{{app.request.post('event_stop')}}{% endif %}" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description">{% if app.request.isPost() %}{{app.request.post('description')}}{% endif %}</textarea>
+        </div>
+        <!--
+        <div class="form-group">
+          <label for="whiskies">Whiskies at the event</label>
+          <select class="form-control" id="whiskies" name="whiskies" multiple="multiple">
+            {% for whisky in whiskies %}
+                <option value="{{ whisky.id }}" {% if whisky.id == app.request.post('whiskies') %} selected="selected" {% endif %}>{{ whisky.name }} - {{ whisky.distillery.name }} {% if whisky.bottlery.name is not null %}- {{ whisky.bottlery.name }}{% endif %}</option>
+            {% endfor %}
+          </select>
+        </div>
+        -->
+        <input class="form-control submit btn btn-default" type="submit" id="verzend" name="event" value="Add event" />
+
+      </form>
+    </div>
+{% endblock content %}

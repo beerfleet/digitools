@@ -1,0 +1,31 @@
+scrum\ScotchLodge\Entities\EventPresence:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  table: event_presence  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+     
+  manyToOne:
+    answer:
+      targetEntity: EventAnswer
+      inversedBy: users_present
+      joinColumn:
+        name: event_answer_id
+        referencedColumnName: id 
+      
+    user:
+      targetEntity: User
+      inversedBy: present_in_events
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+    
+    event:
+      targetEntity: Event
+      inversedBy: event_presences
+      joinColumn:
+        name: event_id
+        referencedColumnName: id

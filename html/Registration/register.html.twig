@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Register
+{% endblock title %}
+
+{% block content %}
+  
+  {% set app = globals.app %}
+  
+  <div class="container form">
+    <h1>Register</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+    <p>
+    <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
+      <div class="form-group">
+        <label for="username">User name</label>
+        <input class="form-control" type="text" id="username" name="username" value="{% if app.request.isPost() %}{{app.request.post('username')}}{% endif %}" />
+        <label for="email">E-mail</label>
+        <input class="form-control" type="email" id="email" name="email" value="{% if app.request.isPost() %}{{app.request.post('email')}}{% endif %}"/>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="wachtwoord" name="password" />
+        <label for="password_repeat">Repeat password</label>
+        <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
+      </div>
+      
+      <div class="form-group">
+        <label for="first_name">First name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{% if app.request.isPost() %}{{app.request.post('first_name')}}{% endif %}" />
+        <label for="surname">Surname</label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{% if app.request.isPost() %}{{app.request.post('surname')}}{% endif %}"/>
+      </div>
+      
+      <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <select class="form-control" id="postcode" name="postcode">
+          {% for pc in postcodes %}
+            <option value="{{ pc.id }}">{{ pc.postcode }} - {{ pc.town }}</option>
+          {% endfor %}
+        </select>
+        <label for="address">Address</label>
+        <input class="form-control" type="text" id="adres" name="address" value="{% if app.request.isPost() %}{{app.request.post('address')}}{% endif %}" />
+      </div>
+
+      <!--Honeypot-->
+      <div class="form-group" id="city">
+        <label for="city">City</label>
+        <input class="form-control" type="text" id="city" name="city">
+      </div>
+
+      <ul>
+        <li>
+          <input class="form-control btn btn-default submit" type="submit" id="verzend" name="register" value="Register now" />
+        </li>
+        <li>
+          <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+{% endblock content %}

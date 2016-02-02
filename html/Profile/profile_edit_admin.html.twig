@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Show Profile
+{% endblock title %}
+
+{% block content %}
+  {% if globals.user is defined and globals.user is not null %}
+    {% set user = usertoedit %}
+  {% endif %}
+  <div class="container form">
+    <h1>Edit Profile</h1>
+    <form action="{{ globals.app.urlFor('profile_edit_save_admin') }}" method="post">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="usernam" name="usernam" value="{{ user.username }}" readonly />
+        <label for="email">E-mail</label> 
+        <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly />
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" />
+        <label for="password_repeat">Repeat password</label>
+        <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
+      </div>
+
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}"  />
+        <label for="surname">Surname</label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" />
+      </div>
+
+      <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <select class="form-control" id="postcode" name="postcode">
+          {% for pc in postcodes %}
+            <option {% if pc.id == user.postcode.id %} selected {% endif %}  value="{{ pc.id }}">{{ pc.postcode }} -- {{ pc.town }}</option>
+          {% endfor %}
+        </select>
+        <label for="adres">Adres</label>
+        <input class="form-control" type="text" id="adres" name="address" value="{{ user.address }}"  />
+      </div>
+
+      <div class="form-group">
+        <label for="is_admin">Admin</label>
+        <input  type="checkbox" id="is_admin" name="is_admin" value="1"  {% if user.isAdmin %} checked {% endif %} />            
+      </div>
+
+      <div class="form-group">
+        <label for="is_admin">Review</label>
+        <input  type="checkbox" id="can_review" name="can_review" value="1"  {% if user.canReview %} checked {% endif %} />            
+      </div>
+      
+       <div class="form-group">
+        <label for="is_admin">Event</label>
+        <input  type="checkbox" id="can_create_event" name="can_create_event" value="1"  {% if user.canCreateEvent %} checked {% endif %} />            
+      </div>
+      
+      <div class="form-group">
+        <label for="is_admin">Category</label>
+        <input  type="checkbox" id="can_create_category" name="can_create_category" value="1"  {% if user.canCreateCategory %} checked {% endif %} />            
+      </div>
+      <div class="form-group">
+        <label for="is_enabled">Active user</label>
+        <input  type="checkbox" id="enabled" name="enabled" value="1"  {% if user.isEnabled %} checked {% endif %} />            
+      </div>
+      <div class="form-group">
+        <label for="is_deleted">Delete user</label>
+        <input  type="checkbox" id="deleted" name="deleted" value="1"  {% if user.isDeleted %} checked {% endif %} />            
+      </div>
+      <input class="form-control" type="hidden" id="username" name="username" value="{{ user.username }}" />
+      <input class="btn form-control submit" type="submit" id="wijzig" name="save" value="Save" />
+    </form>
+    <a href="/members" id="return_to_main" class="btn submit btn-default">
+          Return to members menu</a>  
+    <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a> 
+  </div>
+{% endblock content %}
+

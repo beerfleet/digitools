@@ -1,0 +1,12 @@
+{% set app = globals.app %}
+
+<div class="container cf">  
+  	<nav id="topmenu" class="">
+      <ul class="nav nav-tabs">
+        <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
+        <li><a href="{{ globals.app.urlFor('advanced_search_whisky') }}">Whisky</a></li>
+        <li><a href="{{ globals.app.urlFor('current_event_list') }}"> Events </a></li>
+        <li><a href="{{ app.urlFor('member_list') }}">Members</a></li>
+      </ul>
+    </nav>
+</div>

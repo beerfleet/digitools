@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  {{ whisky.getName }}
+{% endblock title %}
+
+{% block content %}
+  <div id="whisky_id" class="cf container form">
+    <h1>{{ whisky.getName }}</h1>
+    <dl>
+      <img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50">
+    </dl>
+    <dl>
+      <dt>Name:</dt>
+      <dd>{{ whisky.getName }}</dd>
+      <dt>Region:</dt>
+      <dd>{{ whisky.region.getName }}</dd>
+      <dt>Distillery:</dt>
+      <dd>{{ whisky.distillery.getName }}</dd>
+      {% if whisky.bottlery is defined and whisky.bottlery is not null %}
+      <dt>Bottlery:</dt>
+      <dd>{{ whisky.bottlery.getName }}</dd>
+      {% endif %}
+    </dl>
+    <dl>
+      <dt>Barrel:</dt>
+      <dd>{{ whisky.barrel.getCasktype }}</dd>
+      <dt>Age:</dt>
+      <dd>{{ whisky.getAge }} year</dd>
+      <dt>ABV:</dt>
+      <dd>{{ (whisky.getAlcohol/100)|number_format(1) }} %</dd>
+      <dt>Price:</dt>
+      <dd>&euro; {{ (whisky.getPrice/100)|number_format(2) }}</dd>
+    </dl>
+  {% set status = whiskylike['like' ~ whisky.getId ] %}
+   <div id="item{{ whisky.getId }}" class="like-selector">
+                <a href="#" class="like-btn single-like {% if status == 1 %}active_pos{% endif %}" data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}" data-pos="{% if status == 1 %}1{% endif %}" data-id="{{ whisky.likes.getId }}" data-name="Like" onclick="like(this)">
+                {% if status == 1 %}
+                   <img src="../img/like_icon_active.png" >{% else %}<img src="../img/like_icon.png" >{% endif %}
+                </a>
+                <a href="#" class="like-btn single-like {% if status == -1 %}active_neg{% endif %}" data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}" data-pos="{{ whisky.likes.getState }}"  data-id="{{ whisky.likes.getId }}"  data-name="Not Like" onclick="like(this)">
+                  {% if status == -1 %}<img src="../img/dislike_icon_active.png" >{% else %}<img src="../img/dislike_icon.png" >{% endif %}
+    </div>
+    
+    <dl>
+      <dt class="clearboth">Review:</dt>
+      <dd id="review_score">{{ whisky.short_description }}</dd>
+    </dl>
+
+    {% set scores =  whisky.getScores  %}
+    {% set total = 0  %}
+    <ul>
+      {% for score in scores %}     
+      <li><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/100)|number_format(1) }} /10</li>
+    {% set total = total + (score.getScore/100)  %}
+      {% endfor %}
+    </ul>
+
+    <dl>
+      <dt>Overall score</dt>
+      <dd>{% if  scores.length >0 %}     
+{% set avg = total / scores|length  %}
+<strong>Average:</strong> {{avg|number_format(2) }} / 10
+{% endif %}
+    TO BE CALCULATED</dd>
+    </dl>
+
+    <div class="comments">
+      {# comments #}
+      {% set comments = whisky.comments %}
+      {% include 'Comments/_include_comments.html.twig' %}
+
+      {% if globals.user is defined and globals.user is not null %}
+      <form action="#">
+        <div class="comment-post">
+          <div class="form-group">
+            <label for="comment">Leave a comment</label>
+            <textarea data-whiskyid="{{ whisky.id }}" class="form-control" id="comment-box"></textarea>
+          </div>
+          <input id="add-comment" class="form-control submit btn btn-default" type="submit" id="submit" name="submit" value="Send" />
+        </div>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="/js/comments.js"></script>
+{% endblock extrajs %}

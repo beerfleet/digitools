@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  User comments
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container form">
+    <h1>Comments made by <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': user.id} ) }}">{{ user.username }}</a> </h1>
+    {% for comment in comments %}
+      <div class="topline"><b>{{ comment.comment_date|date('Y-m-d') }}</b></div>
+      
+      {% if comment.review_comment is not null %}
+        <div><a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comment.review_comment.whisky.id } ) }}"><i>comment on whisky: {{ comment.review_comment.whisky.name }}</i></a></div>
+      {% endif %}
+      
+      {% if comment.event_comment is not null %}
+        <div><a href="{{ globals.app.urlFor('show_event_by_id', {'id': comment.event_comment.event.id} ) }}"><i>comment on event: {{ comment.event_comment.event.title }}</i></a></div>
+      {% endif %}
+      
+      <div class="margin-bottom-6">{{ comment.comment }}</div>
+    {% endfor %}
+  </div>
+    
+{% endblock content %}

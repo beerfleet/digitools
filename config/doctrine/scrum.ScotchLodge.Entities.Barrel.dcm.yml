@@ -1,0 +1,19 @@
+scrum\ScotchLodge\Entities\Barrel:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  table: barrel  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+        
+  oneToMany:
+    whiskies:
+      targetEntity: Whisky
+      mappedBy: barrel
+        
+  fields:
+    casktype:
+      type: string
+      length: 45        

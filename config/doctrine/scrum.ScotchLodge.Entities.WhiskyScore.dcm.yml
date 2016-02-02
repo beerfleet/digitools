@@ -1,0 +1,30 @@
+scrum\ScotchLodge\Entities\WhiskyScore:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Entities\Repo\ ...
+  table: whisky_score
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  uniqueConstraints:
+    idx_whisky_category_UNIQUE:
+      columns: [ whisky_id, category_id ]
+  manyToOne:
+    whisky:
+      targetEntity: Whisky
+      inversedBy: scores
+      joinColumn:
+        name: whisky_id
+        referencedColumnName: id
+  
+    category:
+      targetEntity: Category
+      inversedBy: scores
+      joinColumn:
+        name: category_id
+        referencedColumnName: id
+        
+  fields:
+    score:
+      type: integer

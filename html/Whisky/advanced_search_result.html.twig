@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+ {% block title %}
+ Search Whisky
+{% endblock title %}
+
+{% block content %}
+  
+  {% set app = globals.app %}
+  
+  <div id="adv_search" class="list container form">
+    <h1>Your search yielded the following results</h1>
+    
+    <ul> 
+      {% for whisky in whiskys %}
+          {% set status = whiskylike['like' ~ whisky.getId ] %}
+          <li class="cf">
+              <a href="{{ app.urlFor('show_whisky_by_id', {"id" : whisky.getId } ) }}">
+                <div id="w_bottle" class="thumb">
+                  <img src="../img/whisky/{{ whisky.
+                  getImagePath }}" height="80" width="50">
+                </div>
+                <p>{{ whisky.getName }}{% if globals.user.isAdmin() or globals.user.canReview()  %}
+                  <a href="{{ app.urlFor('edit_whisky', {"id" : whisky.getId } ) }}"> 
+                    <img src="../img/edit.png"
+                  </a>
+                {% endif %}
+                </p>
+
+              </a>
+              <div id="item{{ whisky.getId }}" class="like-selector">
+
+                <a href="#" class="like-btn {% if status == 1 %}active_pos{% endif %}" data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}" data-pos="{% if status == 1 %}1{% endif %}" data-id="{{ whisky.likes.getId }}" data-name="Like" onclick="like(this)">
+                {% if status == 1 %}
+                   <img src="../img/like_icon_active.png" >{% else %}<img src="../img/like_icon.png" >{% endif %}
+                </a>
+                <a href="#" class="like-btn {% if status == -1 %}active_neg{% endif %}" data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}" data-pos="{{ whisky.likes.getState }}"  data-id="{{ whisky.likes.getId }}"  data-name="Not Like" onclick="like(this)">
+                  {% if status == -1 %}<img src="../img/dislike_icon_active.png" >{% else %}<img src="../img/dislike_icon.png" >{% endif %}
+              </div>
+          </li>        
+      {% endfor %} 
+    </ul>
+        <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a> 
+  </div>
+{% endblock content %}
+
+{% block extrajs %}
+   <script type="text/javascript" src="/js/main.js"></script>
+ {% endblock extrajs %}

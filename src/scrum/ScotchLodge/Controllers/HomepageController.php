@@ -23,7 +23,7 @@ class HomepageController extends Controller {
     $globals = $this->getGlobals();
 
     $prof_srv = new ProfileService($em, $app);
-    $members = $prof_srv->showalluser();    
+    $members = $prof_srv->showalluser();
     
     $app->render('homepage.html.twig', ['globals' => $this->getGlobals(), 'members' => $members]);
   }

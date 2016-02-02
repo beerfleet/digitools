@@ -16,32 +16,6 @@ scrum\ScotchLodge\Entities\User:
         name: postcode_id
         referencedColumnName: id
 
-  oneToMany:
-    user_likes:
-      targetEntity: CommentLike
-      mappedBy: user
-      
-    comments:
-      targetEntity: Comment
-      mappedBy: user
-
-    present_in_events:
-      targetEntity: EventPresence
-      mappedBy: user
-      
-    whisky_likes:
-      targetEntity: Whisky
-      mappedBy: user
-    
-    whiskys_created:
-      targetEntity: Whisky
-      mappedBy: created_by
-      
-    events_created:
-      targetEntity: Event
-      mappedBy: created_by
-     
-
   fields:
     username:
       type: string

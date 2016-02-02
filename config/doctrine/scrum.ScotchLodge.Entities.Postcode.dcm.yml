@@ -8,7 +8,7 @@ scrum\ScotchLodge\Entities\Postcode:
       type: integer
       generator:
         strategy: AUTO
-        
+
   indexes:
     postcode_idx:
       columns: [ postcode ]
@@ -16,10 +16,6 @@ scrum\ScotchLodge\Entities\Postcode:
   oneToMany:
     users:
       targetEntity: User
-      mappedBy: postcode
-    
-    events:
-      targetEntity: Event
       mappedBy: postcode
 
   fields:

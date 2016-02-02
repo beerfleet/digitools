@@ -25,7 +25,7 @@ class HomepageController extends Controller {
     $prof_srv = new ProfileService($em, $app);
     $members = $prof_srv->showalluser();    
     
-    $this->getApp()->render('homepage.html.twig', ['members' => $members]);
+    $app->render('homepage.html.twig', ['globals' => $this->getGlobals(), 'members' => $members]);
   }
 
   public function simplifydRoutes($routes) {

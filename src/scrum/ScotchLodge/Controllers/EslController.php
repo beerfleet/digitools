@@ -18,11 +18,11 @@ class EslController extends Controller {
   private $app;
 
   public function __construct ($em, $app) {
-    parent::construct($em, $app);
+    parent::__construct($em, $app);
     $this->eslService = new EslService($em, $app);
   }
 
   public function esl_home() {
-    
+
   }
 }

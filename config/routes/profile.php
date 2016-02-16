@@ -1,6 +1,6 @@
 <?php
 
-use scrum\ScotchLodge\Controllers\ProfileController;
+use digi\eslTools\Controllers\ProfileController;
 
 $contr = new ProfileController($em, $app);
 

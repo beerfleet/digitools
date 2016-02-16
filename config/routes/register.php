@@ -1,6 +1,6 @@
 <?php
 
-use scrum\ScotchLodge\Controllers\RegistrationController;
+use digi\eslTools\Controllers\RegistrationController;
 
 $contr = new RegistrationController($em, $app);
 

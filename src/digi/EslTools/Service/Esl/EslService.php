@@ -1,10 +1,10 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Esl;
+namespace digi\eslTools\Service\Esl;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
-use scrum\ScotchLodge\Entities\Esl;
+use digi\eslTools\Entities\Esl;
 
 /**
 * EslService

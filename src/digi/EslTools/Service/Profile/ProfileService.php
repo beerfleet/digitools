@@ -1,12 +1,12 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Profile;
+namespace digi\eslTools\Service\Profile;
 
 use Doctrine\ORM\EntityManager;
-use scrum\ScotchLodge\Entities\User;
-use scrum\ScotchLodge\Service\Validation\ProfileValidation as Val;
-use \scrum\ScotchLodge\Service\Registration\RegistrationService;
-use scrum\ScotchLodge\Service\Validation\PasswordValidation;
+use digi\eslTools\Entities\User;
+use digi\eslTools\Service\Validation\ProfileValidation as Val;
+use digi\eslTools\Service\Registration\RegistrationService;
+use digi\eslTools\Service\Validation\PasswordValidation;
 
 /**
  * ProfileService
@@ -26,13 +26,13 @@ class ProfileService {
   }
 
   public function retrieveUserByUsername($username) {
-    $repo = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $this->em->getRepository('digi\eslTools\Entities\User');
     $user = $repo->findBy(array('username' => $username));
     return count($user) > 0 ? $user[0] : null;
   }
 
   public function retrieveUserByEmail($email) {
-    $repo = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $this->em->getRepository('digi\eslTools\Entities\User');
     $user = $repo->findBy(array('email' => $email));
     return count($user) > 0 ? $user[0] : null;
   }
@@ -65,7 +65,7 @@ class ProfileService {
   public function updateUser(User $user) {
     $app = $this->app;
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository('digi\eslTools\Entities\User');
 
     $password = $app->request->post('password');
     if (isset($password) && trim($password) != '') {
@@ -213,7 +213,7 @@ class ProfileService {
 
   public function searchUserByToken($token) {
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository('digi\eslTools\Entities\User');
     $user = $repo->findBy(array('password_token' => $token));
     return count($user) == 0 ? null : $user[0];
   }
@@ -223,7 +223,7 @@ class ProfileService {
   public function searchUserById($id) {
 
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository('digi\eslTools\Entities\User');
     $user = $repo->find($id);
     if (isset($user) && $user != null)
       return $user;
@@ -233,7 +233,7 @@ class ProfileService {
 
   public function searchUserByUsername($username) {
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository('digi\eslTools\Entities\User');
     return $repo->findOneByUsername($username);
   }
 
@@ -252,7 +252,7 @@ class ProfileService {
     $password = $app->request->post('password');
     $hash = password_hash($password, CRYPT_BLOWFISH);
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository('digi\eslTools\Entities\User');
     $user = $repo->find($user_id);
     $user->setPassword($hash);
     $em->persist($user);
@@ -264,7 +264,7 @@ class ProfileService {
     if ($user == null) {
       $app = $this->app;
       $user_id = $app->request->post('id');
-      $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+      $repo = $em->getRepository('digi\eslTools\Entities\User');
       $user = $repo->find($user_id);
     }
     $user->resetPasswordToken();
@@ -287,7 +287,7 @@ class ProfileService {
 
   public function clearAllTokens() {
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository('digi\eslTools\Entities\User');
     $repo->clearTokens();
   }
 
@@ -303,7 +303,7 @@ class ProfileService {
 
   public function showalluser() {
     $em = $this->em;
-    $userRepository = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $userRepository = $em->getRepository('digi\eslTools\Entities\User');
     $members = $userRepository->findBy(array('is_deleted' => 0));
 
     return $members;

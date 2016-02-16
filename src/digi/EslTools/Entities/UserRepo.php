@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Entities\Repo;
+namespace digi\eslTools\Entities\Repo;
 
 use Doctrine\ORM\EntityRepository;
 

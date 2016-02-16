@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Controllers;
+namespace digi\eslTools\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;

@@ -1,11 +1,11 @@
 <?php
 
-namespace scrum\ScotchLodge\Controllers;
+namespace digi\eslTools\Controllers;
 
-use scrum\ScotchLodge\Controllers\Controller;
-use scrum\ScotchLodge\Service\Registration\RegistrationService;
-use scrum\ScotchLodge\Service\Profile\ProfileService;
-use scrum\ScotchLodge\Entities\User;
+use digi\eslTools\Controllers\Controller;
+use digi\eslTools\Service\Registration\RegistrationService;
+use digi\eslTools\Service\Profile\ProfileService;
+use digi\eslTools\Entities\User;
 
 /**
  * RegistrationController controller

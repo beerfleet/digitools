@@ -1,8 +1,8 @@
 <?php
 
-namespace scrum\ScotchLodge\Entities;
+namespace digi\eslTools\Entities;
 
-use scrum\ScotchLodge\Entities\Postcode;
+use digi\eslTools\Entities\Postcode;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

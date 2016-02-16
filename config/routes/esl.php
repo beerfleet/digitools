@@ -1,6 +1,6 @@
 <?php
 
-use scrum\ScotchLodge\Controllers\EslController;
+use digi\eslTools\Controllers\EslController;
 
 $contr = new EslController($em, $app);
 

@@ -1,10 +1,12 @@
 <?php
 
-namespace scrum\ScotchLodge\Controllers;
+namespace digi\eslTools\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
-use scrum\ScotchLodge\Controllers\Controller;
+use digi\eslTools\Controllers\Controller;
+use digi\eslTools\Service\Esl\EslService;
+
 
 /**
 * ESLController Controller
@@ -23,6 +25,6 @@ class EslController extends Controller {
   }
 
   public function esl_home() {
-
+    
   }
 }

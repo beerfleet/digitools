@@ -1,13 +1,13 @@
 <?php
 
-namespace scrum\ScotchLodge\Controllers;
+namespace digi\eslTools\Controllers;
 
-//use scrum\ScotchLodge\Controllers\Controller;
-use scrum\ScotchLodge\Service\Profile\ProfileService;
-use scrum\ScotchLodge\Service\Event\EventService;
-use scrum\ScotchLodge\Service\Comment\CommentService;
-use scrum\ScotchLodge\Service\Whisky\WhiskyService;
-use scrum\ScotchLodge\Controllers\Controller;
+//use digi\eslTools\Controllers\Controller;
+use digi\eslTools\Service\Profile\ProfileService;
+use digi\eslTools\Service\Event\EventService;
+use digi\eslTools\Service\Comment\CommentService;
+use digi\eslTools\Service\Whisky\WhiskyService;
+use digi\eslTools\Controllers\Controller;
 
 /**
  * HomepageController

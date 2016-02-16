@@ -1,6 +1,6 @@
-scrum\ScotchLodge\Entities\User:
+digi\eslTools\Entities\User:
   type: entity
-  repositoryClass: scrum\ScotchLodge\Entities\Repo\UserRepo
+  repositoryClass: digi\eslTools\Entities\Repo\UserRepo
   table: digi_user  
   id:
     id:

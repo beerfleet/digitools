@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Entities;
+namespace digi\eslTools\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

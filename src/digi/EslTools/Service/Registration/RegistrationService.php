@@ -1,9 +1,9 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Registration;
+namespace digi\eslTools\Service\Registration;
 
-use scrum\ScotchLodge\Entities\User;
-use scrum\ScotchLodge\Service\Validation\RegistrationValidation as Val;
+use digi\eslTools\Entities\User;
+use digi\eslTools\Service\Validation\RegistrationValidation as Val;
 
 /**
  * RegistrationService registration services

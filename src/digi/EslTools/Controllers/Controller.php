@@ -55,7 +55,7 @@ abstract class Controller {
   
   private function queryUserByUserName($username) {    
     $em = $this->getEntityManager();
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository('digi\eslTools\Entities\User');
     $user = $repo->findBy(array('username' => $username));
     return $user;
   }

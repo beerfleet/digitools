@@ -1,7 +1,27 @@
+/* GENERAL */
+html, body {
+	color: gray;
+}
+
 /* MISC */
 .form-group ul {
 	list-style-type: none;
 	padding-left: 0;
+}
+
+/* ERROR OUTPUT */
+.flagged {
+	border: 3px gray double;
+	border-radius: 6px;
+	padding: 10px;
+}
+.flagged ul {
+	margin-bottom: 0;
+	list-style-type: none;
+}
+.errors {
+	text-align: center;
+	color: red;
 }
 
 .spacing ul li {

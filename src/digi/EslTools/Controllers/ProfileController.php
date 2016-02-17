@@ -77,7 +77,7 @@ class ProfileController extends Controller {
       $app->render('Profile\profile_show.html.twig', array('globals' => $globals, 'user' => $u));
     } else {
       $app->flash('error', 'U moet aangemeld zijn om uw profiel te bekijken.');
-      $app->redirect($app->urlFor('user_logon'));
+      $app->redirect($app->urlFor('main_page'));
     }
   }
   

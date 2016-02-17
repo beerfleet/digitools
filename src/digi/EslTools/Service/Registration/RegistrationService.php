@@ -70,14 +70,14 @@ class RegistrationService {
 
   public function getPostcodes() {
     $em = $this->getEm();
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\Postcode');
+    $repo = $em->getRepository('digi\eslTools\Entities\Postcode');
     $postcodes = $repo->findAll();
     return $postcodes;
   }
 
   public function getPostcodeObject($postcode_id) {
     $em = $this->getEm();
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\Postcode');
+    $repo = $em->getRepository('digi\eslTools\Entities\Postcode');
     $pc_obj = $repo->find($postcode_id);
     return $pc_obj;
   }

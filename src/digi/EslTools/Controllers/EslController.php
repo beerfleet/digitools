@@ -25,6 +25,10 @@ class EslController extends Controller {
   }
 
   public function esl_home() {
+    $em = $this->getEntityManager();
+    $app = $this->getApp();    
+    $globals = $this->getGlobals();
+
     
   }
 }

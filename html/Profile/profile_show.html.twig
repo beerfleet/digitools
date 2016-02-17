@@ -4,45 +4,36 @@
   Show Profile
 {% endblock title %}
 
-{% block content %}
-  {% block main_column %}
-    <div class="container form">
-      <h1>My Profile</h1>
-      <form action="{{ globals.app.urlFor('profile_edit') }}" method="post">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
-          <label for="email">E-mail</label> 
-          <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly/>
-        </div>
 
-        <div class="form-group">
-          <label for="first_name">First name</label>
-          <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}" readonly />
-          <label for="surname">Surname</label>
-          <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" readonly/>
-        </div>
+{% block main_column %}
+  <div class="container form">
+    <h1>My Profile</h1>
+    <form action="{{ globals.app.urlFor('profile_edit') }}" method="post">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
+        <label for="email">E-mail</label> 
+        <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly/>
+      </div>
 
-        <div class="form-group">
-          <label for="postcode">Postcode</label>
-          <input class="form-control" type="text" id="postcode" name="postcode" value="{{ user.postcode.postcode }}" readonly />
-          <label for="adres">address</label>
-          <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}" readonly />
-        </div>
+      <div class="form-group">
+        <label for="first_name">First name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}" readonly />
+        <label for="surname">Surname</label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" readonly/>
+      </div>
 
-        <input class="form-control btn submit" type="submit" id="wijzig" name="edit" value="Edit profile" />
-      </form>
-      <a href="/members" id="return_to_main" class="btn submit btn-default">
-        Return to members menu
-      </a>  
-      <a href="/" id="return_to_main" class="btn submit btn-default">
-        Return to main menu
-      </a>
-    </div>
-  {% endblock main_column %}
+      <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <input class="form-control" type="text" id="postcode" name="postcode" value="{{ user.postcode.postcode }}" readonly />
+        <label for="adres">address</label>
+        <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}" readonly />
+      </div>
 
-  {% block sidebar %}    
-    {% include 'menu.html.twig' %}        
-  {% endblock sidebar %}
-
-{% endblock content %}
+      <input class="form-control btn submit" type="submit" id="wijzig" name="edit" value="Edit profile" />
+    </form>      
+    <a href="/" id="return_to_main" class="form-control btn submit">
+      Return to main menu
+    </a>
+  </div>
+{% endblock main_column %}

@@ -23,7 +23,6 @@ class ProfileController extends Controller {
   }
 
   /* logon */
-
   public function logon() {
     $globals = $this->getGlobals();
     $this->getApp()->render('Profile\logon.html.twig', array('globals' => $globals));
@@ -91,7 +90,7 @@ class ProfileController extends Controller {
   public function showProfilesList() {
     $srv = $this->srv;
     $users_list = $srv->showAllUsers();
-    $this->getApp()->render('Profile\profiles_list_show.html.twig', array( 'globals' => $this->getGlobals(), 'user_list' => $users_list ));
+    $this->getApp()->render('Profile\profiles_list_show.html.twig', array( 'globals' => $this->getGlobals(), 'users_list' => $users_list ));
   }
   
   

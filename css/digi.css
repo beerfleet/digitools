@@ -29,14 +29,21 @@ html, body {
 }
 
 /* MAIN CONTENT */
+#users_list {
+	margin-top: 30px;
+	margin-left: 20px;
+}
+#users_list th {
+	padding-right: 10px;
+}
+
 #main-wrapper {
 	
 }
 
 /* SIDEBAR */
 #sidebar-wrapper {
-	margin-top: 25px;
-	
+	margin-top: 25px;	
 }
 
 /* REGISTRATION */

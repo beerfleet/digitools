@@ -78,7 +78,7 @@ abstract class Controller {
 
   public function isUserAdmin() {
     if (isset($_SESSION['user'])) {
-      $user = unserialize($_SESSION['user']);
+      $user = $_SESSION['user'];
       return $user->isAdmin() == 1 ? true : false;
     }
     return false;

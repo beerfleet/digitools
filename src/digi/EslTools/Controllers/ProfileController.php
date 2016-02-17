@@ -88,6 +88,15 @@ class ProfileController extends Controller {
   }
 
   public function showProfilesList() {
+    $app = $this->getApp();
+    if (!$this->isUserLoggedIn()) {
+      $app->flash('error', 'U moet hiervoor aangemeld zijn');
+      $app->redirect($app->urlFor('main_page'));
+    }
+    if (!$this->getUser()->isAdmin()) {
+      $app->flash('error', 'U moet hiervoor admin zijn');
+      $app->redirect($app->urlFor('main_page'));
+    }
     $srv = $this->srv;
     $users_list = $srv->showAllUsers();
     $this->getApp()->render('Profile\profiles_list_show.html.twig', array( 'globals' => $this->getGlobals(), 'users_list' => $users_list ));

@@ -12,7 +12,7 @@ use Slim\Slim;
  */
 abstract class Controller {
   
-  /* @var $em EntityManager() */
+  /* @var $em EntityManager */
   private $em;
 
   /* @var $app  Slim */

@@ -1,0 +1,19 @@
+/* MISC */
+.form-group ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.spacing ul li {
+	padding-bottom: 15px;
+}
+
+/* SIDEBAR */
+#sidebar-wrapper {
+	margin-top: 25px;	
+}
+
+/* REGISTRATION */
+#registration p {
+	color: gray;
+}

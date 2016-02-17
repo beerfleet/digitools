@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Validation;
+namespace digi\eslTools\Service\Validation;
 
 use Valitron\Validator;
 
@@ -10,7 +10,7 @@ class RegistrationValidation extends Validation {
     // custom rule unique email
     Validator::addRule('unique_email', function($field, $value, array $params) use ($em, $app) {
       $email = $app->request->post('email');
-      $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+      $repo = $em->getRepository('digi\eslTools\Entities\User');
       $result = $repo->findBy(array('email' => $email));
       return count($result) < 1;
     }, 'already exists');
@@ -18,7 +18,7 @@ class RegistrationValidation extends Validation {
     // custom rule unique username
     Validator::addRule('unique_username', function($field, $value, array $params) use ($em, $app) {
       $username = $app->request->post('username');
-      $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+      $repo = $em->getRepository('digi\eslTools\Entities\User');
       $result = $repo->findBy(array('username' => $username));
       return count($result) < 1;      
     }, 'already exists');

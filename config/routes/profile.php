@@ -29,6 +29,10 @@ $app->get('/profile/username/:username', function($username) use ($contr) {
   $contr->showProfileOfUserWithUsername($username);
 })->name('/profile_show_by_username');
 
+$app->get('/profiles', function() use ($contr) {
+  $contr->showProfilesList();
+})->name('admin_list_profiles');
+
 /* olivier */
 $app->get('/editadmin/:username', function($username) use ($contr) {
   $contr->editProfileAdmin($username);

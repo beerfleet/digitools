@@ -10,9 +10,9 @@
       {% set user = globals.user %}
         <h1>{{ globals.user.username }} is logged on</h1>
         {% if user.isAdmin() %}
-          <span class="status">Logged in as admin</span>
+          <span class="status">as admin</span>
         {% else %}
-          <span class="status">Logged in as user</span>
+          <span class="status">as user</span>
         {% endif %}
       {% else %}
         <h1>Welcome</h1>
@@ -24,10 +24,6 @@
     </section>
     
   {% endblock main_column %}
-
-  {% block sidebar %}    
-      {% include 'menu.html.twig' %}        
-  {% endblock sidebar %}
 
 
 {% block extrajs %}

@@ -68,7 +68,6 @@ class ProfileController extends Controller {
   }
 
   /* profile */
-
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
@@ -88,6 +87,12 @@ class ProfileController extends Controller {
     $g = $this->getGlobals();    
     $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
+
+  public function showProfilesList() {
+    $srv = $this->srv;
+    $users_list = $srv->showAllUsers();
+    $this->getApp()->render('Profile\profiles_list_show.html.twig', array( 'globals' => $this->getGlobals(), 'user_list' => $users_list ));
+  }
   
   
 /* olivier */
@@ -97,8 +102,7 @@ class ProfileController extends Controller {
     $postcodes = $reg_srv->getPostcodes();
     $g = $this->getGlobals();
   
-    $usertoedit = $this->srv->retrieveUserByUsername($username);
-    
+    $usertoedit = $this->srv->retrieveUserByUsername($username);    
     
     $app->render('Profile\profile_edit_admin.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes, 'usertoedit' => $usertoedit));
   }

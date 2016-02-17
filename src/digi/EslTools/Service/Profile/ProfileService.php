@@ -298,19 +298,13 @@ class ProfileService {
     $em->persist($user);
     $em->flush();
   }
-
-  /* Olivier */
-
-  public function showalluser() {
+  
+  public function showAllUsers() {
     $em = $this->em;
     $userRepository = $em->getRepository('digi\eslTools\Entities\User');
-    $members = $userRepository->findBy(array('is_deleted' => 0));
+    $members = $userRepository->findAll();
 
     return $members;
   }
-
-  /* End  Olivier */
-
-
 
 }

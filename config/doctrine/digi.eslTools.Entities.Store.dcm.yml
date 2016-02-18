@@ -1,0 +1,45 @@
+digi\eslTools\Entities\Store:
+  type: entity
+  repositoryClass: digi\eslTools\Entities\Repo\StoreRepo
+  table: store
+  id:
+    id:
+      type: integer
+      generator: 
+        strategy: AUTO
+
+  manyToOne:
+    storegroup:
+      targetEntity: Storegroup
+      inversedBy: stores
+      joinColumn:
+        name: storegroup_id
+        referencedColumnName: id
+
+    backoffice:
+      targetEntity: Backoffice
+      inversedBy: stores
+      joinColumn: 
+        name: backoffice_id
+        referencedColumnName: id
+
+    postcode:
+      targetEntity: Postcode
+      inversedBy: stores
+      joinColumn: 
+        name: postcode_id
+        referencedColumnName: id
+
+    contract:
+      targetEntity: Contract
+      inversedBy: stores
+      joinColumn:
+        name: contract_id
+        referencedColumnName: id
+
+    contracttype:
+      targetEntity: Contracttype
+      inversedBy: stores
+      joinColumn:
+        name: contract_type_id
+        referencedColumnName: id

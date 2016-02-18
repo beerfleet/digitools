@@ -1,0 +1,18 @@
+digi\eslTools\Entities\Storegroup:
+  type: entity  
+  table: storegroup
+  id:
+    id:
+      type: integer
+      generator: 
+        strategy: AUTO
+
+  oneToMany:
+    stores:
+      targetEntity: Store
+      mappedBy: storegroup
+
+  fields:
+    groupname:
+      type: string
+      length: 45

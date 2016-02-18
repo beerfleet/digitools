@@ -43,3 +43,24 @@ digi\eslTools\Entities\Store:
       joinColumn:
         name: contract_type_id
         referencedColumnName: id
+
+  fields:
+    storename:
+      type: string
+      length: 65
+    synergie:
+      type: string
+      length: 45
+    ip:
+      type: string
+      length: 45
+    softwareversion:
+      type: string
+      length: 80
+    contact:
+      type: string
+      length: 128
+    email:
+      type: string
+      length: 65
+      

@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author jan van biervliet
  */
-class Contract {
+class Contracttype {
   private $id;
-  private $company;
+  private $typename;
   private $stores;
 
   function __construct() {
@@ -23,8 +23,8 @@ class Contract {
     return $this->id;
   }
 
-  function getCompany() {
-    return $this->company;
+  function getTypename() {
+    return $this->typename;
   }
 
   function getStores() {
@@ -36,8 +36,8 @@ class Contract {
     $this->id = $id;
   }
 
-  function setCompany($company) {
-    $this->company = $company;
+  function setTypename($typename) {
+    $this->typename = $typename;
   }
 
   function setStores($stores) {

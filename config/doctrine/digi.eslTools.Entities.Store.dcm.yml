@@ -63,4 +63,3 @@ digi\eslTools\Entities\Store:
     email:
       type: string
       length: 65
-      

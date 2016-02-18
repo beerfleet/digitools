@@ -15,11 +15,12 @@ class Postcode {
   private $postcode;
   private $town;
   private $users;
-  private $events;
 
-  function __construct($users) {
+  private $stores;
+
+  function __construct() {
     $this->users = new ArrayCollection();
-    $this->events = new ArrayCollection();
+    $this->stores = new ArrayCollection();
   }
 
   function getId() {
@@ -38,8 +39,8 @@ class Postcode {
     return $this->users;
   }
 
-  function getEvents() {
-    return $this->events;
+  function getStores() {
+    return $this->stores;
   }
 
   function setId($id) {
@@ -58,8 +59,8 @@ class Postcode {
     $this->users = $users;
   }
 
-  function setEvents($events) {
-    $this->events = $events;
+  function setStores($stores) {
+    $this->stores = $stores;
   }
 
 }

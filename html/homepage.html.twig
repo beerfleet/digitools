@@ -8,14 +8,14 @@
     <div class="container welcome">
       {% if globals.user is defined and globals.user is not null %}
       {% set user = globals.user %}
-        <h1>{{ globals.user.username }} is logged on</h1>
+        <h1>{{ globals.user.username }} is aangemeld</h1>
         {% if user.isAdmin() %}
-          <span class="status">as admin</span>
+          <span class="status">als admin</span>
         {% else %}
-          <span class="status">as user</span>
+          <span class="status">als user</span>
         {% endif %}
       {% else %}
-        <h1>Welcome</h1>
+        <h1>Hello</h1>
       {% endif %}
     </div>
     

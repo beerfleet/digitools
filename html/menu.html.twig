@@ -9,19 +9,19 @@
             {% include 'Profile/logon.html.twig' %}
           {% endblock login %}
         </li>
-        <li><a href="{{ app.urlFor('user_register') }}">Register</a></li>
-        <li><a href="{{ app.urlFor('password_reset_request') }}">Forgot password</a></li>
+        <li><a href="{{ app.urlFor('user_register') }}">Registreer</a></li>
+        <li><a href="{{ app.urlFor('password_reset_request') }}">Wachtwoord vergeten</a></li>
       </ul>
     </nav>
     {% else %}
     {# user aangemeld #}
     <nav id="reg-menu">
       <ul class="nav nav-pills">
-        <li><a href="{{ app.urlFor('profile_show') }}">My Profile</a></li>
-        <li><a href="{{ app.urlFor('user_logoff') }}">Logoff</a></li>
+        <li><a href="{{ app.urlFor('profile_show') }}">Mijn Profiel</a></li>
+        <li><a href="{{ app.urlFor('user_logoff') }}">Afmelden</a></li>
         {% set user = globals.user %}
         {% if user.isAdmin() %}
-          <li> <a href="{{ app.urlFor('admin_list_profiles') }}">Profiles</a> </li>
+          <li> <a href="{{ app.urlFor('admin_list_profiles') }}">Profielen</a> </li>
         {% endif %}
       </ul>
     </nav>

@@ -1,0 +1,12 @@
+{% extends 'homepage.html.twig' %}
+
+{% block title %}Digi Tools - ESL{% endblock title %}
+
+{% block main_column %}
+  {% set app = globals.app %}
+  <section id="submenu">
+    <ul>
+      <li><a href="{{ app.urlFor('esl_sheet_show') }}">klantensheet</a></li>
+    </ul>
+  </section>
+{% endblock main_column %}

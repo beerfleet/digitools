@@ -4,7 +4,8 @@ html, body {
 }
 
 /* MISC */
-.form-group ul {
+.form-group ul,
+#submenu ul {
 	list-style-type: none;
 	padding-left: 0;
 }
@@ -29,6 +30,9 @@ html, body {
 }
 
 /* MAIN CONTENT */
+#submenu {
+	margin-top: 30px;
+}
 #users_list {
 	margin-top: 30px;
 	margin-left: 20px;

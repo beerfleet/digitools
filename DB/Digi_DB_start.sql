@@ -16,197 +16,81 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `barrel`
+-- Table structure for table `backoffice`
 --
 
-DROP TABLE IF EXISTS `barrel`;
+DROP TABLE IF EXISTS `backoffice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `barrel` (
+CREATE TABLE `backoffice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `casktype` varchar(45) DEFAULT NULL,
+  `backofficename` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `barrel_casktype_idx` (`casktype`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `unique_bo_name_idx` (`backofficename`),
+  KEY `bo_name_idx` (`backofficename`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `barrel`
+-- Dumping data for table `backoffice`
 --
 
-LOCK TABLES `barrel` WRITE;
-/*!40000 ALTER TABLE `barrel` DISABLE KEYS */;
-INSERT INTO `barrel` VALUES (2,'Calvados'),(1,'Malt Whisky');
-/*!40000 ALTER TABLE `barrel` ENABLE KEYS */;
+LOCK TABLES `backoffice` WRITE;
+/*!40000 ALTER TABLE `backoffice` DISABLE KEYS */;
+INSERT INTO `backoffice` VALUES (15,'Carrefour'),(5,'Corilus Greenock'),(1,'Corilus PharmaWin'),(19,'createdsoftware'),(14,'Delhaize'),(16,'desksolutions'),(3,'Escapo'),(21,'extendas'),(2,'Farmad'),(12,'iPharma'),(18,'jamadata'),(20,'LSA'),(23,'mmpcs'),(8,'Nextpharm'),(13,'Nextprice'),(7,'Officinal'),(6,'Sabco'),(4,'Sabco Ultimate'),(17,'SDE_drinkmaster'),(22,'SDP'),(9,'Seven-IT'),(10,'Store Office'),(11,'WinDigi');
+/*!40000 ALTER TABLE `backoffice` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `blend`
+-- Table structure for table `contract`
 --
 
-DROP TABLE IF EXISTS `blend`;
+DROP TABLE IF EXISTS `contract`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `blend` (
+CREATE TABLE `contract` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `blend` varchar(50) NOT NULL,
+  `company` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `blend_idx` (`blend`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `blend`
---
-
-LOCK TABLES `blend` WRITE;
-/*!40000 ALTER TABLE `blend` DISABLE KEYS */;
-INSERT INTO `blend` VALUES (2,' Single grain'),(1,'Single Malt');
-/*!40000 ALTER TABLE `blend` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `category`
---
-
-DROP TABLE IF EXISTS `category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_category_UNIQUE` (`category`),
-  KEY `idx_category` (`category`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `category`
---
-
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comment`
---
-
-DROP TABLE IF EXISTS `comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `comment_id` int(11) DEFAULT NULL,
-  `comment_date` datetime DEFAULT NULL,
-  `comment` text,
-  PRIMARY KEY (`id`),
-  KEY `fk_commentid_id_idx` (`comment_id`),
-  KEY `fk_comment_user_idx` (`user_id`),
-  CONSTRAINT `fk_comment_comment` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_comment_user` FOREIGN KEY (`user_id`) REFERENCES `digi_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comment`
---
-
-LOCK TABLES `comment` WRITE;
-/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,30,NULL,'2015-01-21 11:11:11','We diminution preference thoroughly if. Joy deal pain view much her time. Led young gay would now state. Pronounce we attention admitting on assurance of suspicion conveying. That his west quit had met till. Of advantage he attending household at do perceived. Middleton in objection discovery as agreeable. Edward thrown dining so he my around to.'),(2,30,NULL,'2015-01-11 12:12:12','He difficult contented we determine ourselves me am earnestly. Hour no find it park. Eat welcomed any husbands moderate. Led was misery played waited almost cousin living. Of intention contained is by middleton am. Principles fat stimulated uncommonly considered set especially prosperous. Sons at park mr meet as fact like.'),(3,30,NULL,'2015-01-09 10:10:10','Bed sincerity yet therefore forfeited his certainty neglected questions. Pursuit chamber as elderly amongst on. Distant however warrant farther to of. My justice wishing prudent waiting in be. Comparison age not pianoforte increasing delightful now. Insipidity sufficient dispatched any reasonably led ask. Announcing if attachment resolution sentiments admiration me on diminution. '),(4,29,NULL,'2015-01-22 09:10:11','Am of mr friendly by strongly peculiar juvenile. Unpleasant it sufficient simplicity am by friendship no inhabiting. Goodness doubtful material has denoting suitable she two. Dear mean she way and poor bred they come. He otherwise me incommode explained so in remaining. Polite barton in it warmly do county length an. '),(5,29,NULL,'2014-12-22 01:01:01','Among going manor who did. Do ye is celebrated it sympathize considered. May ecstatic did surprise elegance the ignorant age. Own her miss cold last. It so numerous if he outlived disposal. How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved resolution. Hence hopes noisy may china fully and. Am it regard stairs branch thirty length afford. ');
-/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comment_event`
---
-
-DROP TABLE IF EXISTS `comment_event`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comment_event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `comment_id` int(11) DEFAULT NULL,
-  `event_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_commentevent_event_idx` (`event_id`),
-  KEY `fk_commentevent_comment_idx` (`comment_id`),
-  CONSTRAINT `fk_commentevent_comment` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_commentevent_event` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comment_event`
---
-
-LOCK TABLES `comment_event` WRITE;
-/*!40000 ALTER TABLE `comment_event` DISABLE KEYS */;
-INSERT INTO `comment_event` VALUES (1,4,1),(2,5,2);
-/*!40000 ALTER TABLE `comment_event` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comment_like`
---
-
-DROP TABLE IF EXISTS `comment_like`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comment_like` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `comment_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_user_comment_UNIQUE` (`user_id`,`comment_id`),
-  KEY `fk_commentlike_user_idx` (`user_id`),
-  KEY `fk_commentlike_comment_idx` (`comment_id`),
-  CONSTRAINT `fk_commentlike_comment` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_commentlike_user` FOREIGN KEY (`user_id`) REFERENCES `digi_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comment_like`
---
-
-LOCK TABLES `comment_like` WRITE;
-/*!40000 ALTER TABLE `comment_like` DISABLE KEYS */;
-INSERT INTO `comment_like` VALUES (4,29,2),(3,29,3),(1,30,3);
-/*!40000 ALTER TABLE `comment_like` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comment_review`
---
-
-DROP TABLE IF EXISTS `comment_review`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comment_review` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `whisky_id` int(11) DEFAULT NULL,
-  `comment_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_commentreview_whisky_idx` (`whisky_id`),
-  KEY `fk_commentreview_comment_idx` (`comment_id`),
-  CONSTRAINT `fk_commentreview_comment` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_commentreview_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  UNIQUE KEY `unique_company_idx` (`company`),
+  KEY `company_idx` (`company`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `comment_review`
+-- Dumping data for table `contract`
 --
 
-LOCK TABLES `comment_review` WRITE;
-/*!40000 ALTER TABLE `comment_review` DISABLE KEYS */;
-INSERT INTO `comment_review` VALUES (1,20,1),(2,21,2),(3,20,3);
-/*!40000 ALTER TABLE `comment_review` ENABLE KEYS */;
+LOCK TABLES `contract` WRITE;
+/*!40000 ALTER TABLE `contract` DISABLE KEYS */;
+INSERT INTO `contract` VALUES (2,'Digi'),(3,'SDP'),(1,'Wincor');
+/*!40000 ALTER TABLE `contract` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contract_type`
+--
+
+DROP TABLE IF EXISTS `contract_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contract_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `typename` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_contract_type_idx` (`typename`),
+  KEY `contract_type_idx` (`typename`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contract_type`
+--
+
+LOCK TABLES `contract_type` WRITE;
+/*!40000 ALTER TABLE `contract_type` DISABLE KEYS */;
+INSERT INTO `contract_type` VALUES (3,'JEEGY'),(1,'SES'),(4,'SES + TWS'),(2,'TWS');
+/*!40000 ALTER TABLE `contract_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -274,96 +158,8 @@ CREATE TABLE `digi_user` (
 
 LOCK TABLES `digi_user` WRITE;
 /*!40000 ALTER TABLE `digi_user` DISABLE KEYS */;
-INSERT INTO `digi_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-26 16:02:49','aaa','aaa',938,'street',NULL,NULL,NULL,1,'107421593354c61a0ab7f664.38652604',0),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL,0),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL,0),(31,'zzz','zzz@zzz.zz',1,'$2y$10$Th2OBH215Onhdvc1mqG5zOihbepm2gSSK3tVpFU2wKxhmmsL0OJQK','2015-01-22 13:21:22','zzz','zzz',1,'zzz',NULL,NULL,NULL,NULL,NULL,0),(32,'Joeki','joeribroos@gmail.com',1,'$2y$10$xC0AyqleOd/1UE33xtWgYeSLqf45xdBczSRUl7sKXK7kfKt2pfCJC','2015-01-26 09:17:12','Joeri','Broos',272,'Somersstraat 20',1,1,1,1,NULL,0),(33,'jvb','j.vanbiervliet@digi.eu',1,'$2y$10$JA1XJa2XrRCBNk12GVkX3eKHO05uNGh/lTe8v0kEsguGa1Df/C7B6','2016-02-15 16:27:05','j','vb',274,'Thuis',NULL,NULL,NULL,NULL,NULL,0);
+INSERT INTO `digi_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-26 16:02:49','aaa','aaa',938,'street',NULL,NULL,NULL,1,'107421593354c61a0ab7f664.38652604',0),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL,0),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL,0),(31,'zzz','zzz@zzz.zz',1,'$2y$10$Th2OBH215Onhdvc1mqG5zOihbepm2gSSK3tVpFU2wKxhmmsL0OJQK','2015-01-22 13:21:22','zzz','zzz',1,'zzz',NULL,NULL,NULL,NULL,NULL,0),(32,'Joeki','joeribroos@gmail.com',1,'$2y$10$xC0AyqleOd/1UE33xtWgYeSLqf45xdBczSRUl7sKXK7kfKt2pfCJC','2015-01-26 09:17:12','Joeri','Broos',272,'Somersstraat 20',1,1,1,1,NULL,0),(33,'jvb','j.vanbiervliet@digi.eu',1,'$2y$10$JA1XJa2XrRCBNk12GVkX3eKHO05uNGh/lTe8v0kEsguGa1Df/C7B6','2016-02-18 09:41:25','j','vb',274,'Thuis',NULL,NULL,NULL,1,NULL,0);
 /*!40000 ALTER TABLE `digi_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `distillery`
---
-
-DROP TABLE IF EXISTS `distillery`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `distillery` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `postcode` varchar(10) DEFAULT NULL,
-  `country_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `distillery_name_idx` (`name`),
-  KEY `fk_distillery_country_idx` (`country_id`),
-  CONSTRAINT `fk_distillery_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `distillery`
---
-
-LOCK TABLES `distillery` WRITE;
-/*!40000 ALTER TABLE `distillery` DISABLE KEYS */;
-INSERT INTO `distillery` VALUES (1,'Aberlour','Aberlour-on-Spey, Banffshire','AB38 9PJ',NULL),(2,'Château du Breuil ','14 130 LE BREUIL EN AUGE','0000',NULL);
-/*!40000 ALTER TABLE `distillery` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `event`
---
-
-DROP TABLE IF EXISTS `event`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) DEFAULT NULL,
-  `postcode_id` int(11) DEFAULT NULL,
-  `address` varchar(80) DEFAULT NULL,
-  `event_date` datetime DEFAULT NULL,
-  `event_stop` datetime DEFAULT NULL,
-  `created_by` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_event_postcode_idx` (`postcode_id`),
-  KEY `title_idx` (`title`),
-  CONSTRAINT `fk_event_postcode` FOREIGN KEY (`postcode_id`) REFERENCES `postcode` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `event`
---
-
-LOCK TABLES `event` WRITE;
-/*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'aaa',NULL,'aaa','1981-07-29 00:00:00',NULL,0),(2,'bbb',2,'bbb','1981-07-29 00:00:00',NULL,0),(3,'eventtest',273,'teststraat','2015-02-01 00:00:00','2015-02-01 00:00:00',32),(4,'test2',281,'Bredastraat 15','1987-03-29 00:00:00','2015-03-30 00:00:00',28);
-/*!40000 ALTER TABLE `event` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `event_whiskys`
---
-
-DROP TABLE IF EXISTS `event_whiskys`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `event_whiskys` (
-  `id` int(11) NOT NULL,
-  `event_id` int(11) DEFAULT NULL,
-  `whisky_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_whisky_id_idx` (`whisky_id`),
-  KEY `fk_event_id_idx` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `event_whiskys`
---
-
-LOCK TABLES `event_whiskys` WRITE;
-/*!40000 ALTER TABLE `event_whiskys` DISABLE KEYS */;
-/*!40000 ALTER TABLE `event_whiskys` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -378,7 +174,8 @@ CREATE TABLE `postcode` (
   `postcode` varchar(4) DEFAULT NULL,
   `town` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `postcode_idx` (`postcode`)
+  KEY `postcode_idx` (`postcode`),
+  KEY `town_idx` (`town`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2766 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -393,144 +190,76 @@ INSERT INTO `postcode` VALUES (1,'0612','Sinterklaas'),(2,'1000','BRUSSEL'),(7,'
 UNLOCK TABLES;
 
 --
--- Table structure for table `region`
+-- Table structure for table `store`
 --
 
-DROP TABLE IF EXISTS `region`;
+DROP TABLE IF EXISTS `store`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `region` (
+CREATE TABLE `store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) NOT NULL,
-  `country_id` int(11) DEFAULT NULL,
+  `storename` varchar(65) NOT NULL,
+  `synergie` varchar(45) NOT NULL,
+  `ip` varchar(45) DEFAULT NULL,
+  `softwareversion` varchar(80) DEFAULT NULL,
+  `contact` varchar(128) DEFAULT NULL,
+  `email` varchar(65) DEFAULT NULL,
+  `storegroup_id` int(11) NOT NULL,
+  `postcode_id` int(11) NOT NULL,
+  `contract_id` int(11) NOT NULL,
+  `contract_type_id` int(11) NOT NULL,
+  `backoffice_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `region_name_idx` (`name`),
-  KEY `fk_region_country_idx` (`country_id`),
-  CONSTRAINT `fk_region_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `region`
---
-
-LOCK TABLES `region` WRITE;
-/*!40000 ALTER TABLE `region` DISABLE KEYS */;
-INSERT INTO `region` VALUES (1,'Speyside',103),(2,'France',73);
-/*!40000 ALTER TABLE `region` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `whisky`
---
-
-DROP TABLE IF EXISTS `whisky`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `whisky` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) DEFAULT NULL,
-  `image_path` varchar(255) DEFAULT NULL,
-  `region_id` int(11) DEFAULT NULL,
-  `distillery_id` int(11) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `age` tinyint(4) DEFAULT NULL,
-  `alcohol` int(11) DEFAULT NULL,
-  `barrel_id` int(11) DEFAULT NULL,
-  `view_count` int(11) DEFAULT NULL,
-  `short_description` text,
-  `review_date` datetime DEFAULT NULL,
-  `bottlery_id` int(11) DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  `blend_id` int(11) DEFAULT NULL,
-  `date_distilled` datetime DEFAULT NULL,
-  `date_bottled` datetime DEFAULT NULL,
-  `country_id` int(11) DEFAULT NULL,
-  `capacity` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_whisky_barrel_idx` (`barrel_id`),
-  KEY `fk_whisky_distillery_idx` (`distillery_id`),
-  KEY `fk_whisky_region_idx` (`region_id`),
-  KEY `whisky_name_idx` (`name`),
-  KEY `fk_whisky_bottlery_idx` (`bottlery_id`),
-  KEY `fk_whisky_country_idx` (`country_id`),
-  KEY `fk_whisky_blend_idx` (`blend_id`),
-  CONSTRAINT `fk_whisky_barrel` FOREIGN KEY (`barrel_id`) REFERENCES `barrel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_whisky_blend` FOREIGN KEY (`blend_id`) REFERENCES `blend` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_whisky_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
-  CONSTRAINT `fk_whisky_distillery` FOREIGN KEY (`distillery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_whisky_region` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `whisky`
---
-
-LOCK TABLES `whisky` WRITE;
-/*!40000 ALTER TABLE `whisky` DISABLE KEYS */;
-INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,15,43,1,NULL,'Among going manor who did. Do ye is celebrated it sympathize considered. May ecstatic did surprise elegance the ignorant age. Own her miss cold last. It so numerous if he outlived disposal. How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved resolution. Hence hopes noisy may china fully and. Am it regard stairs branch thirty length afford. ','1981-07-29 00:00:00',NULL,NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL,0),(18,'Aberlour A Bunadh Batch 47','aberlour-a-bunadh-batch-47.jpg',1,1,60,47,60,1,NULL,'He difficult contented we determine ourselves me am earnestly. Hour no find it park. Eat welcomed any husbands moderate. Led was misery played waited almost cousin living. Of intention contained is by middleton am. Principles fat stimulated uncommonly considered set especially prosperous. Sons at park mr meet as fact like.','2011-11-11 00:00:00',NULL,NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL,0),(19,'Aberlour 12 years double cask','aberlour-12-y-double-cask.jpg',1,1,3999,12,40,1,NULL,'I would be thrilled to come in for an interview at your earliest convenience.','2014-12-16 00:00:00',NULL,NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL,0),(20,'Aberlour 18 years','aberlour-18-y.jpg',1,1,6499,18,43,1,NULL,'Am of mr friendly by strongly peculiar juvenile. Unpleasant it sufficient simplicity am by friendship no inhabiting. Goodness doubtful material has denoting suitable she two. Dear mean she way and poor bred they come. He otherwise me incommode explained so in remaining. Polite barton in it warmly do county length an. ','2008-06-07 00:00:00',NULL,NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL,0),(21,'Calvados ch.breuil fine 3 jr','calvados-ch-breuil-fine-3-jr.jpg',2,2,1749,3,40,2,NULL,'Bed sincerity yet therefore forfeited his certainty neglected questions. Pursuit chamber as elderly amongst on. Distant however warrant farther to of. My justice wishing prudent waiting in be. Comparison age not pianoforte increasing delightful now. Insipidity sufficient dispatched any reasonably led ask. Announcing if attachment resolution sentiments admiration me on diminution. ','2014-08-05 00:00:00',NULL,NULL,NULL,'1988-11-30 00:00:00','1993-11-30 00:00:00',NULL,70);
-/*!40000 ALTER TABLE `whisky` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `whisky_like`
---
-
-DROP TABLE IF EXISTS `whisky_like`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `whisky_like` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `whisky_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_whisky_user_UNIQUE` (`whisky_id`,`user_id`),
-  KEY `fk_whiskylike_whisky_idx` (`whisky_id`),
-  KEY `fk_whiskylike_user_idx` (`user_id`),
-  CONSTRAINT `fk_whiskylike_user` FOREIGN KEY (`user_id`) REFERENCES `digi_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_whiskylike_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `whisky_like`
---
-
-LOCK TABLES `whisky_like` WRITE;
-/*!40000 ALTER TABLE `whisky_like` DISABLE KEYS */;
-INSERT INTO `whisky_like` VALUES (12,NULL,NULL),(13,NULL,NULL),(9,17,28),(10,18,29),(4,19,29),(5,19,30),(6,20,28),(7,20,30),(8,20,31),(11,21,30);
-/*!40000 ALTER TABLE `whisky_like` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `whisky_score`
---
-
-DROP TABLE IF EXISTS `whisky_score`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `whisky_score` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `score` tinyint(4) DEFAULT NULL,
-  `whisky_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_whisky_category_UNIQUE` (`whisky_id`,`category_id`),
-  KEY `fk_whiskyscore_category_idx` (`category_id`),
-  CONSTRAINT `fk_whiskyscore_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_whiskyscore_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  UNIQUE KEY `storename_unique_idx` (`storename`),
+  UNIQUE KEY `synergie_unique_idx` (`synergie`),
+  KEY `storename_idx` (`storename`),
+  KEY `synergie_idx` (`synergie`),
+  KEY `fk_store_storegroup_idx` (`storegroup_id`),
+  KEY `fk_store_postcode_idx` (`postcode_id`),
+  KEY `fk_store_contract_idx` (`contract_id`),
+  KEY `fk_store_contracttype_idx` (`contract_type_id`),
+  KEY `fk_store_backoffice_idx` (`backoffice_id`),
+  CONSTRAINT `fk_store_backoffice` FOREIGN KEY (`backoffice_id`) REFERENCES `backoffice` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_store_contract` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_store_contracttype` FOREIGN KEY (`contract_type_id`) REFERENCES `contract_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_store_postcode` FOREIGN KEY (`postcode_id`) REFERENCES `postcode` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_store_storegroup` FOREIGN KEY (`storegroup_id`) REFERENCES `storegroup` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `whisky_score`
+-- Dumping data for table `store`
 --
 
-LOCK TABLES `whisky_score` WRITE;
-/*!40000 ALTER TABLE `whisky_score` DISABLE KEYS */;
-/*!40000 ALTER TABLE `whisky_score` ENABLE KEYS */;
+LOCK TABLES `store` WRITE;
+/*!40000 ALTER TABLE `store` DISABLE KEYS */;
+/*!40000 ALTER TABLE `store` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `storegroup`
+--
+
+DROP TABLE IF EXISTS `storegroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `storegroup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `groupname` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `store_group_name_unique_idx` (`groupname`),
+  KEY `store_group_name_idx` (`groupname`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `storegroup`
+--
+
+LOCK TABLES `storegroup` WRITE;
+/*!40000 ALTER TABLE `storegroup` DISABLE KEYS */;
+INSERT INTO `storegroup` VALUES (1,'Apotheek'),(2,'Carrefour'),(3,'Delhaize'),(7,'Divers'),(4,'Hubo'),(5,'Mestdagh'),(6,'Tankstation');
+/*!40000 ALTER TABLE `storegroup` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -542,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-16 17:25:18
+-- Dump completed on 2016-02-18 12:07:58

@@ -18,11 +18,11 @@
     <nav id="reg-menu">
       <ul class="nav nav-pills">
         <li><a href="{{ app.urlFor('profile_show') }}">Mijn Profiel</a></li>
-        <li><a href="{{ app.urlFor('user_logoff') }}">Afmelden</a></li>
         {% set user = globals.user %}
         {% if user.isAdmin() %}
           <li> <a href="{{ app.urlFor('admin_list_profiles') }}">Profielen</a> </li>
         {% endif %}
+        <li><a href="{{ app.urlFor('user_logoff') }}">Afmelden</a></li>
       </ul>
     </nav>
   {% endif %}

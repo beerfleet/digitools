@@ -24,12 +24,17 @@ class EslController extends Controller {
     $this->eslService = new EslService($em, $app);
   }
 
-  public function esl_home() {      
-    $globals = $this->getGlobals();
+  public function esl_home() {          
     $this->getApp()->render('Esl/esl_main_page.html.twig', ['globals' => $this->getGlobals()]);
   }
 
   public function esl_sheet_show() {
     echo "SHOW CLIENTS";
+  }
+
+  public function esl_sheet_new() {
+    
+
+    $this->getApp()->render('Esl/esl_new_client.html.twig', ['globals' => $this->getGlobals()]);
   }
 }

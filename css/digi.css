@@ -30,7 +30,8 @@ html, body {
 }
 
 /* MAIN CONTENT */
-#submenu {
+#submenu,
+#client-form {
 	margin-top: 30px;
 }
 #users_list {

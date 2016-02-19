@@ -24,7 +24,7 @@ class EslController extends Controller {
     $this->eslService = new EslService($em, $app);
   }
 
-  public function esl_home() {          
+  public function esl_home() {
     $this->getApp()->render('Esl/esl_main_page.html.twig', ['globals' => $this->getGlobals()]);
   }
 
@@ -33,8 +33,12 @@ class EslController extends Controller {
   }
 
   public function esl_sheet_new() {
-    
-
-    $this->getApp()->render('Esl/esl_new_client.html.twig', ['globals' => $this->getGlobals()]);
+  $app = $this->getApp();
+    if ($this->isUserLoggedIn()) {
+      $app->render('Esl/esl_new_client.html.twig', ['globals' => $this->getGlobals()]);
+    } else {
+      $app->flash('error', 'U moet aangemeld zijn om een klant aan te maken.');
+      $app->redirect($app->urlFor('main_page'));
+    }
   }
 }

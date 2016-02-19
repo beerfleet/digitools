@@ -2,12 +2,14 @@
 
 {% block title %}Digi Tools - ESL{% endblock title %}
 
-{% block main_column %}
-  {% set app = globals.app %}
-  <section id="submenu">
-    <ul>
-      <li><a href="{{ app.urlFor('esl_sheet_show') }}" class="form-control btn">lijst klanten</a></li>
-      <li><a href="{{ app.urlFor('esl_sheet_new') }}" class="form-control btn">nieuwe klant</a></li>
-    </ul>
-  </section>
-{% endblock main_column %}
+  {% block main_column %}
+    {% set app = globals.app %}
+      <section id="submenu">
+        <ul>
+          <li><a href="{{ app.urlFor('esl_sheet_show') }}" class="form-control btn">lijst klanten</a></li>
+          {% if globals.logged_in == 1 %}
+            <li><a href="{{ app.urlFor('esl_sheet_new') }}" class="form-control btn">nieuwe klant</a></li>
+          {% endif %}
+        </ul>
+      </section>
+    {% endblock main_column %}

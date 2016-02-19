@@ -1,10 +1,19 @@
-{% extends 'homepage.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Digi Tools - ESL - Maak nieuwe klant {% endblock title %}
 
-{% block main_column %}
-  {% set app = globals.app %}
-  <section id="client-form">
-    CLIENT FORM
-  </section>
-{% endblock main_column %}
+  {% block nav_menu %}
+    {% include 'nav_top_menu.html.twig' %}
+    <div class="container">
+      <div class="floatright">
+        {% include 'menu.html.twig' %}
+      </div>
+    </div>
+  {% endblock nav_menu%}
+
+  {% block content %}
+    {% set app = globals.app %}
+    <section class="container" id="client-form">
+      CLIENT FORM
+    </section>
+  {% endblock content %}

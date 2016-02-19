@@ -10,6 +10,10 @@ html, body {
 	padding-left: 0;
 }
 
+.floatright {
+	float: right;
+}
+
 /* ERROR OUTPUT */
 .flagged {
 	border: 3px gray double;
@@ -47,6 +51,9 @@ html, body {
 }
 
 /* SIDEBAR */
+#reg-menu .nav li a {
+	font-size: 10px;
+}
 #sidebar-wrapper {
 	margin-top: 25px;	
 }

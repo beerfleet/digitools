@@ -16,7 +16,7 @@
     {% else %}
     {# user aangemeld #}
     <nav id="reg-menu">
-      <ul class="nav nav-pills">
+      <ul class="nav nav-tabs">
         <li><a href="{{ app.urlFor('profile_show') }}">Mijn Profiel</a></li>
         {% set user = globals.user %}
         {% if user.isAdmin() %}

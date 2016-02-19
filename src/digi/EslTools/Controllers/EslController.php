@@ -14,14 +14,14 @@ use digi\eslTools\Service\Esl\EslService;
 */
 
 class EslController extends Controller {
-  
-  private $eslService; 
+
+  private $srv; 
   private $em;
   private $app;
 
   public function __construct ($em, $app) {
     parent::__construct($em, $app);
-    $this->eslService = new EslService($em, $app);
+    $this->srv = new EslService($em, $app);
   }
 
   public function esl_home() {
@@ -33,9 +33,10 @@ class EslController extends Controller {
   }
 
   public function esl_sheet_new() {
-  $app = $this->getApp();
+    $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
-      $app->render('Esl/esl_new_client.html.twig', ['globals' => $this->getGlobals()]);
+      $data = $this->srv->getForeignTablesData();
+      $app->render('Esl/esl_new_client.html.twig', ['globals' => $this->getGlobals(), 'data' => $data]);
     } else {
       $app->flash('error', 'U moet aangemeld zijn om een klant aan te maken.');
       $app->redirect($app->urlFor('main_page'));

@@ -36,7 +36,7 @@ class ProfileController extends Controller {
     if ($verified) {
       $this->logonIfEnabled();
     } else {
-      $app->flash('error', 'Invalid credentials');
+      $app->flash('error', 'Aanmelden mislukt');
       $app->redirect($app->urlFor('main_page'));
     }
   }

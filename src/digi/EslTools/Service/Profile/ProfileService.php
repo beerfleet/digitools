@@ -67,18 +67,18 @@ class ProfileService {
     $em = $this->em;
     $repo = $em->getRepository('digi\eslTools\Entities\User');
 
-    $password = $app->request->post('password');
+    $password = $app->request->post('wachtwoord');
     if (isset($password) && trim($password) != '') {
       $hash = password_hash($password, CRYPT_BLOWFISH);
       $user->setPassword($hash);
     }
 
-    $first_name = $app->request->post('first_name');
+    $first_name = $app->request->post('voornaam');
     if ($user->getFirstName() != $first_name) {
       $user->setFirstName($first_name);
     }
 
-    $surname = $app->request->post('surname');
+    $surname = $app->request->post('naam');
     if ($user->getSurname() != $surname) {
       $user->setSurname($surname);
     }
@@ -94,51 +94,6 @@ class ProfileService {
     if ($user->getAddress() != $address) {
       $user->setAddress($address);
     }
-
-    /* Olivier */
-    $isAdmin = $app->request->post('is_admin');
-    if ($user->isAdmin() != $isAdmin) {
-      $user->setAdmin($isAdmin);
-    }
-
-    $can_review = $app->request->post('can_review');
-    if ($user->canReview() != $can_review) {
-      $user->setCanReview($can_review);
-    }
-
-
-    $can_create_event = $app->request->post('can_create_event');
-    if ($user->canCreateEvent() != $can_create_event) {
-      $user->setCanCreateEvent($can_create_event);
-    }
-
-    $can_create_category = $app->request->post('can_create_category');
-    if ($user->canCreateCategory() != $can_create_category) {
-      $user->setCanCreateCategory($can_create_category);
-    }
-    
-    $isEnabled = $app->request->post('enabled');
-    if($user->isEnabled() != $isEnabled){
-        if(!isset($isEnabled)){
-            $user->setEnabled(0);
-        }else{
-            $user->setEnabled($isEnabled);
-        }
-    }
-    
-    $isDeleted = $app->request->post('deleted');
-    if($user->isDeleted() != $isDeleted){
-        if(!isset($isDeleted)){
-            $user->setDeleted(0);
-        }else{
-            $user->setDeleted(1);
-        }
-        if($isDeleted){
-            $user->setEnabled(0);
-        }
-    }
-
-    /* Olivier */
 
     $em->persist($user);
     $em->flush();
@@ -181,7 +136,7 @@ class ProfileService {
     $rel_path = str_replace(":token", "", $rel_path_raw);
     $url = "http://$root_path" . $rel_path . $user->getPasswordToken();
     $message = wordwrap("Aanvraag wachtwoord herstel: " . $user->getUsername() .
-        ". Klik " . $url . " om te herstellen.");
+            ". Klik " . $url . " om te herstellen.");
     $headers = 'From: webmaster@digi.eu';
     mail($user->getEmail(), 'Digi Tools wachtwoord herstel dienst.', $message, $headers);
   }
@@ -193,7 +148,7 @@ class ProfileService {
     $rel_path = str_replace(":token", "", $rel_path_raw);
     $url = "http://$root_path" . $rel_path . $user->getPasswordToken();
     $message = wordwrap("Hello " . $user->getUsername() .
-        ". Klik " . $url . " om uw registratie te activeren.");
+            ". Klik " . $url . " om uw registratie te activeren.");
     $headers = 'From: webmaster@digi.eu';
     mail($user->getEmail(), 'The Scotch Lodge profile verification.', $message, $headers);
   }
@@ -271,15 +226,16 @@ class ProfileService {
     $em->merge($user);
     $em->flush();
   }
-  
+
   /* @var $user User */
+
   public function setEnabledState($user) {
-    $user->setEnabled(1);    
+    $user->setEnabled(1);
     $em = $this->em;
     $em->merge($user);
     $em->flush();
   }
-  
+
   public function enableUser($user) {
     $this->clearToken($user);
     $this->setEnabledState($user);
@@ -298,7 +254,7 @@ class ProfileService {
     $em->persist($user);
     $em->flush();
   }
-  
+
   public function showAllUsers() {
     $em = $this->em;
     $userRepository = $em->getRepository('digi\eslTools\Entities\User');

@@ -15,6 +15,7 @@ use digi\eslTools\Entities\User;
  */
 class ProfileController extends Controller {
   /* var $srv ProfileService */
+
   private $srv;
 
   public function __construct($em, $app) {
@@ -23,6 +24,7 @@ class ProfileController extends Controller {
   }
 
   /* logon */
+
   public function logon() {
     $globals = $this->getGlobals();
     $this->getApp()->render('Profile\logon.html.twig', array('globals' => $globals));
@@ -56,7 +58,7 @@ class ProfileController extends Controller {
     $this->srv->clearToken($user);
     if ($user->isEnabled()) {
       // logon
-      
+
       $_SESSION['user'] = $user->getUsername();
       $this->srv->storeLoginTime($user);
       $app->redirect($app->urlFor('main_page'));
@@ -67,6 +69,7 @@ class ProfileController extends Controller {
   }
 
   /* profile */
+
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
@@ -78,12 +81,11 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
-  
+
   public function editProfile() {
     $app = $this->getApp();
-    $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
+    $reg_srv = new RegistrationService($this->getEntityManager(), $app);
     $postcodes = $reg_srv->getPostcodes();
-    $g = $this->getGlobals();    
     $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
 
@@ -99,38 +101,33 @@ class ProfileController extends Controller {
     }
     $srv = $this->srv;
     $users_list = $srv->showAllUsers();
-    $this->getApp()->render('Profile\profiles_list_show.html.twig', array( 'globals' => $this->getGlobals(), 'users_list' => $users_list ));
+    $this->getApp()->render('Profile\profiles_list_show.html.twig', array('globals' => $this->getGlobals(), 'users_list' => $users_list));
   }
-  
-  
-/* olivier */
+
   public function editProfileAdmin($username) {
     $app = $this->getApp();
     $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
     $postcodes = $reg_srv->getPostcodes();
     $g = $this->getGlobals();
-  
-    $usertoedit = $this->srv->retrieveUserByUsername($username);    
-    
+
+    $usertoedit = $this->srv->retrieveUserByUsername($username);
+
     $app->render('Profile\profile_edit_admin.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes, 'usertoedit' => $usertoedit));
   }
-  
-    
-    public function storeChangesAdmin() {
-    $app = $this->getApp();      
-    $usertoedit = $this->srv->retrieveUserByUsername($app->request->post('username'));       
+
+  public function storeChangesAdmin() {
+    $app = $this->getApp();
+    $usertoedit = $this->srv->retrieveUserByUsername($app->request->post('username'));
     $this->srv->updateUser($usertoedit);
     $app->flash('info', 'User profile updated.');
-    $app->redirect($app->urlFor('profile_editadmin',array('username'=> $usertoedit->getUsername())));
-
+    $app->redirect($app->urlFor('profile_editadmin', array('username' => $usertoedit->getUsername())));
   }
-  
-  /* olivier */
-  public function storeChanges() {
+
+  public function profile_edit_store() {
     $app = $this->getApp();
     if ($this->srv->dataIsValid()) {
       $this->srv->updateUser($this->getUser());
-      $app->flash('info', 'User profile updated.');
+      $app->flash('info', 'De wijzigingen in uw profiel zijn bewaard.');
       $app->redirect($app->urlFor('profile_show'));
     } else {
       $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
@@ -139,8 +136,8 @@ class ProfileController extends Controller {
     }
   }
 
-   
   /* password reset */
+
   public function processToken($token) {
     $app = $this->getApp();
     $srv = $this->srv;
@@ -161,9 +158,9 @@ class ProfileController extends Controller {
 
   public function passwordResetProcess() {
     $app = $this->getApp();
-    $em = $this->getEntityManager('digi\eslTools\Entities\User');    
+    $em = $this->getEntityManager('digi\eslTools\Entities\User');
     $val = new EmailVal($app, $em);
-    if ($val->validate()) {      
+    if ($val->validate()) {
       $user = $this->srv->createPasswordToken();
       if ($user != null) {
         $this->srv->mailUserResetToken($user);
@@ -190,8 +187,9 @@ class ProfileController extends Controller {
       $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $id, 'errors' => $errors));
     }
   }
-  
+
   /* registration */
+
   public function processLogonToken($token) {
     $app = $this->getApp();
     $srv = $this->srv;
@@ -205,8 +203,8 @@ class ProfileController extends Controller {
     }
   }
 
-  public function showProfileOfUserWithId($id) {           
-    $app = $this->getApp();    
+  public function showProfileOfUserWithId($id) {
+    $app = $this->getApp();
     $srv = $this->srv;
     $usertoview = $srv->searchUserById($id);
     if ($usertoview != null) {
@@ -215,9 +213,8 @@ class ProfileController extends Controller {
       $app->flash('error', 'Invalid user. Please try again');
       $app->redirect($app->urlFor('main_page'));
     }
-    
   }
-  
+
   public function showProfileOfUserWithUsername($username) {
     $app = $this->getApp();
     $srv = $this->srv;
@@ -229,7 +226,7 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
-  
+
   public function showAllUserComments($id) {
     $app = $this->getApp();
     $srv = $this->srv;
@@ -239,7 +236,7 @@ class ProfileController extends Controller {
     }
     $app->render('Comments/profile_comments.html.twig', array('globals' => $this->getGlobals(), 'comments' => $user->getComments(), 'user' => $user));
   }
- 
+
   public function showAllUserWhiskies($id) {
     $app = $this->getApp();
     $user = $this->srv->searchUserById($id);
@@ -257,5 +254,5 @@ class ProfileController extends Controller {
     }
     $app->render('Events/profile_events.html.twig', array('globals' => $this->getGlobals(), 'events' => $user->getEventsCreated(), 'user' => $user));
   }
-  
+
 }

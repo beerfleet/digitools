@@ -1,37 +1,37 @@
 {% extends 'base_with_right_sidebar.html.twig' %}
 
 {% block title %}
-  Show Profile
+  Editeer mijn profiel
 {% endblock title %}
 
 {% block content %}
   {% block main_column %}
     {% if globals.user is defined and globals.user is not null %}
-      set user = globals.user
+      {% set user = globals.user %}
     {% endif %}
 
     <div class="container form">
-      <h1>My Profile</h1>      
-      <form action="{{ globals.app.urlFor('profile_edit_save') }}" method="post">
+      <h1>Mijn Profiel</h1>      
+      <form action="{{ globals.app.urlFor('profile_edit_store') }}" method="post" novalidate>
         <div class="form-group">
-          <label for="username">Username</label>
-          <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
-          <label for="email">E-mail</label> 
-          <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly />
+          <label for="username">Gebruikersnaam</label>
+          <input class="form-control" type="text" id="username" name="gebruikersnaam" value="{{ user.username }}" readonly />
+          <label for="email">E-mail adres</label> 
+          <input class="form-control" type="email" id="email" name="e-mail" value="{{ user.email }}" readonly />
         </div>
 
         <div class="form-group">
-          <label for="password">Password</label>
-          <input class="form-control" type="password" id="password" name="password" />
-          <label for="password_repeat">Repeat password</label>
-          <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
+          <label for="password">Wachwoord</label>
+          <input class="form-control" type="password" id="password" name="wachtwoord" />
+          <label for="password_repeat">Herhaal wachtwoord</label>
+          <input class="form-control" type="password" id="password_repeat" name="herhaal_wachtwoord" />
         </div>
 
         <div class="form-group">
-          <label for="first_name">First Name</label>
-          <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}"  />
-          <label for="surname"></label>
-          <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" />
+          <label for="voornaam">Voornaam</label>
+          <input class="form-control" type="text" id="first_name" name="voornaam" value="{{ user.firstName }}"  />
+          <label for="naam">Naam</label>
+          <input class="form-control" type="text" id="surname" name="naam" value="{{ user.surname }}" />
         </div>
 
         <div class="form-group">
@@ -42,18 +42,15 @@
             {% endfor %}
           </select>
           <label for="adres">Adres</label>
-          <input class="form-control" type="text" id="adres" name="address" value="{{ user.address }}"  />
+          <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}"  />
         </div>
 
-        <input class="form-control btn submit" type="submit" id="wijzig" name="save" value="Save" />
+        <div class="form-group spacing">
+          <input class="form-control btn submit" type="submit" id="wijzig" name="save" value="Bewaar" />
+          <a href="/" id="return_to_main" class="form-control btn">Home</a>
+        </div>
       </form>
-      <a href="/" id="return_to_main" class="btn submit btn-default">
-        Return to main menu
-      </a>     
     </div>
   {% endblock main_column %}
 
-  {% block sidebar %}          
-  {% endblock sidebar %}
-  
 {% endblock content %}

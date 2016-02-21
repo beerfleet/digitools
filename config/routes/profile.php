@@ -44,8 +44,8 @@ $app->post('/profile/storeadmin', function() use ($contr){
 
 /*olivier */
 $app->post('/profile/store', function() use ($contr){
-  $contr->storeChanges();
-})->name('profile_edit_save');
+  $contr->profile_edit_store();
+})->name('profile_edit_store');
 
 
 $app->get('/password/reset', function() use ($contr) {

@@ -45,22 +45,7 @@ digi\eslTools\Entities\User:
       length: 80
     address:
       type: string
-      length: 255
-    can_review:
-      type: integer
-      options:
-        default: 0
-        unsigned: true
-    can_create_category:
-      type: integer
-      options:
-        default: 0
-        unsigned: true
-    can_create_event:
-      type: integer
-      options:
-        default: 0
-        unsigned: true
+      length: 255    
     is_admin:
       type: integer
       options:
@@ -69,8 +54,3 @@ digi\eslTools\Entities\User:
     password_token:
       type: string
       length: 64
-    is_deleted:
-      type: integer
-      options:
-        default: 0
-        unsigned: true

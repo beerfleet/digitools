@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Slim\Slim;
 use Slim\Extras\Views\Twig;
+use Valitron\Validator as V;
 
 // ---------------->  YAML
 $namespaces = $config['yaml']['namespaces'];
@@ -30,3 +31,7 @@ $view->twigExtensions = $config['slim_ext'];
 
 $app = new Slim(array( 'view' => $view ));
 $app->config($config['slim']);
+
+// ---------------> Valitron
+V::langDir(__DIR__. '/config/lang/');
+V::lang('nl');

@@ -1,9 +1,9 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Validation;
+namespace digi\eslTools\Service\Validation;
 
 /**
- * Description of EmailNotBlankValidation
+ * E-mail validatie
  *
  * @author jan van biervliet
  */
@@ -11,8 +11,8 @@ class EmailNotBlankValidation extends Validation {
 
   public function addRules() {
     $val = $this->getVal();
-    $val->rule('required', 'email');
-    $val->rule('email', 'email');
+    $val->rule('required', 'e-mail');
+    $val->rule('email', 'e-mail');
   }
 
 }

@@ -41,14 +41,14 @@ class RegistrationService {
 
     /* @var $user User */
     $user = new User();
-    $username = $app->request->post('username');
-    $email = $app->request->post('email');
-    $password = $app->request->post('password');
+    $username = $app->request->post('gebruikersnaam');
+    $email = $app->request->post('e-mail');
+    $password = $app->request->post('wachwoord');
     $hash = password_hash($password, CRYPT_BLOWFISH);
-    $first_name = $app->request->post('first_name');
-    $surname = $app->request->post('surname');
+    $first_name = $app->request->post('voornaam');
+    $surname = $app->request->post('naam');
     $postcode = $app->request->post('postcode');
-    $address = $app->request->post('address');
+    $address = $app->request->post('adres');
 
     $user->setUsername($username);
     $user->setEmail($email);

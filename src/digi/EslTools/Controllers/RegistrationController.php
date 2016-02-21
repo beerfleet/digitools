@@ -49,7 +49,7 @@ class RegistrationController extends Controller {
 
   public function registrationConfirm() {
     $app = $this->getApp();
-    $app->flash('info', 'A mail has been sent. Please verify by following the email instructions.');
+    $app->flash('info', 'Check uw mail, u ontvangt dadelijk een e-mail met instructies om uw registratie te activeren.');
     $app->redirect($app->urlFor('main_page'));
   }
 

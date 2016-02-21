@@ -13,7 +13,7 @@ return array(
     'in'            => "bevat ongeldige waarde",
     'notIn'         => "bevat ongeldige waarde",
     'ip'            => "is geen geldig IP adres",
-    'email'         => "is geen geldig email-adres",
+    'email'         => "is geen geldig e-mail adres",
     'url'           => "is geen URL",
     'urlActive'     => "moet een actief domein zijn",
     'alpha'         => "enkel letters a-z",

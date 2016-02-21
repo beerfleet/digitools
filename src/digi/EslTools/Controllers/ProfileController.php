@@ -61,7 +61,7 @@ class ProfileController extends Controller {
       $this->srv->storeLoginTime($user);
       $app->redirect($app->urlFor('main_page'));
     } else {
-      $app->flash('error', 'Access denied.');
+      $app->flash('error', 'Geen toegang.');
       $app->redirect($app->urlFor('main_page'));
     }
   }
@@ -169,10 +169,10 @@ class ProfileController extends Controller {
       if ($user != null) {
         $this->srv->mailUserResetToken($user);
       }
-      $app->flash('info', 'A mail will be sent shortly if the email address provided is valid.');
+      $app->flash('info', 'Er zal u een nieuw wachtwoord worden verzonden, indien uw e-mail adres geldig is.');
       $app->redirect($app->urlFor('main_page'));
     } else {
-      $app->flash('error', 'E-mail address is not valid.');
+      $app->flash('error', 'E-mail adres is niet geldig.');
       $app->redirect($app->urlFor('password_reset_request'));
     }
   }
@@ -183,7 +183,7 @@ class ProfileController extends Controller {
     if ($srv->isPasswordValid()) {
       $srv->changePassword();
       $srv->clearToken();
-      $app->flash('info', 'Password has been changed');
+      $app->flash('info', 'Uw wachtwoord is gewijzigd.');
       $app->redirect($app->urlFor('main_page'));
     } else {
       $id = $app->request->post('id');
@@ -199,7 +199,7 @@ class ProfileController extends Controller {
     $user = $srv->searchUserByToken($token);
     if ($user != null) {
       $srv->enableUser($user);
-      $app->flash('info', 'The token is verified. You are now granted access.');
+      $app->flash('info', 'Token aanvaard.');
       $app->redirect($app->urlFor('main_page'));
     } else {
       $app->redirect($app->urlFor('error_404'));
@@ -226,7 +226,7 @@ class ProfileController extends Controller {
     if ($usertoview != null) {
       $app->render('Profile/profile_show_by_id.html.twig', array('globals' => $this->getGlobals(), 'usertoview' => $usertoview));
     } else {
-      $app->flash('error', 'Invalid user. Please try again');
+      $app->flash('error', 'Ongeldige gebruiker.');
       $app->redirect($app->urlFor('main_page'));
     }
   }

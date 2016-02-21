@@ -1,5 +1,6 @@
 cache/*
 vendor/*
+vendor/slim/*
 !vendor/slim/extras/Slim/Extras/Views/Twig.php
 nbproject/*
 composer.lock

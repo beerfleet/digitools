@@ -8,62 +8,34 @@
 
   {% set app = globals.app %}
 
-    <section id="registration">
-      <div class="container form">
-        <h1>Register</h1>
-        <p>Registreer hier voor volledige functionaliteit.</p>
+  <section id="registration">
+    <div class="container form">
+      <h1>Registreer</h1>
+      <p>Registreer hier voor volledige functionaliteit.</p>
 
-        <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
-          <div class="form-group">
-            <label for="username">User name</label>
-            <input class="form-control" type="text" id="username" name="username" value="{% if app.request.isPost() %}{{app.request.post('username')}}{% endif %}" />
-            <label for="email">E-mail</label>
-            <input class="form-control" type="email" id="email" name="email" value="{% if app.request.isPost() %}{{app.request.post('email')}}{% endif %}"/>
-          </div>
+      <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
+        <input class="form-control" type="text" id="username" name="gebruikersnaam" placeholder="Gebruikersnaam" value="{% if app.request.isPost() %}{{app.request.post('gebruikersnaam')}}{% endif %}" />
+        <input class="form-control" type="email" id="email" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('e-mail')}}{% endif %}"/>
+        <input class="form-control" type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" />
+        <input class="form-control" type="password" id="password_repeat" name="herhaal_wachtwoord" placeholder="Herhaal achtwoord" />
+        <input class="form-control" type="text" id="first_name" name="voornaam" placeholder="Voornaam" value="{% if app.request.isPost() %}{{app.request.post('voornaam')}}{% endif %}" />
+        <input class="form-control" type="text" id="surname" name="naam" placeholder="Naam" value="{% if app.request.isPost() %}{{app.request.post('naam')}}{% endif %}"/>
 
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input class="form-control" type="password" id="wachtwoord" name="password" />
-            <label for="password_repeat">Repeat password</label>
-            <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
-          </div>
+        <select class="form-control" id="postcode" name="postcode">
+          {% for pc in postcodes %}
+            <option value="{{ pc.id }}">{{ pc.postcode }} - {{ pc.town }}</option>
+          {% endfor %}
+        </select>
+        <input class="form-control" type="text" id="adres" name="adres" placeholder="Adres" value="{% if app.request.isPost() %}{{app.request.post('adres')}}{% endif %}" />        
 
-          <div class="form-group">
-            <label for="first_name">First name</label>
-            <input class="form-control" type="text" id="first_name" name="first_name" value="{% if app.request.isPost() %}{{app.request.post('first_name')}}{% endif %}" />
-            <label for="surname">Surname</label>
-            <input class="form-control" type="text" id="surname" name="surname" value="{% if app.request.isPost() %}{{app.request.post('surname')}}{% endif %}"/>
-          </div>
+        <div class="form-group spacing">
+          <ul>
+            <li><input class="form-control btn submit" type="submit" id="verzend" name="register" value="Registreer" /></li>
+            <li><a href="/" id="return_to_main" class="form-control btn submit">Home</a></li>
+          </ul>
+        </div>
 
-          <div class="form-group">
-            <label for="postcode">Postcode</label>
-            <select class="form-control" id="postcode" name="postcode">
-              {% for pc in postcodes %}
-                <option value="{{ pc.id }}">{{ pc.postcode }} - {{ pc.town }}</option>
-              {% endfor %}
-            </select>
-            <label for="address">Address</label>
-            <input class="form-control" type="text" id="adres" name="address" value="{% if app.request.isPost() %}{{app.request.post('address')}}{% endif %}" />
-          </div>
-
-          <!--Honeypot-->
-          <div class="form-group" id="city">
-            <label for="city">City</label>
-            <input class="form-control" type="text" id="city" name="city">
-          </div>
-
-          <div class="form-group spacing">      
-            <ul>
-              <li>
-                <input class="form-control btn submit" type="submit" id="verzend" name="register" value="Register now" />
-              </li>
-              <li>
-                <a href="/" id="return_to_main" class="form-control btn submit">Return to main menu</a>
-              </li>
-            </ul>
-          </div>
-
-        </form>
-      </div>
-    </section>
-  {% endblock content %}
+      </form>
+    </div>
+  </section>
+{% endblock content %}

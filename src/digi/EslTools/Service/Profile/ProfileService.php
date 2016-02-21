@@ -180,10 +180,10 @@ class ProfileService {
     $rel_path_raw = trim($app->urlFor('reset_token_verify'), '\x3A');
     $rel_path = str_replace(":token", "", $rel_path_raw);
     $url = "http://$root_path" . $rel_path . $user->getPasswordToken();
-    $message = wordwrap("Password reset link requested: " . $user->getUsername() .
-        ". Click " . $url . " to complete.");
-    $headers = 'From: webmaster@thescotchlodge.com';
-    mail($user->getEmail(), 'The Scotch Lodge password reset', $message, $headers);
+    $message = wordwrap("Aanvraag wachtwoord herstel: " . $user->getUsername() .
+        ". Klik " . $url . " om te herstellen.");
+    $headers = 'From: webmaster@digi.eu';
+    mail($user->getEmail(), 'Digi Tools wachtwoord herstel dienst.', $message, $headers);
   }
 
   public function mailUserLogonToken($user) {
@@ -193,8 +193,8 @@ class ProfileService {
     $rel_path = str_replace(":token", "", $rel_path_raw);
     $url = "http://$root_path" . $rel_path . $user->getPasswordToken();
     $message = wordwrap("Hello " . $user->getUsername() .
-        ". Click " . $url . " to complete the registration.");
-    $headers = 'From: webmaster@thescotchlodge.com';
+        ". Klik " . $url . " om uw registratie te activeren.");
+    $headers = 'From: webmaster@digi.eu';
     mail($user->getEmail(), 'The Scotch Lodge profile verification.', $message, $headers);
   }
 

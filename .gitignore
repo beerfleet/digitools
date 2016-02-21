@@ -1,8 +1,7 @@
-cache/*
-vendor/*
-vendor/slim/*
+cache/
+vendor/
 !vendor/slim/extras/Slim/Extras/Views/Twig.php
-nbproject/*
+nbproject/
 composer.lock
-logs/*
+logs/
 config/config.php

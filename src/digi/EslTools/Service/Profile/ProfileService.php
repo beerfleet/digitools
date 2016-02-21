@@ -90,7 +90,7 @@ class ProfileService {
       $user->setPostcode($postcode);
     }
 
-    $address = $app->request->post('address');
+    $address = $app->request->post('adres');
     if ($user->getAddress() != $address) {
       $user->setAddress($address);
     }

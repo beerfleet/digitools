@@ -1,3 +1,12 @@
+/* bootstrap override */
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #ffffff;
+}
+
+.nav-tabs > li > a:hover {
+  border: none;
+}
+
 /* GENERAL */
 html, body {
   color: gray;

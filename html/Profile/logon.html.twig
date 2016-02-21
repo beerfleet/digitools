@@ -1,12 +1,16 @@
 
 {% block login %}
-    <form action="{{ app.urlFor('user_logon_process') }}" method="post">
-      <div class="form-group">
-        <input class="form-control" type="text" id="username" name="gebruikersnaam" placeholder="gebruikersnaam"/>
-      </div>
-      <div class="form-group">
-        <input class="form-control" type="password" id="password" name="wachtwoord" placeholder="wachtwoord"/>
-      </div>
-      <input class="form-control btn btn-default" type="submit" id="login" name="login" value="Login" />
-    </form>
+  <form action="{{ app.urlFor('user_logon_process') }}" method="post">
+    <div class="form-group">
+      <input class="form-control" type="text" id="username" name="gebruikersnaam" placeholder="gebruikersnaam"/>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" id="password" name="wachtwoord" placeholder="wachtwoord"/>
+    </div>
+    <div class="form-group spacing">
+      <ul>
+        <li><input class="form-control btn submit" type="submit" id="login" name="login" value="Login" /></li>
+      </ul>
+    </div>
+  </form>
 {% endblock login %}

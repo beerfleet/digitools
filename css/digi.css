@@ -1,36 +1,41 @@
 /* GENERAL */
 html, body {
-    color: gray;
+  color: gray;
 }
 
 /* MISC */
 .form-group ul,
 #submenu ul {
-    list-style-type: none;
-    padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .floatright {
-    float: right;
+  float: right;
 }
 
 /* ERROR OUTPUT */
 .flagged {
-    border: 3px gray double;
-    border-radius: 6px;
-    padding: 10px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px #d1d1d1 solid;
+  border-radius: 6px;  
 }
 .flagged ul {
-    margin-bottom: 0;
-    list-style-type: none;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+.info {
+  text-align: center;
+  color: #12711e;
 }
 .errors {
-    text-align: center;
-    color: red;
+  text-align: center;
+  color: red;
 }
 
 .spacing ul li {
-    
+
 }
 
 /* MAIN CONTENT */
@@ -41,33 +46,33 @@ html, body {
 
 #submenu,
 #client-form {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 #users_list {
-    margin-top: 30px;
-    margin-left: 20px;
+  margin-top: 30px;
+  margin-left: 20px;
 }
 #users_list th {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
 #main-wrapper {	}
 
 /* SIDEBAR */
 #reg-menu .nav li a {
-    font-size: 10px;
+  font-size: 10px;
 }
 #reg-menu li a {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 #reg-menu .nav-tabs {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 #sidebar-wrapper {
-    margin-top: 25px;	
+  margin-top: 25px;	
 }
 
 /* REGISTRATION */
 #registration p {
-    color: gray;
+  color: gray;
 }

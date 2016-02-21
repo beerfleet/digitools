@@ -32,8 +32,8 @@ class ProfileController extends Controller {
 
   public function verifyUserCredentials() {
     $app = $this->getApp();
-    $username = $app->request->post('username');
-    $password = $app->request->post('password');
+    $username = $app->request->post('gebruikersnaam');
+    $password = $app->request->post('wachtwoord');
     $verified = $this->srv->confirmPassword($username, $password);
     if ($verified) {
       $this->logonIfEnabled();
@@ -52,7 +52,7 @@ class ProfileController extends Controller {
 
   public function logonIfEnabled() {
     $app = $this->getApp();
-    $username = $app->request->post('username');
+    $username = $app->request->post('gebruikersnaam');
     /* @var $user User */
     $user = $this->srv->retrieveUserByUsername($username);
     $this->srv->clearToken($user);

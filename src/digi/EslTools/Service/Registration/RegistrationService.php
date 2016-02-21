@@ -43,7 +43,7 @@ class RegistrationService {
     $user = new User();
     $username = $app->request->post('gebruikersnaam');
     $email = $app->request->post('e-mail');
-    $password = $app->request->post('wachwoord');
+    $password = $app->request->post('wachtwoord');
     $hash = password_hash($password, CRYPT_BLOWFISH);
     $first_name = $app->request->post('voornaam');
     $surname = $app->request->post('naam');

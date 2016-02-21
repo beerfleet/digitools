@@ -178,7 +178,7 @@ class ProfileController extends Controller {
     $app = $this->getApp();
     if ($srv->isPasswordValid()) {
       $srv->changePassword();
-      $srv->clearToken();
+      $srv->clearToken();      
       $app->flash('info', 'Uw wachtwoord is gewijzigd.');
       $app->redirect($app->urlFor('main_page'));
     } else {

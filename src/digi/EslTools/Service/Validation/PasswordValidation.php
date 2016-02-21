@@ -15,7 +15,7 @@ class PasswordValidation extends Validation {
     $val = $this->getVal();
     $val->rule('required', 'wachtwoord');
     $val->rule('required', 'herhaal_wachtwoord')
-        ->message('Repeat password is required');
+        ->message('Herhaal wachtwoord is verplicht');
     $val->rule('equals', 'wachtwoord', 'herhaal_wachtwoord')
         ->message('Wachtwoorden komen niet overeen.');
   }

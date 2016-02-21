@@ -210,6 +210,7 @@ class ProfileService {
     $repo = $em->getRepository('digi\eslTools\Entities\User');
     $user = $repo->find($user_id);
     $user->setPassword($hash);
+    $user->setEnabled(1);
     $em->persist($user);
     $em->flush();
   }

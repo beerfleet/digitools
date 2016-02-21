@@ -150,7 +150,7 @@ class ProfileService {
    * @return User
    */
   public function createPasswordToken() {
-    $email = $this->app->request->post('email');
+    $email = $this->app->request->post('e-mail');
     $user = $this->retrieveUserByEmail($email);
     if (isset($user) && $user != null) {
       $token = uniqid(mt_rand(), true);

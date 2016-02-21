@@ -161,10 +161,9 @@ class ProfileController extends Controller {
 
   public function passwordResetProcess() {
     $app = $this->getApp();
-    $em = $this->getEntityManager();
-
+    $em = $this->getEntityManager('digi\eslTools\Entities\User');    
     $val = new EmailVal($app, $em);
-    if ($val->validate()) {
+    if ($val->validate()) {      
       $user = $this->srv->createPasswordToken();
       if ($user != null) {
         $this->srv->mailUserResetToken($user);

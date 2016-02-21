@@ -249,7 +249,7 @@ class ProfileService {
   public function changePassword() {
     $app = $this->app;
     $user_id = $app->request->post('id');
-    $password = $app->request->post('password');
+    $password = $app->request->post('wachtwoord');
     $hash = password_hash($password, CRYPT_BLOWFISH);
     $em = $this->em;
     $repo = $em->getRepository('digi\eslTools\Entities\User');

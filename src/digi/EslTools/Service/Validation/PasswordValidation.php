@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Validation;
+namespace digi\eslTools\Service\Validation;
 
 use Valitron\Validator;
 
@@ -13,11 +13,11 @@ class PasswordValidation extends Validation {
 
   public function addRules() {
     $val = $this->getVal();
-    $val->rule('required', 'password');
-    $val->rule('required', 'password_repeat')
+    $val->rule('required', 'wachtwoord');
+    $val->rule('required', 'herhaal_wachtwoord')
         ->message('Repeat password is required');
-    $val->rule('equals', 'password', 'password_repeat')
-        ->message('Passwords don\'t match');
+    $val->rule('equals', 'wachtwoord', 'herhaal_wachtwoord')
+        ->message('Wachtwoorden komen niet overeen.');
   }
     
 

@@ -15,7 +15,7 @@ class Backoffice {
 
   // getters
   function getId() {
-    return $this->getId();
+    return $this->id;
   }
 
   function getBackofficename() {

@@ -48,10 +48,10 @@ class EslService {
   public function getForeignTablesData() {    
     $data['storegroups'] = $this->getStoreGroups();
     $regSrv = new RegistrationService($this->em, $this->app);
-    $data['postcodes'] = $regSrv->getPostcodes();
+    $data['postcodes'] = $regSrv->getPostcodesByCity();
     $data['contracts'] = $this->getContracts();
-    $data['contracttypes'] = $this->getContracttypes();
     $data['backoffices'] = $this->getBackoffices();
+    $data['contracttypes'] = $this->getContracttypes();
     return $data;
   }
 

@@ -9,11 +9,11 @@ $app->get('/esl', function() use ($contr) {
 })->name('esl_main');
 
 // toon klanten
-$app->get('/esl/sheet', function() use ($contr) {
+$app->get('/esl/klanten', function() use ($contr) {
   $contr->esl_sheet_show();
 })->name('esl_sheet_show');
 
 // nieuwe klant
-$app->get('/esl/sheet/new', function() use ($contr) {
+$app->get('/esl/klant/niew', function() use ($contr) {
   $contr->esl_sheet_new();
 })->name('esl_sheet_new');

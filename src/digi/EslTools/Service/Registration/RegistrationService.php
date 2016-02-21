@@ -74,6 +74,13 @@ class RegistrationService {
     $postcodes = $repo->findAll();
     return $postcodes;
   }
+  
+  public function getPostcodesByCity() {
+    $em = $this->getEm();
+    $repo = $em->getRepository('digi\eslTools\Entities\Postcode');
+    $postcodes = $repo->findBy(array(), ['town' => 'ASC']);
+    return $postcodes;
+  }
 
   public function getPostcodeObject($postcode_id) {
     $em = $this->getEm();

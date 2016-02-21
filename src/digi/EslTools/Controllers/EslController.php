@@ -35,7 +35,7 @@ class EslController extends Controller {
   public function esl_sheet_new() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
-      $data = $this->srv->getForeignTablesData();
+      $data = $this->srv->getForeignTablesData();      
       $app->render('Esl/esl_new_client.html.twig', ['globals' => $this->getGlobals(), 'data' => $data]);
     } else {
       $app->flash('error', 'U moet aangemeld zijn om een klant aan te maken.');

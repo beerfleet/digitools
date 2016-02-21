@@ -1,19 +1,73 @@
-{% extends 'base.html.twig' %}
+{% extends 'homepage.html.twig' %}
 
 {% block title %}Digi Tools - ESL - Maak nieuwe klant {% endblock title %}
 
-  {% block nav_menu %}
-    {% include 'nav_top_menu.html.twig' %}
-    <div class="container">
-      <div class="floatright">
-        {% include 'menu.html.twig' %}
-      </div>
-    </div>
-  {% endblock nav_menu%}
+{% block main_column %}
+  {% set app = globals.app %}
+  <section id="registration">
+    <div class="container form">
+      <h1>Nieuwe klant</h1>
+      <form action="#" method="POST" novalidate>
+        <input class="form-control" type="text" name="winkelnaam" placeholder="Naam klant" value="{% if app.request.isPost() %}{{app.request.post('winkelnaam')}}{% endif %}">
+        <input class="form-control" type="text" name="synergie" placeholder="Klantnummer in Synergy" value="{% if app.request.isPost() %}{{app.request.post('synergie')}}{% endif %}">
+        <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{% if app.request.isPost() %}{{app.request.post('ip')}}{% endif %}">
+        <input class="form-control" type="text" name="softwareversion" placeholder="Software versies" value="{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}">
+        <textarea class="form-control" name="contact" placeholder="Contactgegevens">{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}</textarea>
+        <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('contact')}}{% endif %}">        
 
-  {% block content %}
-    {% set app = globals.app %}
-    <section class="container" id="client-form">
-      CLIENT FORM
-    </section>
-  {% endblock content %}
+        <div class="form-group">
+          <label for="e-mail">Groep</label>
+          <select class="form-control" name="storegroup">
+            {% for group in data.storegroups %}
+              <option value="{{ group.id }}">{{ group.groupname }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="e-mail">Postcode</label>
+          <select class="form-control" name="postcode">
+            {% for pc in data.postcodes %}
+              <option value="{{ pc.id }}">{{ pc.town }} - {{ pc.postcode }}</option>
+            {% endfor %}
+          </select>
+        </div>
+          
+        <div class="form-group">
+          <label for="e-mail">Contract</label>
+          <select class="form-control" name="contract">
+            {% for contract in data.contracts %}
+              <option value="{{ contract.id }}">{{ contract.company }}</option>
+            {% endfor %}
+          </select>
+        </div>
+          
+        <div class="form-group">
+          <label for="e-mail">Contracttype</label>
+          <select class="form-control" name="contracttype">
+            {% for ct in data.contracttypes %}
+              <option value="{{ ct.id }}">{{ ct.typename }}</option>
+            {% endfor %}
+          </select>
+        </div>
+          
+        <div class="form-group">
+          <label for="e-mail">Backoffice</label>
+          <select class="form-control" name="backoffice">
+            {% for bo in data.backoffices %}
+              <option value="{{ bo.id }}">{{ bo.backofficename }}</option>
+            {% endfor %}
+          </select>
+        </div>
+          
+        <div class="form-group">
+          <ul>            
+            <li><input class="form-control btn submit" type="submit" id="verzend" name="register" value="Maak" /></li>
+            <li><a href="/" id="return_to_main" class="form-control btn submit">Home</a></li>
+          </ul>
+        </div>
+          
+      </form>
+    </div>
+  </section>
+{% endblock main_column %}

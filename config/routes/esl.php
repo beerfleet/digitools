@@ -14,6 +14,6 @@ $app->get('/esl/klanten', function() use ($contr) {
 })->name('esl_sheet_show');
 
 // nieuwe klant
-$app->get('/esl/klant/niew', function() use ($contr) {
+$app->get('/esl/klant/nieuw', function() use ($contr) {
   $contr->esl_sheet_new();
 })->name('esl_sheet_new');

@@ -5,7 +5,7 @@
 {% block main_column %}
   {% set app = globals.app %}
   <section id="registration">
-    <div class="container form">
+    <div class="form">
       <h1>Nieuwe klant</h1>
       <form action="#" method="POST" novalidate>
         <input class="form-control" type="text" name="winkelnaam" placeholder="Naam klant" value="{% if app.request.isPost() %}{{app.request.post('winkelnaam')}}{% endif %}">

@@ -7,7 +7,7 @@
   <section id="registration">
     <div class="form">
       <h1>Nieuwe klant</h1>
-      <form action="#" method="POST" novalidate>
+      <form action="{{ app.urlFor('esl_sheet_new_store') }}" method="POST" novalidate>
         <input class="form-control" type="text" name="winkelnaam" placeholder="Naam klant" value="{% if app.request.isPost() %}{{app.request.post('winkelnaam')}}{% endif %}">
         <input class="form-control" type="text" name="synergie" placeholder="Klantnummer in Synergy" value="{% if app.request.isPost() %}{{app.request.post('synergie')}}{% endif %}">
         <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{% if app.request.isPost() %}{{app.request.post('ip')}}{% endif %}">

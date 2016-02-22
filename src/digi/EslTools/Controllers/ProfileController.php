@@ -24,7 +24,6 @@ class ProfileController extends Controller {
   }
 
   /* logon */
-
   public function logon() {
     $globals = $this->getGlobals();
     $this->getApp()->render('Profile\logon.html.twig', array('globals' => $globals));

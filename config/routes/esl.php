@@ -17,3 +17,7 @@ $app->get('/esl/klanten', function() use ($contr) {
 $app->get('/esl/klant/nieuw', function() use ($contr) {
   $contr->esl_sheet_new();
 })->name('esl_sheet_new');
+
+$app->post('/esl/klant/nieuw', function() use ($contr) {
+  $contr->esl_sheet_new_store();
+})->name('esl_sheet_new_store');

@@ -42,4 +42,9 @@ class EslController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
+
+  public function esl_sheet_new_store() {
+    $app = $this->getApp();
+    var_dump($app);
+  }
 }

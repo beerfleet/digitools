@@ -13,7 +13,7 @@
         <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{% if app.request.isPost() %}{{app.request.post('ip')}}{% endif %}">
         <input class="form-control" type="text" name="softwareversion" placeholder="Software versies" value="{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}">
         <textarea class="form-control" name="contact" placeholder="Contactgegevens">{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}</textarea>
-        <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('contact')}}{% endif %}">        
+        <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('e-mail')}}{% endif %}">        
 
         <div class="form-group">
           <label for="e-mail">Groep</label>

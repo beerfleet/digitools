@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use digi\eslTools\Entities\Esl;
 use digi\eslTools\Service\Registration\RegistrationService;
+use digi\eslTools\Service\Validation\EslClientValidation as EslVal;
 
 /**
 * EslService
@@ -57,5 +58,12 @@ class EslService {
 
   public function getErrors() {
     return $this->errors;
+  }
+
+  public function validateClient() {
+    $val = new EslVal($this->app, $this->em);
+    $validated = $val->validate();
+    $this->errors = $val->getErrors();
+    return $validated;
   }
 }

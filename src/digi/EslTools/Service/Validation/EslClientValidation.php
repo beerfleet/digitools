@@ -4,9 +4,10 @@ namespace digi\eslTools\Service\Validation;
 
 use Valitron\Validator;
 
-class ClientValidation extends Validation {
+class EslClientValidation extends Validation {
   
   public function addRules() {
-    $val->rule('email', 'e-mail');
+    $val = $this->getVal();
+    $val->rule('email', 'e-mail')->message('{field} is geen geldig e-mail adres');
   }
 }

@@ -15,6 +15,7 @@ use digi\eslTools\Service\Esl\EslService;
 
 class EslController extends Controller {
 
+  /* @var $srv EslService */
   private $srv; 
   private $em;
   private $app;
@@ -45,6 +46,10 @@ class EslController extends Controller {
 
   public function esl_sheet_new_store() {
     $app = $this->getApp();
-    var_dump($app);
+    if ($this->srv->validateClient()) {
+      echo "OKOKOKO";
+    } else {
+      $app->render('Esl\esl_new_client.html.twig', ['globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'data' => $this->srv->getForeignTablesData()]);
+    }
   }
 }

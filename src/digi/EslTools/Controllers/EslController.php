@@ -45,9 +45,9 @@ class EslController extends Controller {
   }
 
   public function esl_sheet_new_store() {
-    $app = $this->getApp();
-    if ($this->srv->validateClient()) {
-      echo "OKOKOKO";
+    $app = $this->getApp();    
+    if ($this->srv->storeEslClient()) {
+      
     } else {
       $app->render('Esl\esl_new_client.html.twig', ['globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'data' => $this->srv->getForeignTablesData()]);
     }

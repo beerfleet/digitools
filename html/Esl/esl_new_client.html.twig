@@ -1,6 +1,6 @@
 {% extends 'homepage.html.twig' %}
 
-{% block title %}Digi Tools - ESL - Maak nieuwe klant {% endblock title %}
+{% block title %} Digi Tools - ESL - Maak nieuwe klant {% endblock title %}
 
 {% block main_column %}
   {% set app = globals.app %}
@@ -12,7 +12,7 @@
         <input class="form-control" type="text" name="synergie" placeholder="Klantnummer in Synergy" value="{% if app.request.isPost() %}{{app.request.post('synergie')}}{% endif %}">
         <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{% if app.request.isPost() %}{{app.request.post('ip')}}{% endif %}">        
         <textarea class="form-control" name="softwareversion" placeholder="Software versies">{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}</textarea>
-        <textarea class="form-control" name="contact" placeholder="Contactgegevens">{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}</textarea>
+        <textarea class="form-control" name="contact" placeholder="Contactgegevens">{% if app.request.isPost() %}{{app.request.post('contact')}}{% endif %}</textarea>
         <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('e-mail')}}{% endif %}">        
 
         <div class="form-group">

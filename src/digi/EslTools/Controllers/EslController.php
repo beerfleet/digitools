@@ -47,7 +47,7 @@ class EslController extends Controller {
   public function esl_sheet_new_store() {
     $app = $this->getApp();    
     if ($this->srv->storeEslClient()) {
-      
+      $app->redirect($app->urlFor('esl_sheet_new_store'));
     } else {
       $app->render('Esl\esl_new_client.html.twig', ['globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'data' => $this->srv->getForeignTablesData()]);
     }

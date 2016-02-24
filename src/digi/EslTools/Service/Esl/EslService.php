@@ -5,6 +5,7 @@ namespace digi\eslTools\Service\Esl;
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use digi\eslTools\Entities\Esl;
+use digi\eslTools\Entities\Contract;
 use digi\eslTools\Service\Registration\RegistrationService;
 use digi\eslTools\Service\Validation\EslClientValidation as EslVal;
 use digi\eslTools\Entities\Store;
@@ -41,14 +42,29 @@ class EslService {
     return $repo->findAll();
   }
 
+  public function getContractById($id) {
+    $repo = $this->em->getRepository('digi\eslTools\Entities\Contract');
+    return $repo->find($id);
+  }
+
   public function getContracttypes() {
     $repo = $this->em->getRepository('digi\eslTools\Entities\Contracttype');
     return $repo->findAll();
   }
 
+  public function getContracttypeById($id) {
+    $repo = $this->em->getRepository('digi\eslTools\Entities\Contracttype');
+    return $repo->find($id);
+  }
+
   public function getBackoffices() {
     $repo = $this->em->getRepository('digi\eslTools\Entities\Backoffice');
     return $repo->findAll();
+  }
+
+  public function getBackofficeById($id) {
+    $repo = $this->em->getRepository('digi\eslTools\Entities\Backoffice');
+    return $repo->find($id);
   }
 
   /* retrieves necessary data to populate dropdowns for creating a new store */
@@ -76,7 +92,7 @@ class EslService {
 
   public function storeEslClient() {
     /* @var $app Slim */
-    $app = $this->app;
+    $app = $this->app;    
     if ($this->validateClient()) {
       /* @var $store Store */
       $store = new Store();      
@@ -87,12 +103,19 @@ class EslService {
       $store->setContact($app->request->post('contact'));
       $store->setEmail($app->request->post('e-mail'));
       $store->setStoregroup($this->getStoreGroupById($app->request->post('storegroup')));
-      $store->setPostcode(fgf;
-
-      var_dump($store);
-
+      /* @var RegistrationService */
+      $em = $this->em;
+      $reg_srv = new RegistrationService($em, $app);          
+      $store->setPostcode($reg_srv->getPostcodeObject($app->request->post('postcode')));
+      $store->setContract($this->getContractById($app->request->post('contract')));      
+      $store->setContracttype($this->getContracttypeById($app->request->post('contracttype')));
+      $store->setBackoffice($this->getBackofficeById($app->request->post('backoffice')));
+      $em->persist($store);
+      $em->flush();
+      $app->flash('info', $store->getStorename() . " is opgeslagen");
+      return true;
     } else {
-      echo "NIET GEVALIDEERD";
+      return false;
     }
   }
 }

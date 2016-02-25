@@ -21,6 +21,7 @@ class Store {
   private $softwareversion;
   private $contact;
   private $email;
+  private $picurl; // picture url
 
   /* @var $storegroup Storegroup */
   private $storegroup;
@@ -86,6 +87,10 @@ class Store {
     return $this->backoffice;
   }
 
+  public function getPicurl() {
+    return $this->picurl;
+  }
+
   // setters
   public function setId($id) {
     $this->id = $id;
@@ -133,5 +138,9 @@ class Store {
 
   public function setBackoffice(Backoffice $backoffice) {
     $this->backoffice = $backoffice;
+  }
+
+  public function setPicurl($picurl) {
+    $this->picurl = $picurl;
   }
 }

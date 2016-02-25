@@ -13,7 +13,8 @@
         <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{% if app.request.isPost() %}{{app.request.post('ip')}}{% endif %}">        
         <textarea class="form-control" name="softwareversion" placeholder="Software versies">{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}</textarea>
         <textarea class="form-control" name="contact" placeholder="Contactgegevens">{% if app.request.isPost() %}{{app.request.post('contact')}}{% endif %}</textarea>
-        <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('e-mail')}}{% endif %}">        
+        <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('e-mail')}}{% endif %}">
+        <input class="form-control" type="text" name="picurl" placeholder="Lokatie van map met afbeeldingen" value="{% if app.request.isPost() %}{{app.request.post('picurl')}}{% endif %}">
 
         <div class="form-group">
           <label for="e-mail">Groep</label>
@@ -58,8 +59,8 @@
               <option value="{{ bo.id }}">{{ bo.backofficename }}</option>
             {% endfor %}
           </select>
-        </div>
-          
+        </div>        
+
         <div class="form-group">
           <ul>            
             <li><input class="form-control btn submit" type="submit" id="verzend" name="register" value="Maak" /></li>

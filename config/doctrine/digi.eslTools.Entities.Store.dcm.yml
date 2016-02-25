@@ -63,3 +63,6 @@ digi\eslTools\Entities\Store:
     email:
       type: string
       length: 65
+    picurl:
+      type: string
+      length: 255

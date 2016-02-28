@@ -3,18 +3,37 @@
 {% block title %} Digi Tools - ESL - Toon klanten {% endblock title %}
 
 {% block extracss %}
-  <link rel="stylesheet" href="/js/DataTables/css/jquery.dataTables.css"/>
+  <link rel="stylesheet" href="/plugins/DataTables/datatables.css"/>
 {% endblock extracss %}
 
 {% block main_column %}
   {% set app = globals.app %}
-  <section id="overview">
-
+  <section id="listing">
+    <table class="dataTable table table-responsive table-striped">
+      <thead>
+        <tr>
+          <th>Winkel</th>
+          <th>Plaats</th>
+          <th>Postcode</th>
+          <th>Synergie #</th>
+          <th>IP</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for store in stores %}          
+          <tr>
+            <td>{{ store.storename }}</td>
+            <td>{{ store.postcode.town }}</td>
+            <td>{{ store.postcode.postcode }}</td>
+            <td>{{ store.synergie }}</td>
+            <td>{{ store.ip }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </section>
 {% endblock main_column %}
 
 {% block extrajs %}   
-  <script src="/js/DataTables/">
-    
-  </script>
+  <script src="/plugins/DataTables/datatables.js"></script>
 {% endblock extrajs %}

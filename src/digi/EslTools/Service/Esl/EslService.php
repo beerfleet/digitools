@@ -26,6 +26,11 @@ class EslService {
     $this->app = $app;
     $this->errors = null;
   }
+  
+  public function getStores() {
+    $repo = $this->em->getRepository('digi\eslTools\Entities\Store');
+    return $repo->findAll();
+  }
 
   public function getStoreGroups() {
     $repo = $this->em->getRepository('digi\eslTools\Entities\Storegroup');

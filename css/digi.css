@@ -48,11 +48,6 @@ html, body {
 }
 
 /* MAIN CONTENT */
-#registration input,
-#registration select,
-#registration textarea {
-  margin-bottom: 10px;
-}
 
 #submenu,
 #client-form {
@@ -82,7 +77,19 @@ html, body {
   margin-top: 25px;	
 }
 
-/* REGISTRATION */
+/* registrations */
+#registration input,
+#registration select,
+#registration textarea {
+  margin-bottom: 10px;
+}
+
 #registration p {
   color: gray;
+}
+
+/* listing */
+#listing {
+  margin-left: 15px;
+  margin-top: 30px;
 }

@@ -29,8 +29,8 @@ class EslController extends Controller {
     $this->getApp()->render('Esl/esl_main_page.html.twig', ['globals' => $this->getGlobals()]);
   }
 
-  public function esl_sheet_show() {
-    $this->getApp()->render('Esl/esl_show_clients.html.twig', ['globals' => $this->getGlobals()]);
+  public function esl_sheet_show() {    
+    $this->getApp()->render('Esl/esl_show_clients.html.twig', ['globals' => $this->getGlobals(), 'stores' => $this->srv->getStores()]);
   }
 
   public function esl_sheet_new() {

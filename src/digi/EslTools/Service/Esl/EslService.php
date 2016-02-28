@@ -102,10 +102,10 @@ class EslService {
       $store->setSoftwareversion($app->request->post('softwareversion'));
       $store->setContact($app->request->post('contact'));
       $store->setEmail($app->request->post('e-mail'));
+      $store->setPicurl($app->request->post('picurl'));
       $store->setStoregroup($this->getStoreGroupById($app->request->post('storegroup')));
-      /* @var RegistrationService */
-      $em = $this->em;
-      $reg_srv = new RegistrationService($em, $app);          
+      $em = $this->em;      
+      $reg_srv = new RegistrationService($em, $app);
       $store->setPostcode($reg_srv->getPostcodeObject($app->request->post('postcode')));
       $store->setContract($this->getContractById($app->request->post('contract')));      
       $store->setContracttype($this->getContracttypeById($app->request->post('contracttype')));

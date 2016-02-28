@@ -30,7 +30,7 @@ class EslController extends Controller {
   }
 
   public function esl_sheet_show() {
-    echo "SHOW CLIENTS";
+    $this->getApp()->render('Esl/esl_show_clients.html.twig', ['globals' => $this->getGlobals()]);
   }
 
   public function esl_sheet_new() {

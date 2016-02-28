@@ -1,6 +1,5 @@
 digi\eslTools\Entities\Store:
-  type: entity
-  repositoryClass: digi\eslTools\Entities\Repo\StoreRepo
+  type: entity  
   table: store
   id:
     id:

@@ -104,7 +104,7 @@ class EslService {
       $store->setStorename($app->request->post('winkelnaam'));
       $store->setSynergie($app->request->post('synergie'));
       $store->setIp($app->request->post('ip'));
-      $store->setSoftwareversion($app->request->post('softwareversion'));
+      $store->setSoftwareversion($app->request->post('softwareversie'));
       $store->setContact($app->request->post('contact'));
       $store->setEmail($app->request->post('e-mail'));
       $store->setPicurl($app->request->post('picurl'));

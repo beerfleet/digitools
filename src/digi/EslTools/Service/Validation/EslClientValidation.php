@@ -21,10 +21,17 @@ class EslClientValidation extends Validation {
   
   public function addRules() {
     $val = $this->getVal();
+    
+    $val->rule('required', 'winkelnaam');
+    $winkel = $this->getApp()->request->post('winkelnaam');
+    $val->rule('unique_storename', 'winkelnaam')->message("$winkel bestaat al");     
+    $val->rule('numeric', 'synergie');
+    $val->rule('required', 'synergie');
+    $val->rule('required', 'ip');
+    $val->rule('required', 'softwareversie');    
+
     $email = $this->getApp()->request->post('e-mail');
     $val->rule('email', 'e-mail')->message("$email is geen geldig e-mail adres");
-    $val->rule('numeric', 'synergie');
-    $winkel = $this->getApp()->request->post('winkelnaam');
-    $val->rule('unique_storename', 'winkelnaam')->message("$winkel bestaat al");
+    
   }
 }

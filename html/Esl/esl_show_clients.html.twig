@@ -1,4 +1,4 @@
-{% extends 'homepage.html.twig' %}
+{% extends 'base_with_bottom_menu.html.twig' %}
 
 {% block title %} Digi Tools - ESL - Toon klanten {% endblock title %}
 
@@ -9,7 +9,7 @@
 {% block main_column %}
   {% set app = globals.app %}
   <section id="listing">
-    <table class="dataTable table table-responsive table-striped">
+    <table class="dataTable table-no-borders">
       <thead>
         <tr>
           <th>Winkel</th>
@@ -33,6 +33,8 @@
     </table>
   </section>
 {% endblock main_column %}
+
+
 
 {% block extrajs %}   
   <script src="/plugins/DataTables/datatables.js"></script>

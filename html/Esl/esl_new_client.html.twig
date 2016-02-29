@@ -11,7 +11,7 @@
         <input class="form-control" type="text" name="winkelnaam" placeholder="Naam klant" value="{% if app.request.isPost() %}{{app.request.post('winkelnaam')}}{% endif %}">
         <input class="form-control" type="text" name="synergie" placeholder="Klantnummer in Synergy" value="{% if app.request.isPost() %}{{app.request.post('synergie')}}{% endif %}">
         <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{% if app.request.isPost() %}{{app.request.post('ip')}}{% endif %}">        
-        <textarea class="form-control" name="softwareversion" placeholder="Software versies">{% if app.request.isPost() %}{{app.request.post('softwareversion')}}{% endif %}</textarea>
+        <textarea class="form-control" name="softwareversie" placeholder="Software versies">{% if app.request.isPost() %}{{app.request.post('softwareversie')}}{% endif %}</textarea>
         <textarea class="form-control" name="contact" placeholder="Contactgegevens">{% if app.request.isPost() %}{{app.request.post('contact')}}{% endif %}</textarea>
         <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('e-mail')}}{% endif %}">
         <input class="form-control" type="text" name="picurl" placeholder="Lokatie van map met afbeeldingen" value="{% if app.request.isPost() %}{{app.request.post('picurl')}}{% endif %}">

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  NO COLS, BOTTOM MENU
+{% endblock title %}
+
+{% block content %}
+
+
+  <div class="container">
+
+    {% block main_column %}      
+    {% endblock main_column %}
+
+    {% block sidebar %}
+      <div id="sidebar-wrapper">
+        {% include 'menu.html.twig' %}
+      </div>        
+    {% endblock sidebar %}
+
+  </div>
+{% endblock content %}

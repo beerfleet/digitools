@@ -9,6 +9,7 @@ use digi\eslTools\Entities\Contract;
 use digi\eslTools\Service\Registration\RegistrationService;
 use digi\eslTools\Service\Validation\EslClientValidation as EslVal;
 use digi\eslTools\Entities\Store;
+use Doctrine\ORM\Repository;
 
 /**
 * EslService
@@ -31,8 +32,14 @@ class EslService {
     $repo = $this->em->getRepository('digi\eslTools\Entities\Store');
     return $repo->findAll();
   }
+  
+  public function getStoreById($id) {
+    /* @var $repo Repository */
+    $repo = $this->em->getRepository('digi\eslTools\Entities\Store');
+    return $repo->find($id);
+  }
 
-  public function getStoreGroups() {
+  public function getStoreGroups() {    
     $repo = $this->em->getRepository('digi\eslTools\Entities\Storegroup');
     return $repo->findAll();
   }

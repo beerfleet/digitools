@@ -10,7 +10,7 @@
       {% set user = globals.user %}
     {% endif %}
 
-    <div class="container form">
+    <div class="container form" id="registration">
       <h1>Mijn Profiel</h1>      
       <form action="{{ globals.app.urlFor('profile_edit_store') }}" method="post" novalidate>
         <div class="form-group">

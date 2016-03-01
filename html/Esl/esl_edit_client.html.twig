@@ -1,6 +1,6 @@
 {% extends 'homepage.html.twig' %}
 
-{% block title %} Digi Tools - ESL - Maak nieuwe klant {% endblock title %}
+{% block title %} Digi Tools - ESL - Wijzig klantgegevens {% endblock title %}
 
 {% block main_column %}
   {% set app = globals.app %}
@@ -8,13 +8,13 @@
     <div class="form">
       <h1>Nieuwe klant</h1>
       <form action="{{ app.urlFor('esl_sheet_new_store') }}" method="POST" novalidate>
-        <input class="form-control" type="text" name="winkelnaam" placeholder="Naam klant" value="{% if app.request.isPost() %}{{app.request.post('winkelnaam')}}{% endif %}">
-        <input class="form-control" type="text" name="synergie" placeholder="Klantnummer in Synergy" value="{% if app.request.isPost() %}{{app.request.post('synergie')}}{% endif %}">
-        <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{% if app.request.isPost() %}{{app.request.post('ip')}}{% endif %}">        
-        <textarea class="form-control" name="softwareversie" placeholder="Software versies" value="{% if app.request.isPost() %}{{app.request.post('softwareversie')}}{% endif %}"></textarea>
-        <textarea class="form-control" name="contact" placeholder="Contactgegevens" value="{% if app.request.isPost() %}{{app.request.post('contact')}}{% endif %}"></textarea>
-        <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{% if app.request.isPost() %}{{app.request.post('e-mail')}}{% endif %}">
-        <input class="form-control" type="text" name="picurl" placeholder="Lokatie van map met afbeeldingen" value="{% if app.request.isPost() %}{{app.request.post('picurl')}}{% endif %}">
+        <input class="form-control" type="text" name="winkelnaam" placeholder="Naam klant" value="{{ store.storename }}">
+        <input class="form-control" type="text" name="synergie" placeholder="Klantnummer in Synergy" value="{{ store.synergie }}">
+        <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{{ store.ip }}">
+        <textarea class="form-control" name="softwareversie" placeholder="Software versies" value="{{ store.softwareversion }}"></textarea>
+        <textarea class="form-control" name="contact" placeholder="Contactgegevens" value="{{ store.contact }}"></textarea>
+        <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{{ store.email }}">
+        <input class="form-control" type="text" name="picurl" placeholder="Lokatie van map met afbeeldingen" value="{{ store.picurl }}">
 
         <div class="form-group">
           <label for="e-mail">Groep</label>

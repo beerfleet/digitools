@@ -29,7 +29,7 @@ class EslController extends Controller {
     $this->getApp()->render('Esl/esl_main_page.html.twig', ['globals' => $this->getGlobals()]);
   }
 
-  public function esl_sheet_show() {    
+  public function esl_sheet_show_all() {    
     $this->getApp()->render('Esl/esl_show_clients.html.twig', ['globals' => $this->getGlobals(), 'stores' => $this->srv->getStores()]);
   }
 
@@ -51,5 +51,11 @@ class EslController extends Controller {
     } else {
       $app->render('Esl\esl_new_client.html.twig', ['globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'data' => $this->srv->getForeignTablesData()]);
     }
+  }
+  
+  public function esl_sheet_show_store($id) {    
+    $app = $this->getApp();
+    $store = $this->srv->getStoreById($id);
+    $app->render('Esl\esl_show_client.html.twig', ['globals' => $this->getGlobals(), 'store' => $store]);
   }
 }

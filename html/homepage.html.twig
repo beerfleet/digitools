@@ -5,7 +5,7 @@
 
   {% block main_column %}
     
-    <div class="">
+    <div id="registration" class="">
       {% if globals.user is defined and globals.user is not null %}
       {% set user = globals.user %}
         <h1>{{ globals.user.username }} is aangemeld</h1>

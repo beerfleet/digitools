@@ -88,6 +88,16 @@ html, body {
   color: gray;
 }
 
+#registration h1,
+#listing h1 {
+  border-radius: 9px;
+  background-color: #eaeaea;
+  opacity: 0.8;
+  padding: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 /* listing */
 #listing {
   margin-left: 15px;

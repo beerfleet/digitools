@@ -7,12 +7,14 @@
   <section id="submenu">
     <div id="registration">
       <h1>ESL menu</h1>
-      <ul>
-        <li><a href="{{ app.urlFor('esl_sheet_show') }}" class="form-control btn">lijst klanten</a></li>
-          {% if globals.logged_in == 1 %}
-          <li><a href="{{ app.urlFor('esl_sheet_new') }}" class="form-control btn">nieuwe klant</a></li>
-          {% endif %}
-      </ul>
+
+      <div class="context">
+        <a class="btn form-control" href="{{ app.urlFor('esl_sheet_show') }}" class="form-control btn">Toon lijst met klanten</a>
+        {% if globals.logged_in == 1 %}
+          <a class="btn form-control" href="{{ app.urlFor('esl_sheet_new') }}" class="form-control btn">Maak een nieuwe klant aan</a></li>
+        {% endif %}
+      </div>
+
     </div>
   </section>
 {% endblock main_column %}

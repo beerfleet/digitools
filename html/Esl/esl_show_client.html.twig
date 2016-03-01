@@ -5,93 +5,67 @@
 {% block main_column %}
   {% set app = globals.app %}
   <section id="registration">
-    <div class="form">
-      <h1>Details van {{ store.storename }}</h1>
 
-      <div class="column">
-        <h3>Klantnummer</h3>
-        <div>{{ store.synergie }}</div>
-      </div>
+    <h1>Details van {{ store.storename }}</h1>
 
-      <div class="column">
-        <h3>Ip-adressen</h3>
-        <div>{{ store.ip }}</div>
-      </div>
-      
-      <br><br>
-      <label for="winkelnaam">Winkelnaam</label>
-      <input class="form-control" type="text" name="winkelnaam" placeholder="Naam klant" value="{{ store.storename }}">
-
-      <label for="synergie">Klantnummer in Synergy</label>
-      <input class="form-control" type="text" name="synergie" placeholder="Klantnummer in Synergy" value="{{ store.synergie }}">
-
-      <label for="ip">Ip adres(sen)</label>
-      <input class="form-control" type="text" name="ip" placeholder="IP adres" value="{{ store.ip }}">
-
-      <label for="softwareversie">Softwareversies</label>
-      <textarea class="form-control" name="softwareversie" placeholder="Software versies" value="{{ store.softwareversion }}"></textarea>
-
-      <label for="contact">Contactgegevens</label>
-      <textarea class="form-control" name="contact" placeholder="Contactgegevens" value="{{ store.contact }}"></textarea>
-
-      <label for="e-mail">E-mail adres</label>
-      <input class="form-control" type="text" name="e-mail" placeholder="E-mail adres" value="{{ store.email }}">
-
-      <label for="picurl">Lokatie van map met afbeeldingen</label>
-      <input class="form-control" type="text" name="picurl" placeholder="Lokatie van map met afbeeldingen" value="{{ store.picurl }}">
-
-      <div class="form-group">
-        <label for="e-mail">Groep</label>
-        <select class="form-control" name="storegroup">
-          {% for group in data.storegroups %}
-            <option value="{{ group.id }}" {% if app.request.isPost() and app.request.post('storegroup') == group.id %} selected {% endif %}>{{ group.groupname }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="e-mail">Postcode</label>
-        <select class="form-control" name="postcode">
-          {% for pc in data.postcodes %}
-            <option value="{{ pc.id }}" {% if app.request.isPost() and app.request.post('postcode') == pc.id %} selected {% endif %} >{{ pc.town }} - {{ pc.postcode }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="e-mail">Contract</label>
-        <select class="form-control" name="contract">
-          {% for contract in data.contracts %}
-            <option value="{{ contract.id }}" {% if app.request.isPost() and app.request.post('contract') == contract.id %} selected {% endif %}>{{ contract.company }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="e-mail">Contracttype</label>
-        <select class="form-control" name="contracttype">
-          {% for ct in data.contracttypes %}
-            <option value="{{ ct.id }}" {% if app.request.isPost() and app.request.post('contracttype') == ct.id %} selected {% endif %}>{{ ct.typename }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="e-mail">Backoffice</label>
-        <select class="form-control" name="backoffice">
-          {% for bo in data.backoffices %}
-            <option value="{{ bo.id }}" {% if app.request.isPost() and app.request.post('backoffice') == bo.id %} selected {% endif %}>{{ bo.backofficename }}</option>
-          {% endfor %}
-        </select>
-      </div>        
-
-      <div class="form-group">
-        <ul>            
-          <li><input class="form-control btn submit" type="submit" id="verzend" name="register" value="Maak" /></li>
-          <li><a href="/" id="return_to_main" class="form-control btn submit">Home</a></li>
-        </ul>
-      </div>
-
+    <div class="context">
+      <a class="btn form-control" href="{{ app.urlFor('esl_sheet_show') }}">Terug naar lijst</a>        
     </div>
+
+    <div class="field">
+      <h3>Klantnummer</h3>
+      <div>{{ store.synergie }}</div>
+    </div>
+
+    <div class="field">
+      <h3>Ip-adressen</h3>
+      <div>{{ store.ip }}</div>
+    </div>
+
+    <div class="field">
+      <h3>Softwareversies</h3>
+      <div>{{ store.softwareversion }}</div>
+    </div>
+
+    <div class="field">
+      <h3>Contactgegevens</h3>
+      <div>{{ store.contact }}</div>
+    </div>
+
+    <div class="field">
+      <h3>E-mail adres</h3>
+      <div>{{ store.email }}</div>
+    </div>
+
+    <div class="field">
+      <h3>Lokatie van de afbeeldingen</h3>
+      <div>{{ store.picurl }}</div>
+    </div>    
+
+    <div class="field">
+      <h3>Groep</h3>
+      <div>{{ store.storegroup.groupname }}</div>
+    </div>    
+
+    <div class="field">
+      <h3>Postcode</h3>
+      <div>{{ store.postcode.postcode }} {{ store.postcode.town }}</div>
+    </div>
+
+    <div class="field">
+      <h3>Contract</h3>
+      <div>{{ store.contract.company }}</div>
+    </div>   
+
+    <div class="field">
+      <h3>Contracttype</h3>
+      <div>{{ store.contracttype.typename }}</div>
+    </div>   
+
+    <div class="field">
+      <h3>Backoffice</h3>
+      <div>{{ store.backoffice.backofficename }}</div>
+    </div> 
+
   </section>
 {% endblock main_column %}

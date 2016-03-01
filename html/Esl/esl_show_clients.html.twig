@@ -13,6 +13,8 @@
     <table class="dataTable table-no-borders">
       <thead>
         <tr>
+          <th></th>
+          <th></th>
           <th>Winkel</th>
           <th>Plaats</th>
           <th>Postcode</th>
@@ -23,6 +25,8 @@
       <tbody>
         {% for store in stores %}          
           <tr>
+            <td><a href="{{ app.urlFor('esl_sheet_edit_store', {"id":store.id}) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td><a href="{{ app.urlFor('esl_sheet_show_store', {"id":store.id}) }}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
             <td>{{ store.storename }}</td>
             <td>{{ store.postcode.town }}</td>
             <td>{{ store.postcode.postcode }}</td>
@@ -34,8 +38,6 @@
     </table>
   </section>
 {% endblock main_column %}
-
-
 
 {% block extrajs %}   
   <script src="/plugins/DataTables/datatables.js"></script>

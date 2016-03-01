@@ -76,7 +76,7 @@ class Store {
   }
 
   public function getContract() {
-    return $this->contact;
+    return $this->contract;
   }
 
   public function getContracttype() {

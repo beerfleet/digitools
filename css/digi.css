@@ -48,7 +48,6 @@ html, body {
 }
 
 /* MAIN CONTENT */
-
 #submenu,
 #client-form {
   margin-top: 30px;
@@ -61,7 +60,16 @@ html, body {
   padding-right: 10px;
 }
 
-#main-wrapper {	}
+.context {
+  background-color: #f8fbf9;
+  padding: 10px;
+  border-radius: 16px;  
+}
+
+.context a {
+  border: 2px #d3f4f1 solid;
+  margin-bottom: 12px;
+}
 
 /* SIDEBAR */
 #reg-menu .nav li a {
@@ -74,7 +82,9 @@ html, body {
   padding-bottom: 10px;
 }
 #sidebar-wrapper {
-  margin-top: 25px;	
+  border-top: 1px #e5e5e5 solid;
+  margin-top: 50px; 
+  padding-top: 50px;	
 }
 
 /* registrations */
@@ -98,6 +108,10 @@ html, body {
   margin-bottom: 30px;
 }
 
+.field {
+  text-align: right;
+}
+
 /* listing */
 #listing {
   margin-left: 15px;
@@ -105,4 +119,8 @@ html, body {
 }
 .table-no-borders {
   
+}
+
+#footer {
+  height: 30px;
 }

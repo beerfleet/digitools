@@ -16,11 +16,9 @@ class Postcode {
   private $town;
   private $users;
 
-  private $stores;
 
   function __construct() {
     $this->users = new ArrayCollection();
-    $this->stores = new ArrayCollection();
   }
 
   function getId() {
@@ -39,10 +37,6 @@ class Postcode {
     return $this->users;
   }
 
-  function getStores() {
-    return $this->stores;
-  }
-
   function setId($id) {
     $this->id = $id;
   }
@@ -57,10 +51,6 @@ class Postcode {
 
   function setUsers($users) {
     $this->users = $users;
-  }
-
-  function setStores($stores) {
-    $this->stores = $stores;
   }
 
 }

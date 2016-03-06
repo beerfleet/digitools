@@ -18,10 +18,6 @@ digi\eslTools\Entities\Postcode:
       targetEntity: User
       mappedBy: postcode
 
-    stores:
-      targetEntity: Store
-      mappedBy: postcode
-
   fields:
     postcode:
       type: string

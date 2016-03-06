@@ -1,10 +1,12 @@
-$(function() {
-  initPicker();
+$(function () {
+  initPickers();
 });
 
-function initPicker(){
-  $(".datepick").on('click', function() {
-    say("clicked");
+function initPickers() {
+  $(".datepick").datepicker();
+  $(".timepick").timepicker();
+  $(".datepick, .timepick").on('mouseover', function() {
+  	$('.datepick, .timepick').css( 'cursor', 'pointer' );
   });
 }
 

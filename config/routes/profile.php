@@ -1,6 +1,6 @@
 <?php
 
-use digi\eslTools\Controllers\ProfileController;
+use Digitools\eslTools\Controllers\ProfileController;
 
 $contr = new ProfileController($em, $app);
 

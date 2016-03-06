@@ -1,13 +1,13 @@
 <?php
 
-namespace digi\eslTools\Controllers;
+namespace Digitools\eslTools\Controllers;
 
-//use digi\eslTools\Controllers\Controller;
-use digi\eslTools\Service\Profile\ProfileService;
-use digi\eslTools\Service\Event\EventService;
-use digi\eslTools\Service\Comment\CommentService;
-use digi\eslTools\Service\Whisky\WhiskyService;
-use digi\eslTools\Controllers\Controller;
+//use Digitools\eslTools\Controllers\Controller;
+use Digitools\EslTools\Service\Profile\ProfileService;
+use Digitools\EslTools\Service\Event\EventService;
+use Digitools\EslTools\Service\Comment\CommentService;
+use Digitools\EslTools\Service\Whisky\WhiskyService;
+use Digitools\Common\Controllers\Controller;
 
 /**
  * HomepageController

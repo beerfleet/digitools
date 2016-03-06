@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\eslTools\Entities;
+namespace Digitools\EslTools\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

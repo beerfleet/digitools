@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\eslTools\Entities\Repo;
+namespace Digitools\eslTools\Entities\Repo;
 
 use Doctrine\ORM\EntityRepository;
 

@@ -1,6 +1,6 @@
 <?php
 
-use digi\eslTools\Controllers\TodoController;
+use Digitools\Todo\Controllers\TodoController;
 
 $contr = new TodoController($em, $app);
 

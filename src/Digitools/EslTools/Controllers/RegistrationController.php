@@ -1,9 +1,9 @@
 <?php
 
-namespace digi\eslTools\Controllers;
+namespace Digitools\EslTools\Controllers;
 
-use digi\eslTools\Controllers\Controller;
-use digi\eslTools\Service\Registration\RegistrationService;
+use Digitools\Common\Controllers\Controller;
+use Digitools\EslTools\Service\Registration\RegistrationService;
 use digi\eslTools\Service\Profile\ProfileService;
 use digi\eslTools\Entities\User;
 

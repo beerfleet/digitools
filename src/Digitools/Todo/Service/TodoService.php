@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\eslTools\Service\Todo;
+namespace Digitools\Todo\Service;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;

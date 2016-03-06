@@ -1,4 +1,4 @@
-digi\eslTools\Entities\Postcode:
+Digitools\EslTools\Entities\Postcode:
   type: entity
   #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
   table: postcode

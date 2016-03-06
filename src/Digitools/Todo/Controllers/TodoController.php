@@ -1,11 +1,11 @@
 <?php
 
-namespace digi\eslTools\Controllers;
+namespace Digitools\Todo\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
-use digi\eslTools\Controllers\Controller;
-use digi\eslTools\Service\Todo\TodoService;
+use Digitools\Common\Controllers\Controller;
+use Digitools\Todo\Service\TodoService;
 
 class TodoController extends Controller {
   /* @var $srv TodoService */

@@ -1,6 +1,6 @@
 <?php
 
-use digi\eslTools\Controllers\RegistrationController;
+use DigiTools\eslTools\Controllers\RegistrationController;
 
 $contr = new RegistrationController($em, $app);
 

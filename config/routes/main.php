@@ -1,6 +1,6 @@
 <?php
 
-use digi\eslTools\Controllers\HomepageController;
+use Digitools\eslTools\Controllers\HomepageController;
 
 $contr = new HomepageController($em, $app);
 

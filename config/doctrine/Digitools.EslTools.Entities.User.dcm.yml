@@ -1,6 +1,6 @@
-digi\eslTools\Entities\User:
+Digitools\EslTools\Entities\User:
   type: entity
-  repositoryClass: digi\eslTools\Entities\Repo\UserRepo
+  repositoryClass: Digitools\EslTools\Entities\Repo\UserRepo
   table: digi_user  
   id:
     id:

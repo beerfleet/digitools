@@ -1,12 +1,12 @@
 <?php
 
-namespace digi\eslTools\Service\Profile;
+namespace Digitools\eslTools\Service\Profile;
 
 use Doctrine\ORM\EntityManager;
-use digi\eslTools\Entities\User;
-use digi\eslTools\Service\Validation\ProfileValidation as Val;
-use digi\eslTools\Service\Registration\RegistrationService;
-use digi\eslTools\Service\Validation\PasswordValidation;
+use Digitools\eslTools\Entities\User;
+use Digitools\eslTools\Service\Validation\ProfileValidation as Val;
+use Digitools\eslTools\Service\Registration\RegistrationService;
+use Digitools\eslTools\Service\Validation\PasswordValidation;
 
 /**
  * ProfileService
@@ -26,13 +26,13 @@ class ProfileService {
   }
 
   public function retrieveUserByUsername($username) {
-    $repo = $this->em->getRepository('digi\eslTools\Entities\User');
+    $repo = $this->em->getRepository('Digitools\eslTools\Entities\User');
     $user = $repo->findBy(array('username' => $username));
     return count($user) > 0 ? $user[0] : null;
   }
 
   public function retrieveUserByEmail($email) {
-    $repo = $this->em->getRepository('digi\eslTools\Entities\User');
+    $repo = $this->em->getRepository('Digitools\eslTools\Entities\User');
     $user = $repo->findBy(array('email' => $email));
     return count($user) > 0 ? $user[0] : null;
   }
@@ -65,7 +65,7 @@ class ProfileService {
   public function updateUser(User $user) {
     $app = $this->app;
     $em = $this->em;
-    $repo = $em->getRepository('digi\eslTools\Entities\User');
+    $repo = $em->getRepository('Digitools\eslTools\Entities\User');
 
     $password = $app->request->post('wachtwoord');
     if (isset($password) && trim($password) != '') {
@@ -168,7 +168,7 @@ class ProfileService {
 
   public function searchUserByToken($token) {
     $em = $this->em;
-    $repo = $em->getRepository('digi\eslTools\Entities\User');
+    $repo = $em->getRepository('Digitools\eslTools\Entities\User');
     $user = $repo->findBy(array('password_token' => $token));
     return count($user) == 0 ? null : $user[0];
   }
@@ -178,7 +178,7 @@ class ProfileService {
   public function searchUserById($id) {
 
     $em = $this->em;
-    $repo = $em->getRepository('digi\eslTools\Entities\User');
+    $repo = $em->getRepository('Digitools\eslTools\Entities\User');
     $user = $repo->find($id);
     if (isset($user) && $user != null)
       return $user;
@@ -188,7 +188,7 @@ class ProfileService {
 
   public function searchUserByUsername($username) {
     $em = $this->em;
-    $repo = $em->getRepository('digi\eslTools\Entities\User');
+    $repo = $em->getRepository('Digitools\eslTools\Entities\User');
     return $repo->findOneByUsername($username);
   }
 
@@ -207,7 +207,7 @@ class ProfileService {
     $password = $app->request->post('wachtwoord');
     $hash = password_hash($password, CRYPT_BLOWFISH);
     $em = $this->em;
-    $repo = $em->getRepository('digi\eslTools\Entities\User');
+    $repo = $em->getRepository('Digitools\eslTools\Entities\User');
     $user = $repo->find($user_id);
     $user->setPassword($hash);
     $user->setEnabled(1);
@@ -220,7 +220,7 @@ class ProfileService {
     if ($user == null) {
       $app = $this->app;
       $user_id = $app->request->post('id');
-      $repo = $em->getRepository('digi\eslTools\Entities\User');
+      $repo = $em->getRepository('Digitools\eslTools\Entities\User');
       $user = $repo->find($user_id);
     }
     $user->resetPasswordToken();
@@ -244,7 +244,7 @@ class ProfileService {
 
   public function clearAllTokens() {
     $em = $this->em;
-    $repo = $em->getRepository('digi\eslTools\Entities\User');
+    $repo = $em->getRepository('Digitools\eslTools\Entities\User');
     $repo->clearTokens();
   }
 
@@ -258,7 +258,7 @@ class ProfileService {
 
   public function showAllUsers() {
     $em = $this->em;
-    $userRepository = $em->getRepository('digi\eslTools\Entities\User');
+    $userRepository = $em->getRepository('Digitools\eslTools\Entities\User');
     $members = $userRepository->findAll();
 
     return $members;

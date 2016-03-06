@@ -1,12 +1,12 @@
 <?php
 
-namespace digi\eslTools\Controllers;
+namespace Digitools\eslTools\Controllers;
 
-use digi\eslTools\Controllers\Controller;
-use digi\eslTools\Service\Profile\ProfileService;
-use digi\eslTools\Service\Registration\RegistrationService;
-use digi\eslTools\Service\Validation\EmailNotBlankValidation as EmailVal;
-use digi\eslTools\Entities\User;
+use Digitools\Common\Controllers\Controller;
+use Digitools\eslTools\Service\Profile\ProfileService;
+use Digitools\eslTools\Service\Registration\RegistrationService;
+use Digitools\eslTools\Service\Validation\EmailNotBlankValidation as EmailVal;
+use Digitools\eslTools\Entities\User;
 
 /**
  * ProfileController User logon, profile related actions
@@ -157,7 +157,7 @@ class ProfileController extends Controller {
 
   public function passwordResetProcess() {
     $app = $this->getApp();
-    $em = $this->getEntityManager('digi\eslTools\Entities\User');
+    $em = $this->getEntityManager('Digitools\eslTools\Entities\User');
     $val = new EmailVal($app, $em);
     if ($val->validate()) {
       $user = $this->srv->createPasswordToken();

@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\eslTools\Service\Registration;
+namespace Digitools\EslTools\Service\Registration;
 
 use digi\eslTools\Entities\User;
 use digi\eslTools\Service\Validation\RegistrationValidation as Val;

@@ -1,8 +1,8 @@
 <?php
 
-namespace digi\eslTools\Entities;
+namespace Digitools\EslTools\Entities;
 
-use digi\eslTools\Entities\Postcode;
+use Digitools\EslTools\Entities\Postcode;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

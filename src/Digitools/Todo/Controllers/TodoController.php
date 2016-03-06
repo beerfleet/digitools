@@ -9,9 +9,7 @@ use Digitools\Todo\Service\TodoService;
 
 class TodoController extends Controller {
   /* @var $srv TodoService */
-  private $srv; 
-  private $em;
-  private $app;
+  private $srv;  
 
   public function __construct ($em, $app) {
     parent::__construct($em, $app);
@@ -24,6 +22,13 @@ class TodoController extends Controller {
 
   public function todo_new() {
     $app = $this->getApp();
-    $app->render('Todo/todo_new.html.twig', ['globals' => $this->getGlobals()]);
+    $priorities = $this->srv->getPriorities();
+    $app->render('Todo/todo_new.html.twig', ['globals' => $this->getGlobals(), 'priorities' => $priorities]);
+  }
+  
+  public function todo_new_store() {
+    $app = $this->getApp();
+    $this->srv->storeTodo();
+    $app->redirect($app->urlFor('todo_new'));
   }
 }

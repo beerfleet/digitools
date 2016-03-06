@@ -1,4 +1,4 @@
-Digitools\EslTools\Entities\Priority:
+Digitools\Todo\Entities\Priority:
   type: entity  
   table: priority  
   id:

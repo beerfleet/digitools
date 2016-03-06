@@ -3,7 +3,6 @@
 namespace Digitools\Todo\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use digi\Todo\Entities\Priority;
 
 /**
  * Postcode entity

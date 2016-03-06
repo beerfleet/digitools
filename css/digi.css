@@ -23,6 +23,12 @@ html, body {
   float: right;
 }
 
+.content-control {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px #d7e3f0 dashed;
+}
+
 /* ERROR OUTPUT */
 .flagged {
   margin-top: 20px;
@@ -41,10 +47,6 @@ html, body {
 .errors {
   text-align: center;
   color: red;
-}
-
-.spacing ul li {
-
 }
 
 /* MAIN CONTENT */

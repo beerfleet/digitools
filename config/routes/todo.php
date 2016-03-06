@@ -12,3 +12,6 @@ $app->get('/todo/new', function() use ($contr) {
   $contr->todo_new();
 })->name('todo_new');
 
+$app->post('/todo/new', function() use ($contr) {
+  $contr->todo_new_store();
+})->name('todo_new_store');

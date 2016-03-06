@@ -1,4 +1,4 @@
-Digitools\EslTools\Entities\Todo:
+Digitools\Todo\Entities\Todo:
   type: entity  
   table: todo  
   id:

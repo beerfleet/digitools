@@ -1,0 +1,24 @@
+digi\eslTools\Entities\Todo:
+  type: entity  
+  table: todo  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  oneToOne:
+    priority:
+      targetEntity: Priority
+      joinColumn:
+        name: priorityid
+        referencedColumnName: id
+
+  fields:
+    title:
+      type: string
+      length: 255
+
+    creationdate:
+      type: datetime
+

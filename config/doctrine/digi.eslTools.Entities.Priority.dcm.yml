@@ -1,0 +1,17 @@
+digi\eslTools\Entities\Priority:
+  type: entity  
+  table: priority  
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    priorityvalue:
+      type: integer      
+
+    description:
+      type: string
+      length: 45
+

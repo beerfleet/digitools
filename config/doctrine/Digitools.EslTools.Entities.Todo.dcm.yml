@@ -22,3 +22,5 @@ Digitools\EslTools\Entities\Todo:
     creationdate:
       type: datetime
 
+    tododate:
+      type: datetime

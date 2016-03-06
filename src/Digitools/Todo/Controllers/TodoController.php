@@ -19,7 +19,8 @@ class TodoController extends Controller {
   }
 
   public function todo_home() {
-    echo "WAKKA WAKKA";
+    $app = $this->getApp();
+    $app->render('Todo/todo_new.html.twig', ['globals' => $this->getGlobals()]);
   }
 
 }

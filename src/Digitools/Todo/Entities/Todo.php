@@ -15,6 +15,7 @@ class Todo {
   private $id;
   private $title;
   private $creationdate;
+  private $tododate;
 
   /* @var $priority Priority */
   private $priority;
@@ -57,6 +58,14 @@ class Todo {
   
   public function __toString() {
     return $this->title;
+  }
+  
+  function getTododate() {
+    return $this->tododate;
+  }
+
+  function setTododate($tododate) {
+    $this->tododate = $tododate;
   }
 
 }

@@ -19,8 +19,11 @@ class TodoController extends Controller {
   }
 
   public function todo_home() {
+    echo("<H1>Work is progress</h1>");
+  }
+
+  public function todo_new() {
     $app = $this->getApp();
     $app->render('Todo/todo_new.html.twig', ['globals' => $this->getGlobals()]);
   }
-
 }

@@ -2,23 +2,22 @@
 
 {% block title %} Digitools - New Todo {% endblock title %}
 
+{% block extracss %}
+  {% include 'Common/include_jquery_ui_css.html.twig' %}  
+{% endblock extracss %}
+
 {% block main_column %}
   {% set app = globals.app %}
   <section id="registration">
     <h1>New Todo Item</h1>
     <form action="{{ app.urlFor('todo_new') }}" method="POST">
       <input class="form-control" type="text" name="title" placeholder="Title">
-      <input class="form-control" type="date" name="tododate" placeholder="Due date" readonly="readonly">      
+      <input class="datepick form-control" type="date" name="tododate" placeholder="Due date">      
     </form>
   </section>
 {% endblock %}
 
-{% block extrajs %}
-  <script type="text/javascript">
-
-    $('<input>').on('click', function () {
-      alert('clicked me');
-    });
-
-  </script>
+{% block extrajs %}  
+  {% include 'Common/include_jquery_ui_js.html.twig' %}
+  <script src="../js/todo.js"></script>
 {% endblock extrajs %}

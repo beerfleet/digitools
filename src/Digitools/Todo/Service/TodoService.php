@@ -17,6 +17,11 @@ class TodoService {
     $this->app = $app;
     $this->errors = null;
   }
+
+  public function getAllTodos() {
+    $repo = $this->em->getRepository('Digitools\Todo\Entities\Todo');
+    return $repo->findAll();
+  }
   
   public function getPriorities() {
     $repo = $this->em->getRepository('Digitools\Todo\Entities\Priority');

@@ -36,7 +36,7 @@ class Todo {
   }
 
   function getCreationdate() {
-    return $this->creationdate;
+    return $this->creationdate->format('Y-m-d H:i');
   }
 
   function getPriority() {
@@ -60,7 +60,7 @@ class Todo {
   }
   
   function getTododate() {
-    return $this->tododate;
+    return $this->tododate->format('Y-m-d H:i');
   }
 
   function setTododate($tododate) {

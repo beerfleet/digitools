@@ -1,0 +1,30 @@
+{% extends 'base_with_bottom_menu.html.twig' %}
+
+{% block title %} Todo - Show all {% endblock title %}
+
+{% block main_column %}
+  {% set app = globals.app %}
+  <section id="listing">
+    <h1>Show items</h1>    
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Title</th> 
+          <th>Creation Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>        
+        {% for item in items %}
+          <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.creationdate }}</td>
+            <td>{{ item.tododate }}</td>
+            <td>{{ item.priority }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock main_column %}

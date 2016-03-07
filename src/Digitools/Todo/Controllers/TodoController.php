@@ -8,8 +8,8 @@ use Digitools\Common\Controllers\Controller;
 use Digitools\Todo\Service\TodoService;
 
 class TodoController extends Controller {
+  
   /* @var $srv TodoService */
-
   private $srv;
 
   public function __construct($em, $app) {
@@ -18,7 +18,8 @@ class TodoController extends Controller {
   }
 
   public function todo_home() {
-    echo("<H1>Work is progress</h1>");
+    $app = $this->getApp();
+    $app->render('Todo/todo_show_all.html.twig', ['globals' => $this->getGlobals(), 'items' => $this->srv->getAllTodos()]);
   }
 
   public function todo_new() {

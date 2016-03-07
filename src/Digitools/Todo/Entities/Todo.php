@@ -13,8 +13,11 @@ class Todo {
 
   private $id;
   private $title;
+  private $finishstate;
+
   private $creationdate;
   private $tododate;
+  private $finishdate;
 
   /* @var $priority Priority */
   private $priority;
@@ -65,6 +68,22 @@ class Todo {
 
   function setTododate($tododate) {
     $this->tododate = $tododate;
+  }
+
+  function getFinishstate() {
+    return $this->finishstate;
+  }
+
+  function setFinishstate($state) {    
+    $this->finishstate = $state;
+  }
+
+  function setFinishdate(\DateTime $finishdate) {
+    $this->finishdate = $finishdate;
+  }
+
+  function getFinishdate() {
+    return $this->finishdate->format('Y-m-d H:i');
   }
 
 }

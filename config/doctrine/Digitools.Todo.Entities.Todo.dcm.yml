@@ -19,8 +19,14 @@ Digitools\Todo\Entities\Todo:
       type: string
       length: 255
 
+    finishstate:
+      type: integer
+
     creationdate:
       type: datetime
 
     tododate:
+      type: datetime
+
+    finishdate:
       type: datetime

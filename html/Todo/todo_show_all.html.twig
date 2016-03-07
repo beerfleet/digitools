@@ -6,13 +6,14 @@
   {% set app = globals.app %}
   <section id="listing">
     <h1>Show items</h1>    
-    <table class="table table-responsive">
-      <thead>
+    <table class="table">
+      <thead class="thead-inverse">
         <tr>
           <th>Title</th> 
           <th>Creation Date</th>
           <th>Due Date</th>
           <th>Priority</th>
+          <th>Finished ?</th>
         </tr>
       </thead>
       <tbody>        
@@ -22,6 +23,7 @@
             <td>{{ item.creationdate }}</td>
             <td>{{ item.tododate }}</td>
             <td>{{ item.priority }}</td>
+            <td><input name="finishstate" type="checkbox" {% if item.finishstate == 1 %} checked="checked" {% endif %}></td>
           </tr>
         {% endfor %}
       </tbody>

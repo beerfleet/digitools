@@ -82,22 +82,6 @@ html, body {
   margin-bottom: 12px;
 }
 
-/* SIDEBAR */
-#reg-menu .nav li a {
-  font-size: 10px;
-}
-#reg-menu li a {
-  margin-top: 10px;
-}
-#reg-menu .nav-tabs {
-  padding-bottom: 10px;
-}
-#sidebar-wrapper {
-  border-top: 1px #e5e5e5 solid;
-  margin-top: 50px; 
-  padding-top: 50px;	
-}
-
 /* registrations */
 #registration input,
 #registration select,
@@ -131,6 +115,24 @@ html, body {
 .table-no-borders {
   
 }
+
+/* SIDEBAR */
+#reg-menu .nav li a {
+  font-size: 10px;
+}
+#reg-menu li a {
+  margin-top: 10px;
+}
+#reg-menu .nav-tabs {
+  padding-bottom: 10px;
+}
+#sidebar-wrapper {
+  border-top: 1px #e5e5e5 solid;
+  margin-top: 50px; 
+  padding-top: 50px;	
+}
+
+
 
 #footer {
   height: 30px;

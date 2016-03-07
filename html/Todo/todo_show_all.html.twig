@@ -23,7 +23,7 @@
             <td>{{ item.creationdate }}</td>
             <td>{{ item.tododate }}</td>
             <td>{{ item.priority }}</td>
-            <td><input name="finishstate" type="checkbox" {% if item.finishstate == 1 %} checked="checked" {% endif %}></td>
+            <td><input class="finishstate" data-todo-id={{ item.id }} name="finishstate" type="checkbox" {% if item.finishstate == 1 %} checked="checked" {% endif %}></td>
           </tr>
         {% endfor %}
       </tbody>

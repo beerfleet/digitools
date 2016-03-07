@@ -51,6 +51,6 @@ class TodoService {
     $em->persist($todo);
     $em->flush();
     
-    $app->flash('info', $todo . " is added");
+    $app->flash("info", "'" . $todo . "' is added");
   }
 }

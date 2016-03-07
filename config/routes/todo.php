@@ -15,3 +15,8 @@ $app->get('/todo/new', function() use ($contr) {
 $app->post('/todo/new', function() use ($contr) {
   $contr->todo_new_store();
 })->name('todo_new_store');
+
+// ajax
+$app->post('/todo/ajax/storestate', function() use ($contr) {
+  $contr->ajax_set_todo_state();
+})->name('ajax_set_todo_state');

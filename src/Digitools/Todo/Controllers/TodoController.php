@@ -39,4 +39,9 @@ class TodoController extends Controller {
     $app->redirect($app->urlFor('todo_new'));
   }
 
+  // ajax
+  public function ajax_set_todo_state() {        
+    $srv = $this->srv->setState();
+  }
+
 }

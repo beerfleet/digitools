@@ -39,7 +39,7 @@ class Todo {
   }
 
   function getCreationdate() {
-    return $this->creationdate->format('Y-m-d H:i');
+    return $this->creationdate == null ? "" : $this->creationdate->format('Y-m-d H:i');
   }
 
   function getPriority() {
@@ -63,7 +63,7 @@ class Todo {
   }
   
   function getTododate() {
-    return $this->tododate->format('Y-m-d H:i');
+    return $this->tododate == null ? "" : $this->tododate->format('Y-m-d H:i');
   }
 
   function setTododate($tododate) {
@@ -76,6 +76,7 @@ class Todo {
 
   function setFinishstate($state) {    
     $this->finishstate = $state;
+    var_dump($this->creationdate);
   }
 
   function setFinishdate(\DateTime $finishdate) {

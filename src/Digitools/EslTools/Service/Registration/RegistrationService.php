@@ -2,8 +2,8 @@
 
 namespace Digitools\EslTools\Service\Registration;
 
-use digi\eslTools\Entities\User;
-use digi\eslTools\Service\Validation\RegistrationValidation as Val;
+use Digitools\EslTools\Entities\User;
+use Digitools\EslTools\Service\Validation\RegistrationValidation as Val;
 
 /**
  * RegistrationService registration services
@@ -70,21 +70,22 @@ class RegistrationService {
 
   public function getPostcodes() {
     $em = $this->getEm();
-    $repo = $em->getRepository('digi\eslTools\Entities\Postcode');
+    //$repo = $em->getRepository('Digitools\EslTools\Entities\Postcode');
+    $repo = $em->getRepository('Digitools\EslTools\Entities\Postcode');
     $postcodes = $repo->findAll();
     return $postcodes;
   }
   
   public function getPostcodesByCity() {
     $em = $this->getEm();
-    $repo = $em->getRepository('digi\eslTools\Entities\Postcode');
+    $repo = $em->getRepository('Digitools\EslTools\Entities\Postcode');
     $postcodes = $repo->findBy(array(), ['town' => 'ASC']);
     return $postcodes;
   }
 
   public function getPostcodeObject($postcode_id) {
     $em = $this->getEm();
-    $repo = $em->getRepository('digi\eslTools\Entities\Postcode');
+    $repo = $em->getRepository('Digitools\EslTools\Entities\Postcode');
     $pc_obj = $repo->find($postcode_id);
     return $pc_obj;
   }

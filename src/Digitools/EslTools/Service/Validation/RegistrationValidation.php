@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\eslTools\Service\Validation;
+namespace Digitools\EslTools\Service\Validation;
 
 use Valitron\Validator;
 
@@ -10,7 +10,7 @@ class RegistrationValidation extends Validation {
     // custom rule unique email
     Validator::addRule('unique_email', function($field, $value, array $params) use ($em, $app) {
       $email = $app->request->post('e-mail');
-      $repo = $em->getRepository('digi\eslTools\Entities\User');
+      $repo = $em->getRepository('Digitools\EslTools\Entities\User');
       $result = $repo->findBy(array('email' => $email));
       return count($result) < 1;
     }, 'bestaat al');
@@ -18,7 +18,7 @@ class RegistrationValidation extends Validation {
     // custom rule unique username
     Validator::addRule('unique_username', function($field, $value, array $params) use ($em, $app) {
       $username = $app->request->post('gebruikersnaam');
-      $repo = $em->getRepository('digi\eslTools\Entities\User');
+      $repo = $em->getRepository('Digitools\EslTools\Entities\User');
       $result = $repo->findBy(array('username' => $username));
       return count($result) < 1;      
     }, 'bestaat al');
@@ -30,8 +30,7 @@ class RegistrationValidation extends Validation {
   public function addRules() {
     $val = $this->getVal();
     $val->rule('required', 'gebruikersnaam');
-    $val->rule('unique_username', 'gebruikersnaam');
-    $val->rule('email', 'e-mail');
+    $val->rule('unique_username', 'gebruikersnaam');    
     $val->rule('unique_email', 'e-mail');    
     $val->rule('required', 'e-mail');
     $val->rule('required', 'wachtwoord');   

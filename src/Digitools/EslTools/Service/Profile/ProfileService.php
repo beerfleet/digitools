@@ -150,7 +150,7 @@ class ProfileService {
     $message = wordwrap("Hello " . $user->getUsername() .
             ". Klik " . $url . " om uw registratie te activeren.");
     $headers = 'From: webmaster@digi.eu';
-    mail($user->getEmail(), 'The Scotch Lodge profile verification.', $message, $headers);
+    mail($user->getEmail(), 'Bevestig uw profiel.', $message, $headers);
   }
 
   public function processRegistration($user) {

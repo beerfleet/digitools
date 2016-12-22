@@ -4,8 +4,8 @@ namespace Digitools\EslTools\Controllers;
 
 use Digitools\Common\Controllers\Controller;
 use Digitools\EslTools\Service\Registration\RegistrationService;
-use digi\eslTools\Service\Profile\ProfileService;
-use digi\eslTools\Entities\User;
+use Digitools\EslTools\Service\Profile\ProfileService;
+use Digitools\EslTools\Entities\User;
 
 /**
  * RegistrationController controller

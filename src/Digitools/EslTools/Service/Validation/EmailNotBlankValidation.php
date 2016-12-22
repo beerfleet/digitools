@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\eslTools\Service\Validation;
+namespace Digitools\EslTools\Service\Validation;
 
 /**
  * E-mail validatie
@@ -11,8 +11,9 @@ class EmailNotBlankValidation extends Validation {
 
   public function addRules() {
     $val = $this->getVal();
-    $val->rule('required', 'e-mail');
-    $val->rule('email', 'e-mail');
+    $val->rule('required', 'email');
+    $val->rule('email', 'email');    
+    
   }
 
 }

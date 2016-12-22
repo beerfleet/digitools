@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\eslTools\Service\Validation;
+namespace Digitools\EslTools\Service\Validation;
 
 use Doctrine\ORM\EntityManager;
 use Valitron\Validator;

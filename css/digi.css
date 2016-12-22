@@ -110,8 +110,7 @@ html, body {
 }
 
 /* listing */
-#listing {
-  margin-left: 15px;
+#listing {  
   margin-top: 30px;
 }
 .table-no-borders {
@@ -119,6 +118,21 @@ html, body {
 }
 
 /* SIDEBAR */
+#sidebar-wrapper {
+  background-color: #F1F6F8;  
+  border-radius: 6px;
+  border-top: 1px #e5e5e5 solid;
+  margin-top: 30px;   
+  padding-top: 20px;  
+  padding-bottom: 20px;
+}
+
+#reg-menu {
+  background-color: #EBF1F2;
+  border: 3px white solid;
+  border-radius: 6px;
+  padding: 10px;
+}
 #reg-menu .nav li a {
   font-size: 10px;
 }
@@ -128,14 +142,10 @@ html, body {
 #reg-menu .nav-tabs {
   padding-bottom: 10px;
 }
-#sidebar-wrapper {
-  border-top: 1px #e5e5e5 solid;
-  margin-top: 50px; 
-  padding-top: 50px;	
-}
 
 
 
+/* footer */
 #footer {
   height: 30px;
 }

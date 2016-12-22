@@ -1,0 +1,20 @@
+Digitools\Logbook\Entities\Tag:
+  type: entity
+  repositoryClass: Digitools\Logbook\Entities\Repo\UserRepo
+  table: tag
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  
+  manyToMany:
+    logs:
+      targetEntity: Log
+      mappedBy: tags
+  
+  fields:
+    tag_desc: 
+      type: string
+      length: 55
+      nullable: false

@@ -5,5 +5,5 @@ use Digitools\Logbook\Controllers\LogController;
 $contr = new LogController($em, $app);
 
 $app->get('/make_log', function() use ($contr){
-  echo("ROUTE MAKE_LOG WORKS");
+  $contr->testMakeLog();
 })->name('make_log');

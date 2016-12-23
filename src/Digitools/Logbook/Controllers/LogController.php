@@ -19,11 +19,11 @@ class LogController extends Controller {
 
   public function __construct($em, $app) {
     parent::__construct($em, $app);
-    $this->srv = new EslService($em, $app);
+    $this->srv = new LogService($em, $app, $this->getUser());
   }
   
-  public function testMakeLog() {
-    echo("TEST MAKE LOG");
+  public function show_log_form() {
+    echo("SHOW LOG FORM");
   }
 
 }

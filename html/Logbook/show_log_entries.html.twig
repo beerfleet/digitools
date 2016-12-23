@@ -1,4 +1,14 @@
 {# empty Twig template #}
 <section id="log_entries_list">
-  
+  {% if log_list %}
+    <ul>
+      {% for log_item in log_list %}
+        <li> {{ log_item.get_created|date('Y-m-d H:i:s') }} </li>
+        {% endfor %}
+    </ul>
+  {% else %}
+    <div class="container">
+      <h2>NO LOGS FOUND</h2>
+    </div>
+  {% endif %}
 </section>

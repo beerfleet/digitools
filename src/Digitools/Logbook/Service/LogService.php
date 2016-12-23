@@ -8,6 +8,7 @@ namespace Digitools\Logbook\Service;
 
 use Digitools\Logbook\Entities\Log;
 use Digitools\Logbook\Service\Validation\LogbookValidation;
+use Digitools\Logbook\Entities\Repo\LogRepo;
 
 /**
  *
@@ -19,7 +20,6 @@ class LogService {
   private $user;
   private $em;
   private $app;
-  
   
   function __construct($em, $app, $user) {
     $this->errors = null;
@@ -48,6 +48,14 @@ class LogService {
     } catch (Exception $e) {
       echo($e->getMessage());
     }
+  }
+  
+  public function list_log_entries_lifo() {
+    $em = $this->em;
+    $repo = $em->getRepository('Digitools\Logbook\Entities\Log');
+    /* @var $repo LogRepo */
+    return $repo->find_ordered_lifo($this->user);
+    
   }
   
   public function get_errors() {

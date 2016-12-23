@@ -25,16 +25,22 @@ class LogController extends Controller {
 
   public function new_log_entry() {
     $app = $this->app;
+    /* @var $srv LogService */
     $srv = $this->srv;
-    $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals()));
+    
+    $test = $srv->list_log_entries_lifo();
+    
+    $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $srv->list_log_entries_lifo()));
   }
 
   public function process_new_entry() {
     try {
       $app = $this->getApp();
-      $user = $this->srv->store_log_entry();
-      if ($user){
-        $app->render('Logbook/new_log_entry.html.twig', array('info' ));
+      $this->srv->store_log_entry();
+      $errors = $this->srv->get_errors();
+      if (!$errors){;
+        $app->flash('info', 'De entry werd opgeslagen');
+        $app->redirect($app->urlFor('new_log_entry'));
       } else {
         $errors = $this->srv->get_errors();
         $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors));

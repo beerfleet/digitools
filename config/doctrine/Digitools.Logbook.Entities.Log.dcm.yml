@@ -1,6 +1,6 @@
 Digitools\Logbook\Entities\Log:
   type: entity
-  #epositoryClass: Digitools\Logbook\Entities\Repo\UserRepo
+  repositoryClass: Digitools\Logbook\Entities\Repo\LogRepo
   table: log  
   id:
     id:

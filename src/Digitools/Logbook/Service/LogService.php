@@ -6,6 +6,9 @@
 
 namespace Digitools\Logbook\Service;
 
+use Digitools\Logbook\Entities\Log;
+use Digitools\Logbook\Service\Validation\LogbookValidation;
+
 /**
  *
  * @author jan
@@ -25,18 +28,30 @@ class LogService {
     $this->user = $user;
   }
 
-  public function insert_log($log) {
-    $log->set_user($this->user);
-    $log->set_entry("This is starlog Alfa Draco Tango");
-    $log->set_created(new \DateTime());
+  public function store_log_entry() {
+    // validate           
+    $app = $this->app;
     $em = $this->em;
+    $val = new LogbookValidation($app, $em);
+    if (!$val->validate()) {
+      $this->errors = $val->getErrors();
+    }
+    
+    /* @var $log Log */
+    $log = new Log();
+    $log->set_entry($app->request->post('log_entry'));    
+    $log->set_created(new \DateTime());
+    $log->set_user($this->user);
     try {
       $em->persist($log);
-      $em->flush();
-      echo("Persisted OK");
+      $em->flush();      
     } catch (Exception $e) {
       echo($e->getMessage());
     }
+  }
+  
+  public function get_errors() {
+    return $this->errors;
   }
 
 }

@@ -4,6 +4,10 @@ use Digitools\Logbook\Controllers\LogController;
 
 $contr = new LogController($em, $app);
 
-$app->get('/make_log', function() use ($contr){
-  $contr->show_log_form();
-})->name('make_log');
+$app->get('/log/new', function() use ($contr){
+  $contr->new_log_entry();
+})->name('new_log_entry');
+
+$app->post('/log/new/', function() use ($contr){
+  $contr->process_new_entry();
+});

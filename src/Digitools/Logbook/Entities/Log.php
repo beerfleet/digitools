@@ -18,6 +18,7 @@ class Log {
   private $user;
   private $created;
   private $tags;
+  private $entry;
   
   public function __construct() {
     $this->tags = new ArrayCollection();
@@ -54,5 +55,17 @@ class Log {
   function set_tags($tags) {
     $this->tags = $tags;
   }
+  
+  public function add_tag($tag) {
+    $this->tags[] = $tag;
+  }
+  
+  function get_entry() {
+    return $this->entry;
+  }
 
+  function set_entry($entry) {
+    $this->entry = $entry;
+  }
+  
 }

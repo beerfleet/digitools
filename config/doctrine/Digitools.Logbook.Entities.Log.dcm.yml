@@ -1,7 +1,7 @@
 Digitools\Logbook\Entities\Log:
   type: entity
-  //repositoryClass: Digitools\Logbook\Entities\Repo\UserRepo
-  table: digi_log  
+  #epositoryClass: Digitools\Logbook\Entities\Repo\UserRepo
+  table: log  
   id:
     id:
       type: integer
@@ -10,7 +10,7 @@ Digitools\Logbook\Entities\Log:
 
   manyToOne:
     user:
-      targetEntity: User 
+      targetEntity: Digitools\EslTools\Entities\User
       joinColumn:
         name: user_id
         referencedColumnName: id
@@ -31,4 +31,8 @@ Digitools\Logbook\Entities\Log:
   fields:
     created:
       type: datetime      
-      nullable: false    
+      nullable: false
+
+    entry:
+      type: text
+      nullable: false

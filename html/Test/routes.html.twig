@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block extracss %}
-  <link href="/js/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+  <link href="/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 {% endblock extracss %}
 
 {% block content %}
@@ -31,11 +31,13 @@
 {% endblock content %}
 
 {% block extrajs %}
-  <script type="text/javascript" src="/js/DataTables/js/jquery.dataTables.min.js">    
+  <script type="text/javascript" src="/js/jquery.dataTables.min.js">    
   </script>
   <script type="text/javascript">
     $(function() {
-      $('#route-tbl').DataTable();
+      $('#route-tbl').DataTable( {
+        "order" : [[0, 'asc']]
+      });
     });
   </script>
 {% endblock extrajs %}

@@ -31,6 +31,10 @@ class Log {
   function get_user() {
     return $this->user;
   }
+  
+  public function getUserID() {
+    return $this->user->getId();
+  }
 
   function get_created() {
     return $this->created;

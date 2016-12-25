@@ -24,13 +24,18 @@ class LogController extends Controller {
   }
 
   public function new_log_entry() {
+    /* @var $app Slim */
     $app = $this->app;
     /* @var $srv LogService */
     $srv = $this->srv;
-    
-    $test = $srv->list_log_entries_lifo();
-    
-    $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $srv->list_log_entries_lifo()));
+
+    if ($this->getUser() != null) {
+      $log_entry_list = $srv->list_log_entries_lifo();
+      $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $log_entry_list));
+    } else {
+      $app->flash('info', 'Gebruiker dient aangemeld te zijn om logboek te bekijken.');
+      $app->redirect($app->urlFor('main_page'));
+    }
   }
 
   public function process_new_entry() {
@@ -38,12 +43,20 @@ class LogController extends Controller {
       $app = $this->getApp();
       $this->srv->store_log_entry();
       $errors = $this->srv->get_errors();
-      if (!$errors){;
-        $app->flash('info', 'De entry werd opgeslagen');
-        $app->redirect($app->urlFor('new_log_entry'));
+
+      if ($this->getUser()) {
+        if (!$errors) {          
+          $app->flash('info', 'De entry werd opgeslagen.');
+          $app->redirect($app->urlFor('new_log_entry'));
+        } else {
+          $errors = $this->srv->get_errors();
+          //$app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors));
+          $app->flash('error', 'Lege entries worden niet opgeslagen.');
+          $app->redirect($app->urlFor('new_log_entry'));
+        }
       } else {
-        $errors = $this->srv->get_errors();
-        $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors));
+        $app->flash('error', 'Er is geen gebruiker aangemeld.');
+        $app->render($app->getUrl('homepage'));
       }
     } catch (Exception $e) {
       $this->getApp()->render('probleem.html.twig');

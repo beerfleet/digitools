@@ -11,6 +11,7 @@ namespace Digitools\Logbook\Entities\Repo;
 use Doctrine\ORM\EntityRepository;
 use Digitools\EslTools\Entities\User;
 
+
 /**
  * Description of LogRepo
  *
@@ -20,10 +21,11 @@ class LogRepo extends EntityRepository {
 
   /* @var $user User */
   public function find_ordered_lifo($user) {
-    $dql = "SELECT * FROM Digitools\Logbook\Entities\Log WHERE user_id = :id ORDER BY created DESC";
-    $query = $this->getEntityManager()->createQuery($dql);
-    $query->setParameter('id', $user->getId());
-    return $query->execute();
+    $sql = "SELECT * FROM log WHERE user_id = " . $user->getId() . " ORDER BY created DESC";    
+    $em = $this->getEntityManager();
+    $list = $em->getConnection()->executeQuery($sql);
+    
+    return $list->fetchAll();
   }
 
 }

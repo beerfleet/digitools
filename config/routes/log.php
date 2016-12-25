@@ -11,3 +11,7 @@ $app->get('/log/new', function() use ($contr){
 $app->post('/log/new/', function() use ($contr){
   $contr->process_new_entry();
 });
+
+$app->get('/log/edit/:id', function($id) use ($contr) {
+  $contr->edit_entry($id);
+})->name('log_edit');

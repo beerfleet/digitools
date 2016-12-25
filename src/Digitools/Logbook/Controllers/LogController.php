@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use Digitools\Common\Controllers\Controller;
 use Digitools\Logbook\Service\LogService;
+use Digitools\Logbook\Entities\Log;
 
 /**
  * @author jan
@@ -48,9 +49,7 @@ class LogController extends Controller {
         if (!$errors) {          
           $app->flash('info', 'De entry werd opgeslagen.');
           $app->redirect($app->urlFor('log_new'));
-        } else {
-          $errors = $this->srv->get_errors();
-          //$app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors));
+        } else {                    
           $app->flash('error', 'Lege entries worden niet opgeslagen.');
           $app->redirect($app->urlFor('log_new'));
         }
@@ -62,5 +61,15 @@ class LogController extends Controller {
       $this->getApp()->render('probleem.html.twig');
     }
   }
+  
+  public function edit_entry($id) {
+    $app = $this->getApp();
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
+    /* @var $entry Log */
+    $entry = $srv->load_entry_data_by_id($id);    
+    $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(), 'log' => $entry]);
+  }
+  
+  
 
 }

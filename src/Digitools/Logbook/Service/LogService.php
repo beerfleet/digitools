@@ -9,6 +9,7 @@ namespace Digitools\Logbook\Service;
 use Digitools\Logbook\Entities\Log;
 use Digitools\Logbook\Service\Validation\LogbookValidation;
 use Digitools\Logbook\Entities\Repo\LogRepo;
+use Doctrine\ORM\EntityManager;
 
 /**
  *
@@ -18,6 +19,7 @@ class LogService {
 
   private $errors;
   private $user;
+  /* @var $em EntityManager */
   private $em;
   private $app;
 
@@ -56,6 +58,11 @@ class LogService {
 
     /* @var $repo LogRepo */
     return $repo->find_ordered_lifo($this->user);
+  }
+  
+  public function load_entry_data_by_id($id) {
+    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
+    return $repo->find($id);
   }
 
   public function get_errors() {

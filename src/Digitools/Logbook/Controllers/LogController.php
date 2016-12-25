@@ -47,12 +47,12 @@ class LogController extends Controller {
       if ($this->getUser()) {
         if (!$errors) {          
           $app->flash('info', 'De entry werd opgeslagen.');
-          $app->redirect($app->urlFor('new_log_entry'));
+          $app->redirect($app->urlFor('log_new'));
         } else {
           $errors = $this->srv->get_errors();
           //$app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors));
           $app->flash('error', 'Lege entries worden niet opgeslagen.');
-          $app->redirect($app->urlFor('new_log_entry'));
+          $app->redirect($app->urlFor('log_new'));
         }
       } else {
         $app->flash('error', 'Er is geen gebruiker aangemeld.');

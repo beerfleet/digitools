@@ -6,12 +6,12 @@
 
 {% block content %}
 
-  {% set app = globals.app %} 
+  {% set app = globals.app %}   
 
   <section id="registration">
     <div class="container form">
       <h1>Log Entry</h1>      
-      <form action="{{ app.urlFor('new_log_entry') }}" method="POST" novalidate>
+      <form action="{{ app.urlFor('log_new') }}" method="POST" novalidate>
         <div class="form-group">          
           <textarea class="form-control" rows="8" id="log_entry" name="log_entry" placeholder="LEGE ENTRY " value="{% if app.request.isPost() %}{{app.request.post('log_entry')}}{% endif %}" /></textarea>
         </div>

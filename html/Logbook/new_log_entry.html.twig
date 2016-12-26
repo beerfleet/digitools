@@ -23,12 +23,13 @@
 
       </form>
     </div>
+    <div class="container">
+      <section id="log_list">
+        <h1>Mijn entries</h1>
+        {% include 'Logbook/show_log_entries.html.twig' %}
+      </section>
+    </div>
   </section>
-  <div class="container">
-    <section id="log_list">
-      {% include 'Logbook/show_log_entries.html.twig' %}
-    </section>
-  </div>
 {% endblock content %}
 
 {% block extrajs %}

@@ -94,11 +94,14 @@ html, body {
 }
 
 #registration h1,
-#listing h1 {
+#listing h1,
+#registration h2,
+#listing h2 {
   border-radius: 9px;
   /*background-color: #eaeaea;*/
-  background-color: #23527C;
-  color: white;
+  /*background-color: #23527C;*/
+  background-image: url('../img/Logbook/title_stripes.png');
+  background-repeat: no-repeat;
   opacity: 0.8;
   padding: 10px;
   margin-top: 30px;
@@ -114,12 +117,15 @@ html, body {
   margin-top: 30px;
 }
 .table-no-borders {
-  
+
 }
 
 /* * ** * LOGBOOK *** * */
 .outer_frame {
-  border-top: 1px solid #ccccff;
+  border-top: 20px solid #ccccff;
+  -webkit-border-image: url(../img/Logbook/separator.png) 30 round; /* Safari 3.1-5 */
+  -o-border-image: url(../img/Logbook/separator.png) 30 round; /* Opera 11-12.1 */
+  border-image: url(../img/Logbook/separator.png) 30 round;  
   padding-bottom: 30px;
 }
 
@@ -127,6 +133,8 @@ html, body {
   padding-left: 0;
   list-style-type: none;
 }
+
+
 
 /* SIDEBAR */
 #sidebar-wrapper {

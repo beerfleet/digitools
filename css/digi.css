@@ -123,6 +123,11 @@ html, body {
   padding-bottom: 30px;
 }
 
+.nice_list ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
 /* SIDEBAR */
 #sidebar-wrapper {
   background-color: #F1F6F8;  

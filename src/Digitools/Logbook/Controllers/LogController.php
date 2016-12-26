@@ -46,10 +46,10 @@ class LogController extends Controller {
       $errors = $this->srv->get_errors();
 
       if ($this->getUser()) {
-        if (!$errors) {          
+        if (!$errors) {
           $app->flash('info', 'De entry werd opgeslagen.');
           $app->redirect($app->urlFor('log_new'));
-        } else {                    
+        } else {
           $app->flash('error', 'Lege entries worden niet opgeslagen.');
           $app->redirect($app->urlFor('log_new'));
         }
@@ -61,15 +61,33 @@ class LogController extends Controller {
       $this->getApp()->render('probleem.html.twig');
     }
   }
-  
+
   public function edit_entry($id) {
+    /* @var $app Slim */
     $app = $this->getApp();
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
     /* @var $entry Log */
-    $entry = $srv->load_entry_data_by_id($id);    
+    $entry = $srv->load_entry_data_by_id($id);
     $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(), 'log' => $entry]);
   }
-  
-  
+
+  public function process_modified_entry($id) {
+    $app = $this->getApp();
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());    
+    if ($this->getUser()) {
+      $srv->store_modified_entry($id);
+      $errors = $srv->get_errors();
+      if (!$errors) {
+        $app->flash('info', 'De wijziging is opgeslagen.');
+        $app->redirect($app->urlFor('log_new'));
+      } else {
+        $app->flash('error', 'Lege entries worden niet opgeslagen.');
+        $app->redirect($app->urlFor('log_new'));
+      }
+    } else {
+      $app->flash('error', 'Er is geen gebruiker aangemeld.');
+      $app->render($app->getUrl('homepage'));
+    }
+  }
 
 }

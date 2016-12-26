@@ -34,6 +34,8 @@ class LogService {
     // validate           
     $app = $this->app;
     $em = $this->em;
+    
+    // is the input valid?
     $val = new LogbookValidation($app, $em);
     if ($val->validate()) {
       /* @var $log Log */
@@ -41,13 +43,13 @@ class LogService {
       $log->set_entry($app->request->post('log_entry'));
       $log->set_created(new \DateTime());
       $log->set_user($this->user);
-      try {
+      try { // valid = store
         $em->persist($log);
         $em->flush();
       } catch (Exception $e) {
         echo($e->getMessage());
       }
-    } else {
+    } else { // invalid = spout error
       $this->errors = $val->getErrors();
     }
   }
@@ -63,6 +65,29 @@ class LogService {
   public function load_entry_data_by_id($id) {
     $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
     return $repo->find($id);
+  }
+  
+  public function store_modified_entry($id) {
+    $app = $this->app;
+    $em = $this->em;
+    $val = new LogbookValidation($app, $em);
+    if ($val->validate()) {
+      /* @var $log Log */
+      $repo = $em->getRepository('Digitools\Logbook\Entities\Log');
+      $log = $repo->find($id);           
+      $log->set_entry($app->request->post('log_entry'));
+      $entry = $log->get_entry();
+      echo $log->get_entry();
+      try {
+        $em->persist($log);
+        $em->flush();
+      } catch (Exception $e) {
+        echo($e->getMessage());
+      }
+    } else {
+      $this->errors = $val->getErrors();
+      var_dump($this->errors);
+    }
   }
 
   public function get_errors() {

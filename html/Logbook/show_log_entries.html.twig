@@ -1,14 +1,17 @@
 {# empty Twig template #}
-<section id="log_entries_list">
+<section id="log_entries_list" class="nice_list">
   {% if log_list %}
-
-    {% for log_item in log_list %}
-      <div class="outer_frame">
-        <div class="floatright editeer"><a href="{{ app.urlFor('log_edit', {"id":log_item.id}) }}">Wijzig</a></div>
-        <h4 class="item_created"> {{ log_item.created|date('Y-m-d H:i') }} </h4>
-        <div class="item_entry_box"> {{ log_item.entry }} </div>
-      </div>
-    {% endfor %}
+    <ul>
+      {% for log_item in log_list %}
+        <li>
+          <div class="outer_frame">
+            <div class="floatright editeer"><a href="{{ app.urlFor('log_edit', {"id":log_item.id}) }}">Wijzig</a></div>
+            <h4 class="item_created"> {{ log_item.created|date('Y-m-d H:i') }} </h4>
+            <div class="item_entry_box"> {{ log_item.entry }} </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
 
   {% else %}
     <div class="container">
@@ -16,3 +19,4 @@
     </div>    
   {% endif %}
 </section>
+

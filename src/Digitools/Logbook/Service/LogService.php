@@ -10,6 +10,7 @@ use Digitools\Logbook\Entities\Log;
 use Digitools\Logbook\Service\Validation\LogbookValidation;
 use Digitools\Logbook\Entities\Repo\LogRepo;
 use Doctrine\ORM\EntityManager;
+use Digitools\EslTools\Entities\User;
 
 /**
  *
@@ -63,8 +64,17 @@ class LogService {
   }
   
   public function load_entry_data_by_id($id) {
+        
     $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
-    return $repo->find($id);
+    /* @var $log Log */
+    $log = $repo->find($id);
+    
+    // check whether the logged on user is the one who wrote this entry
+    /* @var $entry_usr_obj User */
+    $entry_usr_id = $log->get_user()->getId();    
+    //$entry_usr_id = $log->get_user()->get_id();
+    $logged_on_usr = $this->user->getId();
+    return $entry_usr_id == $logged_on_usr ? $log : null;    
   }
   
   public function store_modified_entry($id) {

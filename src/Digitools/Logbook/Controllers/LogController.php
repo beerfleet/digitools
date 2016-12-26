@@ -44,7 +44,7 @@ class LogController extends Controller {
       $app = $this->getApp();
       $this->srv->store_log_entry();
       $errors = $this->srv->get_errors();
-
+      // Execute only when user is logged on
       if ($this->getUser()) {
         if (!$errors) {
           $app->flash('info', 'De entry werd opgeslagen.');
@@ -66,14 +66,25 @@ class LogController extends Controller {
     /* @var $app Slim */
     $app = $this->getApp();
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
-    /* @var $entry Log */
-    $entry = $srv->load_entry_data_by_id($id);
-    $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(), 'log' => $entry]);
+
+    if ($this->getUser()) {
+      /* @var $entry Log */
+      $entry = $srv->load_entry_data_by_id($id);
+      if ($entry == null) {
+        $app->flash('error', 'Ongeldige bewerking.');
+        $app->redirect($app->urlFor('main_page'));
+      }
+      $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(), 'log' => $entry]);
+    } else {
+      $app->flash('error', 'Er is geen gebruiker aangemeld.');
+      $app->redirect($app->urlFor('main_page'));
+    }
   }
 
   public function process_modified_entry($id) {
     $app = $this->getApp();
-    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());    
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
+    // Execute only when user is logged on
     if ($this->getUser()) {
       $srv->store_modified_entry($id);
       $errors = $srv->get_errors();
@@ -86,7 +97,7 @@ class LogController extends Controller {
       }
     } else {
       $app->flash('error', 'Er is geen gebruiker aangemeld.');
-      $app->render($app->getUrl('homepage'));
+      $app->redirect($app->urlFor('main_page'));
     }
   }
 

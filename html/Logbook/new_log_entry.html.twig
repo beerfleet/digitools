@@ -6,14 +6,15 @@
 
 {% block content %}
 
-  {% set app = globals.app %} 
+  {% set app = globals.app %}   
 
   <section id="registration">
     <div class="container form">
       <h1>Log Entry</h1>      
-      <form action="{{ app.urlFor('new_log_entry') }}" method="POST" novalidate>
-        <input class="form-control" type="textarea" id="log_entry" name="log_entry" placeholder="LEGE ENTRY " value="{% if app.request.isPost() %}{{app.request.post('log_entry')}}{% endif %}" />        
-
+      <form action="{{ app.urlFor('log_new') }}" method="POST" novalidate>
+        <div class="form-group">          
+          <textarea class="form-control" rows="8" id="log_entry" name="log_entry" placeholder="LEGE ENTRY " value="{% if app.request.isPost() %}{{app.request.post('log_entry')}}{% endif %}" /></textarea>
+        </div>
         <div class="form-group spacing">
           <ul>
             <li><input class="form-control btn submit" type="submit" id="verzend" name="register" value="Maak" /></li>            
@@ -29,3 +30,7 @@
     </section>
   </div>
 {% endblock content %}
+
+{% block extrajs %}
+  <script src="../js/list.js"></script>
+{% endblock extrajs %}

@@ -1,3 +1,17 @@
+/* FONTS */
+@font-face {
+  font-family: HeadFont;
+  src: url('../Fonts/Digital Play St.ttf');
+}
+@font-face {
+  font-family: MenuFont;
+  src: url('../Fonts/modern_squared2.ttf');
+}
+@font-face {
+  font-family: MainFont;
+  src: url('../Fonts/FluentSans-Regular.otf');
+}
+
 /* bootstrap override */
 .nav > li > a:hover, .nav > li > a:focus {
   background-color: #ffffff;
@@ -9,10 +23,17 @@
 
 /* GENERAL */
 html, body {
-  color: gray;
+  color: gray;  
+  font-family: MainFont
 }
 
-/* MISC */
+h4 {
+  font-size: 1.22em;
+  font-weight: 700;
+}
+
+
+/* COMMON */
 .form-group ul,
 #submenu ul {
   list-style-type: none;
@@ -36,6 +57,26 @@ html, body {
 
 .thead-inverse tr th {
   border: 1px white solid;  
+}
+
+
+/* HEADER */
+.container #topmenu .nav-tabs {
+  border-top: 6px solid #ccccff;
+  border-bottom: 6px solid #ccccff;
+  -webkit-border-image: url(../img/Logbook/separator.png) 30 round; /* Safari 3.1-5 */
+  -o-border-image: url(../img/Logbook/separator.png) 30 round; /* Opera 11-12.1 */
+  border-image: url(../img/Logbook/separator.png) 30 round;  
+}
+
+.container #topmenu .nav-tabs li a {
+  font-family: MenuFont;
+  font-size: 1.12em;
+  font-weight: 900;
+}
+
+nav#topmenu {
+  padding-top: 30px;
 }
 
 /* ERROR OUTPUT */
@@ -109,6 +150,11 @@ html, body {
   color: #78b1a3;
 }
 
+.container #head h1 {
+  color: #78b1a3;
+  font-family: HeadFont;
+}
+
 .field {
   text-align: right;
 }
@@ -123,7 +169,7 @@ html, body {
 
 /* * ** * LOGBOOK *** * */
 .outer_frame {
-  border-top: 12px solid #ccccff;
+  border-top: 6px solid #ccccff;
   -webkit-border-image: url(../img/Logbook/separator.png) 30 round; /* Safari 3.1-5 */
   -o-border-image: url(../img/Logbook/separator.png) 30 round; /* Opera 11-12.1 */
   border-image: url(../img/Logbook/separator.png) 30 round;  

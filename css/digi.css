@@ -150,7 +150,14 @@ nav#topmenu {
   color: #78b1a3;
 }
 
-#registration form input {
+/*#registration form input,
+#reg-menu #login
+{
+  font-size: 1.36em;
+  color: #999999;
+}*/
+
+.action-button {
   font-size: 1.36em;
   color: #999999;
 }
@@ -192,9 +199,9 @@ nav#topmenu {
 
 /* SIDEBAR */
 #sidebar-wrapper {
-  background-color: #F1F6F8;  
-  border-radius: 6px;
-  border-top: 1px #e5e5e5 solid;
+   
+  /*border-radius: 12px;
+  /*border-top: 1px #e5e5e5 solid;*/
   margin-top: 30px;   
   padding-top: 20px;  
   padding-bottom: 20px;
@@ -205,13 +212,14 @@ nav#topmenu {
 }
 
 #reg-menu {
-  background-color: #EBF1F2;
+ /* background-color: #EBF1F2;*/
   border: 3px white solid;
-  border-radius: 6px;
+  border-radius: 12px;
   padding: 10px;
+  clear: both;
 }
 #reg-menu .nav li a {
-  font-size: 10px;
+  font-size: 1;
 }
 #reg-menu li a {
   margin-top: 10px;
@@ -219,7 +227,9 @@ nav#topmenu {
 #reg-menu .nav-tabs {
   padding-bottom: 10px;
 }
-
+.login-btn {
+  font-family: MainFont;
+}
 
 
 /* footer */

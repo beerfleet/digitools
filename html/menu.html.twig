@@ -3,7 +3,7 @@
   {% if globals.user is not defined or globals.user is null %}
     {# user NIET aangemeld #}
     <nav id="reg-menu">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs reg-menu-items">
         <li>
           {% block login %}
             {% include 'Profile/logon.html.twig' %}

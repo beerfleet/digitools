@@ -4,7 +4,7 @@
   Digi Tools - Wijzig mijn profiel
 {% endblock title %}
 
-{% block content %}
+
   {% block main_column %}
     {% if globals.user is defined and globals.user is not null %}
       {% set user = globals.user %}
@@ -46,11 +46,10 @@
         </div>
 
         <div class="form-group spacing">
-          <input class="form-control btn submit" type="submit" id="wijzig" name="save" value="Bewaar" />
-          <a href="/" id="return_to_main" class="form-control btn">Home</a>
+          <input class="form-control btn submit action-button" type="submit" id="wijzig" name="save" value="Bewaar" />
+          <a href="/" id="return_to_main" class="form-control btn action-button">Home</a>
         </div>
       </form>
     </div>
   {% endblock main_column %}
 
-{% endblock content %}

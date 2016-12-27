@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_with_right_sidebar.html.twig' %}
 
 {% block title %}
   Digi Tools - Wijzig Log
 {% endblock title %}
 
-{% block content %}
+{% block main_column %}
 
   {% set app = globals.app %}   
 
@@ -18,10 +18,10 @@
         </div>
         <div class="form-group spacing">
           <ul>
-            <li><input class="form-control btn submit" type="submit" id="verzend" name="register" value="Opslaan" /></li>            
+            <li><input class="form-control btn submit action-button" type="submit" id="verzend" name="register" value="Opslaan" /></li>            
           </ul>
         </div>
       </form>
     </div>
   </section> 
-{% endblock content %}
+{% endblock main_column %}

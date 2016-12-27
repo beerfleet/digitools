@@ -150,6 +150,11 @@ nav#topmenu {
   color: #78b1a3;
 }
 
+#registration form input {
+  font-size: 1.36em;
+  color: #999999;
+}
+
 .container #head h1 {
   color: #78b1a3;
   font-family: HeadFont;

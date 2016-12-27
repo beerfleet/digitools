@@ -34,8 +34,10 @@ class LogController extends Controller {
     $srv = $this->srv;
 
     if ($this->getUser() != null) {
-      $log_entry_list = $srv->list_log_entries_lifo();
-      $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $log_entry_list));
+      $result = $srv->get_logs_and_tags();
+      $log_entry_list = $result['logs'];
+      $tag_list = $result['tags'];
+      $app->render('Logbook/new_log_entry.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $log_entry_list, 'tag_list' => $tag_list));
     } else {
       $app->flash('info', 'Gebruiker dient aangemeld te zijn om logboek te bekijken.');
       $app->redirect($app->urlFor('main_page'));
@@ -109,5 +111,13 @@ class LogController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
-
+  
+  /*
+   * Log Tagging
+   */
+  public function add_tag_if_new() {
+    $tag = $this->app->request->post('tag');        
+    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());
+    $srv->add_tag_if_not_exists($tag);
+  }
 }

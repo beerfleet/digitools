@@ -11,6 +11,16 @@
   <section id="registration">
     <div class="container form">
       <h1>Log Entry</h1>      
+
+      <div class="tag-collection">
+        <div class="controls">
+          <div class="nieuwe-tag"><a href="#">+ Nieuwe tag</a></div>
+        </div>
+        <div class="tag-bag">          
+          {% include 'Logbook/show_log_tags.html.twig' %}
+        </div>
+      </div>
+
       <form action="{{ app.urlFor('log_new') }}" method="POST" novalidate>
         <div class="form-group">          
           <textarea class="form-control" rows="8" id="log_entry" name="log_entry" placeholder="LEGE ENTRY " value="{% if app.request.isPost() %}{{app.request.post('log_entry')}}{% endif %}" /></textarea>
@@ -23,13 +33,20 @@
 
       </form>
     </div>
-    <div class="container">
-      <section id="log_list">
+
+    <section id="log_list">
+      <div class="container">      
+
         <h1>Mijn entries</h1>
+
+        <div id="log-tags">         
+          {% include 'Logbook/show_log_tags.html.twig' %}
+        </div>
+
         <input type="text" class="form-control search_box" placeholder="search here" />
         {% include 'Logbook/show_log_entries.html.twig' %}
-      </section>
-    </div>
+      </div>
+    </section>
   </section>
 {% endblock main_column %}
 

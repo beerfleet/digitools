@@ -6,13 +6,14 @@
 
 namespace Digitools\Logbook\Service;
 
-use Digitools\Logbook\Entities\Log;
+use Slim\Slim;
+use Doctrine\ORM\EntityManager;
+use Digitools\Exceptions\LogExistsException;
 use Digitools\Logbook\Service\Validation\LogbookValidation;
 use Digitools\Logbook\Entities\Repo\LogRepo;
-use Doctrine\ORM\EntityManager;
+use Digitools\Logbook\Entities\Log;
 use Digitools\EslTools\Entities\User;
-use Digitools\Exceptions\LogExistsException;
-use Slim\Slim;
+use Digitools\Logbook\Entities\Tag;
 
 /**
  *
@@ -82,6 +83,17 @@ class LogService {
       $this->errors = $val->getErrors();
     }
   }
+  
+  public function get_logs_and_tags() {
+    $result = ['logs' => $this->list_log_entries_lifo(), 'tags' => $this->list_tags()];
+    return $result;
+  }
+  
+  public function list_tags() {
+    $em = $this->em;
+    $repo = $em->getRepository('Digitools\Logbook\Entities\Tag');
+    return $repo->findAll();
+  }
 
   public function list_log_entries_lifo() {
     $em = $this->em;
@@ -113,9 +125,7 @@ class LogService {
       /* @var $log Log */
       $repo = $em->getRepository('Digitools\Logbook\Entities\Log');
       $log = $repo->find($id);
-      $log->set_entry($app->request->post('log_entry'));
-      $entry = $log->get_entry();
-      echo $log->get_entry();
+      $log->set_entry($app->request->post('log_entry'));            
       try {
         $em->persist($log);
         $em->flush();
@@ -126,6 +136,31 @@ class LogService {
       $this->errors = $val->getErrors();
       var_dump($this->errors);
     }
+  }
+  
+  public function add_tag_if_not_exists($tag) {
+    $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";    
+    $em =  $this->em;
+    $conn = $em->getConnection();
+    $result = $conn->fetchAll($query);
+    header('Content-type: application/json');    
+    // tag added success
+    if (count($result) == 0) {
+      $this->add_tag($tag);
+      echo json_encode( ['status' => 1, 'tag' => $tag] );
+    // failure
+    } else {      
+      echo json_encode( ['status' => 0] );
+    }
+    
+  }
+  
+  public function add_tag($tag_desc) {
+    $tag = new Tag();
+    $tag->set_tag_desc($tag_desc);
+    $em = $this->em;
+    $em->persist($tag);
+    $em->flush();
   }
 
   public function get_errors() {

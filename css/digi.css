@@ -150,25 +150,44 @@ nav#topmenu {
   color: #78b1a3;
 }
 
-/*#registration form input,
-#reg-menu #login
-{
-  font-size: 1.36em;
-  color: #999999;
-}*/
-
 .action-button {
   font-size: 1.36em;
   color: #999999;
 }
-
 .container #head h1 {
   color: #78b1a3;
   font-family: HeadFont;
 }
-
 .field {
   text-align: right;
+}
+
+/* tags */
+.tag-collection {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+.tag-collection .controls input {
+  margin-right: 30px;
+}
+
+.tag-bag .tag,
+#log-tags .tag {
+  float: left;
+  padding-right: 6px;
+  padding-left: 6px;
+  margin: 6px;
+  margin-left: 0;
+  border: 1px #78b1a3 solid;
+  border-radius: 12px;
+}
+
+#log-tags {
+  padding-bottom: 30px;
+}
+
+#registration form {
+  clear: both;
 }
 
 /* listing */
@@ -197,6 +216,10 @@ nav#topmenu {
   margin-bottom: 30px;
 }
 
+#log-tags {
+  margin-bottom: 30px;
+}
+
 /* SIDEBAR */
 #sidebar-wrapper {
    
@@ -205,6 +228,7 @@ nav#topmenu {
   margin-top: 30px;   
   padding-top: 20px;  
   padding-bottom: 20px;
+  clear: both;
 }
 
 #log_entries_list .editeer {

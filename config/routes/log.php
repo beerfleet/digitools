@@ -9,14 +9,7 @@ $app->get('/log', function() use ($contr) {
 })->name('log_new');
 
 $app->post('/log', function() use ($contr) {
-    $contr->process_new_entry();
-    
-    
-  try {
-  } catch (LogExistsException $e) {
-    $app->flash('error', $e->getMessage());
-    $app->render($app->getUrl('log_new'));
-  }
+  $contr->process_new_entry();
 });
 
 $app->get('/log/edit/:id', function($id) use ($contr) {
@@ -27,3 +20,6 @@ $app->post('/log/edit/:id', function($id) use ($contr) {
   $contr->process_modified_entry($id);
 })->name('log_edit_store');
 
+$app->post('/tags/add', function() use ($contr) {
+  $contr->add_tag_if_new();
+});

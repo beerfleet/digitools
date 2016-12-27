@@ -22,8 +22,9 @@ class LogController extends Controller {
 
   public function __construct($em, $app) {
     parent::__construct($em, $app);
-    $this->srv = new LogService($em, $app, $this->getUser());
+    $this->srv = new LogService($em, $app, $this->getUser());        
     $this->app = $app;
+    //$app->config('debug', false);    
   }
 
   public function new_log_entry() {
@@ -57,7 +58,7 @@ class LogController extends Controller {
         }
       } else {
         $app->flash('error', 'Er is geen gebruiker aangemeld.');
-        $app->render($app->getUrl('homepage'));
+        $app->render($app->urlFor('homepage'));
       }
     } catch (Exception $e) {
       $this->getApp()->render('probleem.html.twig');
@@ -67,8 +68,7 @@ class LogController extends Controller {
   }
 
   public function show_log_form() {
-    $this->srv->insert_log(new Log());    
-    
+    $this->srv->insert_log(new Log());
   }
 
   public function edit_entry($id) {

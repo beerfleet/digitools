@@ -186,7 +186,9 @@ nav#topmenu {
   list-style-type: none;
 }
 
-
+#log_list input {
+  margin-bottom: 30px;
+}
 
 /* SIDEBAR */
 #sidebar-wrapper {

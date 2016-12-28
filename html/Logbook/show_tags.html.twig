@@ -1,5 +1,9 @@
 {# empty Twig template #}
 
-{% for tag in tag_list %}
-  <div class="tag"> {{ tag.get_tag_desc }} </div>
-{% endfor %}
+<ul class="tag-list">
+
+  {% for tag in tag_list %}
+    <li class="tag"> {{ tag.get_tag_desc }} </li>
+    {% endfor %}
+
+</ul>

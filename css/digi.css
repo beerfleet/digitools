@@ -171,8 +171,13 @@ nav#topmenu {
   margin-right: 30px;
 }
 
-.tag-bag .tag,
-#log-tags .tag {
+/*.tag-bag .tag,
+#log-tags .tag*/
+.tag-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.tag {
   float: left;
   padding-right: 6px;
   padding-left: 6px;
@@ -183,11 +188,17 @@ nav#topmenu {
 }
 
 #log-tags {
-  padding-bottom: 30px;
+  
 }
 
 #registration form {
-  clear: both;
+  clear: both;padding-top: 40px;
+}
+
+.tag-collection {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border: 20px;
 }
 
 /* listing */

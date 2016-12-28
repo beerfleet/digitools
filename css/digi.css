@@ -34,6 +34,12 @@ h4 {
 
 
 /* COMMON */
+#menu-section {
+  background-image: url('../img/top-image.png');
+  background-repeat: no-repeat;    
+  background-position-x: -40px;
+}
+
 .form-group ul,
 #submenu ul {
   list-style-type: none;

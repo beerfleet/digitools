@@ -13,17 +13,17 @@
     <link href="/css/digi.css" rel="stylesheet" type="text/css" />
 
   </head>
-
   <body>
 
     <div id="wrapper">      
-
-      {% block header %}
-        {% include 'header.html.twig' %}
-      {% endblock header %}
-      {% block nav_menu %}
-        {% include 'nav_top_menu.html.twig' %}
-      {% endblock nav_menu%}
+      <div id="menu-section" class="container">
+        {% block header %}
+          {% include 'header.html.twig' %}
+        {% endblock header %}
+        {% block nav_menu %}
+          {% include 'nav_top_menu.html.twig' %}
+        {% endblock nav_menu%}
+      </div>
 
       <div class="">
         {% block messages %}
@@ -41,7 +41,7 @@
                 <ul>                  
                   {% for error in flash['errors'] %}
                     <li>{{ error }}</li>
-                  {% endfor %}              
+                    {% endfor %}              
                 </ul>
               </div>
             {% endif %}
@@ -84,7 +84,7 @@
 
         {% block footer %}
           <div id="footer">
-            
+
           </div>
         {% endblock footer %}
 
@@ -96,12 +96,12 @@
     <script type="text/javascript" src="/js/bootstrap/js/bootstrap.js"></script>    
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript">
-      $('.flagged').on('click', function(e) {
+      $('.flagged').on('click', function (e) {
         $(this).hide();
       });
     </script>
 
-    
+
     {% block extrajs %}      
     {% endblock extrajs %}
 

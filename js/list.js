@@ -47,7 +47,7 @@ function tag_input_not_empty() {
 }
 
 function add_input_box() {
-  $('.tag-collection .controls').append($("<input type='textbox' id='tag-input' name='tag-input' />"));
+  $('.tag-collection .controls').append($("<input type='textbox' id='tag-input' name='tag-input' class='form-control'/>"));
 }
 
 function add_make_button() {

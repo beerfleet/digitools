@@ -18,7 +18,8 @@
 }
 
 .nav-tabs > li > a:hover {
-  border: none;
+  /*border: none;*/
+  border-radius: 12px;
 }
 
 /* GENERAL */
@@ -156,6 +157,10 @@ nav#topmenu {
   color: #78b1a3;
 }
 
+#registration form input[type="checkbox"] {
+  margin-top: 10px;
+}
+
 .action-button {
   font-size: 1.36em;
   color: #999999;
@@ -191,14 +196,6 @@ nav#topmenu {
   margin-left: 0;
   border: 1px #78b1a3 solid;
   border-radius: 12px;
-}
-
-#log-tags {
-  
-}
-
-#registration form {
-  clear: both;padding-top: 40px;
 }
 
 .tag-collection {

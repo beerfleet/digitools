@@ -86,7 +86,7 @@ class LogController extends Controller {
         $app->flash('error', 'Ongeldige bewerking.');
         $app->redirect($app->urlFor('main_page'));
       }
-      $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(), 'log' => $entry]);
+      $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(), 'log' => $entry, 'tag_list' => $srv->list_tags()]);
     } else {
       $app->flash('error', 'Er is geen gebruiker aangemeld.');
       $app->redirect($app->urlFor('main_page'));

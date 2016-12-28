@@ -12,6 +12,14 @@
     <div class="container form">
       <h1>Log Entry</h1>      
       <form action="{{ app.urlFor('log_edit_store', {'id': log.get_id} ) }}" method="POST" novalidate>
+        <div id="listing" class="tag-collection" >     
+      <div class="controls">
+        <div class="nieuwe-tag action-button"><a href="#">+ Nieuwe tag</a></div>
+      </div>
+      <div class="tag-bag">          
+        {% include 'Logbook/show_tags_selectable.html.twig' %}
+      </div>
+    </div>
         <div id="log_id" hidden="true"> {{ log.get_id }} </div>
         <div class="form-group">          
           <textarea class="form-control" rows="8" id="log_entry" name="log_entry" value="{% if app.request.isPost() %}{{app.request.post('log_entry')}}{% endif %}">{{ log.get_entry }} </textarea>

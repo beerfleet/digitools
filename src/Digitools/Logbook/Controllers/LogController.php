@@ -7,6 +7,7 @@ use Slim\Slim;
 use Digitools\Common\Controllers\Controller;
 use Digitools\Logbook\Service\LogService;
 use Digitools\Logbook\Entities\Log;
+use Digitools\EslTools\Entities\User;
 
 /**
  * @author jan
@@ -119,5 +120,19 @@ class LogController extends Controller {
     $tag = $this->app->request->post('tag');        
     $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());
     $srv->add_tag_if_not_exists($tag);
+  }
+  
+  public function manage_tags() {
+    /* @var $user User */
+    $user = $this->getUser();
+    $admin = $user->isAdmin();
+    $app = $this->app;    
+    if ($admin == 1) {
+      $em = $this->getEntityManager();
+      $srv = new LogService($em, $app, $user);
+      $app->render('Logbook/manage_tags.html.twig', ['globals' => $this->getGlobals(), 'tag_list' => $srv->list_tags()]);
+    } else {
+      echo "Need admin rights";      
+    }
   }
 }

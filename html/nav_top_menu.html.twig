@@ -1,11 +1,15 @@
 {% set app = globals.app %}
 
 <div class="container cf">  
-  	<nav id="topmenu" class="">
-      <ul class="nav nav-tabs">
-        <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
-        <li><a href="{{ app.urlFor('todo_home') }}">Todo</a></li>        
-        <li><a href="{{ app.urlFor('log_new') }}">Logs</a></li>        
-      </ul>
-    </nav>
+  <nav id="topmenu" class="">
+    <ul class="nav nav-tabs">
+      <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
+      <li><a href="{{ app.urlFor('todo_home') }}">Todo</a></li>        
+      <li><a href="{{ app.urlFor('log_new') }}">Logs</a></li>      
+      {% if (globals.user.isAdmin == 1)  %}
+        <li><a href="{{ app.urlFor('tags_manage') }}">Tags</a></li>
+      {% endif %}
+
+    </ul>
+  </nav>
 </div>

@@ -23,3 +23,7 @@ $app->post('/log/edit/:id', function($id) use ($contr) {
 $app->post('/tags/add', function() use ($contr) {
   $contr->add_tag_if_new();
 });
+
+$app->get('/tag', function() use ($contr) {
+  $contr->manage_tags();
+})->name('tags_manage');

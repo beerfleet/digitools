@@ -1,0 +1,23 @@
+{% extends 'base_with_right_sidebar.html.twig' %}
+
+{% block title %}
+  Digitools - Beheer tags
+{% endblock title %}
+
+{% block main_column %}
+  <div class="container">
+    <div id="listing" class="tag-collection" >
+      <h1>Tagbeheer</h1>
+      <div class="controls">
+        <div class="nieuwe-tag"><a href="#">+ Nieuwe tag</a></div>
+      </div>
+      <div class="tag-bag">          
+        {% include 'Logbook/show_tags.html.twig' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extrajs %}
+  <script src="../js/list.js"></script>
+{% endblock extrajs %}

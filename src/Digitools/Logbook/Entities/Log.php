@@ -58,7 +58,7 @@ class Log {
 
   function set_tags($tags) {
     $this->tags = $tags;
-  }
+  } 
   
   public function add_tag($tag) {
     $this->tags[] = $tag;

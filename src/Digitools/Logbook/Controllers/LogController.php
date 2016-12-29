@@ -47,7 +47,7 @@ class LogController extends Controller {
 
   public function process_new_entry() {
     try {
-      $app = $this->getApp();
+      $app = $this->getApp();                  
       $this->srv->store_log_entry();
       $errors = $this->srv->get_errors();
       // Execute only when user is logged on

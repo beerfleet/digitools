@@ -19,8 +19,8 @@ class Tag {
   private $tag_desc;
     
   public function __construct() {
-    $this->logs = new ArrayCollection();
-  }
+    $this->logs = new ArrayCollection();    
+  }    
   
   function get_id() {
     return $this->id;

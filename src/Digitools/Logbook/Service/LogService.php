@@ -57,13 +57,18 @@ class LogService {
     }
   }
 
+  private function acquire_tags_from_input() {
+    $app = $this->app;
+    $tags = $app->request->post('tags_chk');
+    return $tags;
+  }
+
   public function store_log_entry() {
     // validate       
     /* @var $app Slim */
     $app = $this->app;
     $em = $this->em;
-    
-    //$this->check_log_exists();
+
 
     // is the input valid?
     $val = new LogbookValidation($app, $em);
@@ -73,9 +78,19 @@ class LogService {
       $log->set_entry($app->request->post('log_entry'));
       $log->set_created(new \DateTime());
       $log->set_user($this->user);
+
+
+      $tags = $this->acquire_tags_from_input();
+
+
       try { // valid = store
         $em->persist($log);
         $em->flush();
+        
+        
+        $this->append_tags_to_log($log, $tags);
+        
+        
       } catch (Exception $e) {
         echo($e->getMessage());
       }
@@ -83,12 +98,23 @@ class LogService {
       $this->errors = $val->getErrors();
     }
   }
-  
+
+  /* var $log Log */
+  private function append_tags_to_log($log, $tags) {
+    $em = $this->em;
+    foreach ($tags as $id => $value) {
+      $tag = $em->getRepository('Digitools\Logbook\Entities\Tag')->find($id);
+      $log->add_tag($tag);
+    }
+    $em->persist($log);
+    $em->flush();
+  }
+
   public function get_logs_and_tags() {
     $result = ['logs' => $this->list_log_entries_lifo(), 'tags' => $this->list_tags()];
     return $result;
   }
-  
+
   public function list_tags() {
     $em = $this->em;
     $repo = $em->getRepository('Digitools\Logbook\Entities\Tag');
@@ -125,7 +151,7 @@ class LogService {
       /* @var $log Log */
       $repo = $em->getRepository('Digitools\Logbook\Entities\Log');
       $log = $repo->find($id);
-      $log->set_entry($app->request->post('log_entry'));            
+      $log->set_entry($app->request->post('log_entry'));
       try {
         $em->persist($log);
         $em->flush();
@@ -137,24 +163,23 @@ class LogService {
       var_dump($this->errors);
     }
   }
-  
+
   public function add_tag_if_not_exists($tag) {
-    $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";    
-    $em =  $this->em;
+    $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";
+    $em = $this->em;
     $conn = $em->getConnection();
     $result = $conn->fetchAll($query);
-    header('Content-type: application/json');    
+    header('Content-type: application/json');
     // tag added success
     if (count($result) == 0) {
       $this->add_tag($tag);
-      echo json_encode( ['status' => 1, 'tag' => $tag] );
-    // failure
-    } else {      
-      echo json_encode( ['status' => 0] );
+      echo json_encode(['status' => 1, 'tag' => $tag]);
+      // failure
+    } else {
+      echo json_encode(['status' => 0]);
     }
-    
   }
-  
+
   public function add_tag($tag_desc) {
     $tag = new Tag();
     $tag->set_tag_desc($tag_desc);

@@ -20,7 +20,7 @@ Digitools\Logbook\Entities\Log:
       targetEntity: Tag
       inversedBy: logs
       joinTable:
-        name: log_tags
+        name: log_tag
         joinColumns:
           log_id:
             referencedColumnName: id

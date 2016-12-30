@@ -3,12 +3,19 @@
 <section id="log_entries_list" class="nice_list">
   {% if log_list %}
     <ul class="search_list">
+      {# display list #}
       {% for log_item in log_list %}
+        
+        {# display tags associated with log item #}
+        {% set tag_list = log_item.get_tags %}
+        <div class="taggiebaggie clearfix">
+        {% include 'Logbook/show_tags.html.twig' %}
+        </div>
         <li>
           <div class="outer_frame">
-            <div class="floatright editeer"><a href="{{ app.urlFor('log_edit', {"id":log_item.id}) }}">Wijzig</a></div>
-            <h4 class="item_created"> {{ log_item.created|date('Y-m-d H:i') }} </h4>
-            <div class="item_entry_box"> {{ log_item.entry }} </div>
+            <div class="floatright editeer"><a href="{{ app.urlFor('log_edit', {"id":log_item.get_id}) }}">Wijzig</a></div>
+            <h4 class="item_created"> {{ log_item.get_created|date('Y-m-d H:i') }} </h4>
+            <div class="item_entry_box"> {{ log_item.get_entry }} </div>
           </div>
         </li>
       {% endfor %}

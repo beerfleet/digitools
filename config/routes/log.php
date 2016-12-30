@@ -24,6 +24,6 @@ $app->post('/tags/add', function() use ($contr) {
   $contr->add_tag_if_new();
 });
 
-$app->post('/tag', function() use ($contr) {
+$app->get('/tag', function() use ($contr) {
   $contr->manage_tags();
 })->name('tags_manage');

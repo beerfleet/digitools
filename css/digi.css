@@ -186,8 +186,9 @@ nav#topmenu {
 #log-tags .tag*/
 .tag-list {
   list-style-type: none;
-  padding-left: 0;
+  padding-left: 0; 
 }
+
 .tag {
   float: left;
   padding-right: 6px;

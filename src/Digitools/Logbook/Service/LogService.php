@@ -78,19 +78,11 @@ class LogService {
       $log->set_entry($app->request->post('log_entry'));
       $log->set_created(new \DateTime());
       $log->set_user($this->user);
-
-
       $tags = $this->acquire_tags_from_input();
-
-
       try { // valid = store
         $em->persist($log);
         $em->flush();
-        
-        
         $this->append_tags_to_log($log, $tags);
-        
-        
       } catch (Exception $e) {
         echo($e->getMessage());
       }
@@ -186,6 +178,11 @@ class LogService {
     $em = $this->em;
     $em->persist($tag);
     $em->flush();
+  }
+  
+  public function store_new_tag_status($log_id, $tag_id) {
+    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
+    $repo->toggle_log_tag_entry($log_id, $tag_id);
   }
 
   public function get_errors() {

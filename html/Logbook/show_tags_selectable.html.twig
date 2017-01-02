@@ -3,7 +3,7 @@
 <ul class="tag-list"> 
 
   {% for tag in tag_list %}
-    <li class="tag" data-tag-id="{{ tag.get_id }}"> 
+    <li class="tag" data-log-id="{{ log.get_id }}" data-tag-id="{{ tag.get_id }}"> 
       {{ tag.get_tag_desc }}       
       <span>
         <input type="checkbox" name="tags_chk[{{ tag.get_id }}]" id="tags" 

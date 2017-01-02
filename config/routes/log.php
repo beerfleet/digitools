@@ -27,3 +27,7 @@ $app->post('/tags/add', function() use ($contr) {
 $app->get('/tag', function() use ($contr) {
   $contr->manage_tags();
 })->name('tags_manage');
+
+$app->post('/tags/edit', function() use ($contr) {
+  $contr->store_tag_status();
+});

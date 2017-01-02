@@ -142,4 +142,15 @@ class LogController extends Controller {
       echo "Need admin rights";      
     }
   }
+  
+ /*
+ * VOORBEELD: AJAX, JSON, ASYNC
+ */
+  public function store_tag_status() {
+    $app = $this->app;
+    $log_id = $app->request->post("log_id");
+    $tag_id = $app->request->post("tag_id");
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
+    $srv->store_new_tag_status($log_id, $tag_id);
+  }
 }

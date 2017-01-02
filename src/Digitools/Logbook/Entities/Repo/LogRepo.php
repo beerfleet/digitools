@@ -38,5 +38,19 @@ class LogRepo extends EntityRepository {
     }
     return $logs_per_user;
   }
+  
+  public function toggle_log_tag_entry($log_id, $tag_id) {
+    $sql = "SELECT * FROM log_tag WHERE log_tag.log_id = $log_id AND log_tag.tag_id = $tag_id";
+    $em = $this->getEntityManager();
+    $tag = $em->getConnection()->executeQuery($sql);
+    $result = $tag->fetch();
+    if ($result) {
+      $sql_delete = "DELETE FROM log_tag WHERE log_id = $log_id AND tag_id = $tag_id";
+      $em->getConnection()->executeQuery($sql_delete);      
+    } else {
+      $sql_insert = "INSERT INTO log_tag (log_id, tag_id) VALUES ($log_id, $tag_id)";
+      $em->getConnection()->executeQuery($sql_insert);
+    }
+  }
 
 }

@@ -21,7 +21,7 @@
       <tbody>
         {% for name, route in routes %}
           <tr>
-            <td>{{ name }}</td>
+            <td> <a href="{{ route }}"> {{ name }} </a></td>
             <td>{{ route }}</td>
           </tr>
         {% endfor %}

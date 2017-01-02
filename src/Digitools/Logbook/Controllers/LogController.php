@@ -82,11 +82,18 @@ class LogController extends Controller {
     if ($this->getUser()) {
       /* @var $entry Log */
       $entry = $srv->load_entry_data_by_id($id);
+      $entry_tags = $entry->get_tags();
+      
       if ($entry == null) {
         $app->flash('error', 'Ongeldige bewerking.');
         $app->redirect($app->urlFor('main_page'));
       }
-      $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(), 'log' => $entry, 'tag_list' => $srv->list_tags()]);
+      $app->render('Logbook/edit_log_entry.html.twig', 
+              ['globals' => $this->getGlobals(), 
+                  'log' => $entry, 
+                  'tag_list' => $srv->list_tags(),
+                  'entry_tags' => $entry_tags
+              ]);
     } else {
       $app->flash('error', 'Er is geen gebruiker aangemeld.');
       $app->redirect($app->urlFor('main_page'));

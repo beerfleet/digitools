@@ -4,6 +4,7 @@ use Digitools\Logbook\Controllers\LogController;
 
 $contr = new LogController($em, $app);
 
+/* logs */
 $app->get('/log', function() use ($contr) {
   $contr->new_log_entry();
 })->name('log_new');
@@ -20,6 +21,12 @@ $app->post('/log/edit/:id', function($id) use ($contr) {
   $contr->process_modified_entry($id);
 })->name('log_edit_store');
 
+$app->post('/log/tag', function() use ($contr) {
+  $contr->show_logs_filter_by_tags();
+})->name('logs_per_tags');
+
+
+/* tags */
 $app->post('/tags/add', function() use ($contr) {
   $contr->add_tag_if_new();
 });

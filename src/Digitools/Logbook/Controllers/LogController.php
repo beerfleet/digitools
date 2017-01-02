@@ -120,6 +120,16 @@ class LogController extends Controller {
     }
   }
   
+  public function show_logs_filter_by_tags() {
+    /* @var $app Slim */
+    $app = $this->app;
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
+    $tags = $app->request->post('tags_chk');
+    $logs = $srv->get_filtered_logs($tags);
+    
+    return;
+  }
+  
   /*
    * Log Tagging
    */

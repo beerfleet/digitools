@@ -92,6 +92,7 @@ class LogService {
   }
 
   /* var $log Log */
+
   private function append_tags_to_log($log, $tags) {
     $em = $this->em;
     foreach ($tags as $id => $value) {
@@ -156,6 +157,45 @@ class LogService {
     }
   }
 
+  private function build_condition_for_filtered_search($tags) {
+
+    /* $select = "SELECT * FROM log as l, log_tag as lt WHERE id IN (";
+     */
+    $current_user_id = $this->user->getId();
+    $select = "SELECT * "
+            . "FROM log as l "
+            . "JOIN log_tag as lt ON l.id = lt.log_id "
+            . "JOIN tag as t ON lt.tag_id = t.id ";
+
+    if (sizeof($tags) > 1) {
+      $select .= "WHERE lt.tag_id IN (";
+      foreach ($tags as $id => $value) {
+        if ($id == key($tags)) {
+          $select .= $id;
+        } else {
+          $select .= ",$id";
+        }
+      }
+      $select .= ")";
+    } else {
+      $id = key($tags);
+      $select = "SELECT * "
+              . "FROM log as l "
+              . "JOIN log_tag as lt ON l.id = lt.log_id "
+              . "JOIN tag as t ON lt.tag_id = t.id "
+              . "WHERE t.id = $id ";
+    }
+    $select .= " AND l.user_id = $current_user_id";
+    return $select;
+  }
+
+  public function get_filtered_logs($tags) {
+    $sql = $this->build_condition_for_filtered_search($tags);
+    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
+    $logs = $repo->select_query($sql);
+    return $logs;
+  }
+
   public function add_tag_if_not_exists($tag) {
     $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";
     $em = $this->em;
@@ -179,7 +219,7 @@ class LogService {
     $em->persist($tag);
     $em->flush();
   }
-  
+
   public function store_new_tag_status($log_id, $tag_id) {
     $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
     $repo->toggle_log_tag_entry($log_id, $tag_id);

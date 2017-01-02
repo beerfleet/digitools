@@ -33,6 +33,24 @@
       </form>
     </div>
 
+    <section id="search_by_tags">
+      <div class="container form">
+        <h1>Filter getagd</h1>
+        <form action="{{ app.urlFor('logs_per_tags') }} " method="POST" novalidate>
+          <div class="tag-collection">
+            <div class="tag-bag">
+              {% include 'Logbook/show_tags_selectable.html.twig' %}
+            </div>
+          </div>
+          <div class="form-group spacing">
+            <ul>
+              <li><input class="form-control btn submit action-button" type="submit" id="verzend" name="register" value="Toon" /></li>
+            </ul>
+          </div>  
+        </form>
+      </div>
+    </section>
+
     <section id="log_list">
       <div class="container">      
         <h1>Mijn entries</h1>

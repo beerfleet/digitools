@@ -52,5 +52,11 @@ class LogRepo extends EntityRepository {
       $em->getConnection()->executeQuery($sql_insert);
     }
   }
+  
+  public function select_query($sql) {
+    $em = $this->getEntityManager();
+    $tags = $em->getConnection()->executeQuery($sql);
+    return $tags->fetchAll();
+  }
 
 }

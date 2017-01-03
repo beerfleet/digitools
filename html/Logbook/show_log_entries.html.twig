@@ -2,6 +2,7 @@
 
 <section id="log_entries_list" class="nice_list">
   {% if log_list %}
+    {% set app = globals.app %}
     <ul class="search_list">
       {# display list #}
       {% for log_item in log_list %}

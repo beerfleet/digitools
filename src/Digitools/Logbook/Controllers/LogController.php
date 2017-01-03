@@ -123,14 +123,18 @@ class LogController extends Controller {
    * Listing of logs filtered by 1 or several tags: entry point
    */
   public function show_logs_filter_by_tags() {
-    
-    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());
-    if (array_key_exists('tags_chk', $_POST) === false) {
-      $this->app->flash('error', 'Filter niet gelukt. Selecteer 1 of meerdere tags.');
-      $this->app->redirect($this->app->urlFor('log_new'));
+    $app = $this->app;
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());        
+    if (array_key_exists('tags_chk', $app->request->post()) === false) {
+      $app->flash('error', 'Filter niet gelukt. Selecteer 1 of meerdere tags.');
+      $app->redirect($this->app->urlFor('log_new'));
     }
-    $list = $srv->get_filtered_logs_and_tags();    
-    $this->app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags']));
+    $list = $srv->get_filtered_logs_and_tags();
+    if (sizeof($list['logs']) < 1) {
+      $app->flash('error', 'Geen resultaten gevonden.');
+      $app->redirect($this->app->urlFor('log_new'));
+    }
+    $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags']));
   }
 
   /**

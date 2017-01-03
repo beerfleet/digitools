@@ -214,7 +214,7 @@ class LogService {
   
   public function find_tag_by_description($desc) {
     $repo = $this->em->getRepository('Digitools\Logbook\Entities\Tag');
-    $result = $repo->findBy(['tag_desc' => $desc]);
+    $result = $repo->fetch_tag_by_desc($desc);    
     return $result;
   }
 

@@ -8,14 +8,14 @@ $(document).ready(function () {
 function init_search() {
   $('.search_list li').each(function () {
     srch_terms = $(this).find(".item_created").text().toLowerCase() + " " + $(this).find(".item_entry_box").text().toLowerCase();
-    console.log(srch_terms);
+    //console.log(srch_terms);
     $(this).attr('data-search-term', srch_terms);
   });
 }
 
 function init_search_handling() {
   $('.search_box').on('keyup', function () {
-    var searchTerm = $(this).val().toLowerCase();    
+    var searchTerm = $(this).val().toLowerCase();
     $('.search_list li').each(function () {
       //if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
       if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
@@ -74,7 +74,7 @@ function add_make_button() {
 
         if (status == 1) {
           $li = $('<li class="tag">' + tag + ' </li>');
-          //$li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
+          $li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
           $('.tag-bag .tag-list').append($li);
         }
       },
@@ -84,14 +84,17 @@ function add_make_button() {
         console.log("problem storing tag.");
       }
     });
-    $.ajax({
+    result = $.ajax({
       url: "/tag/search",
       type: "POST",
       data: {tag: tag_text},
       dataType: 'json',
-      succes: function (result) {
-        
-      }
+    });
+    result.done(function (data) {
+      console.log("+HAHAHA " + data['id']);
+    });
+    result.fail(function (jqXHR, textStatus) {
+      console.log(textStatus);
     });
   });
 }

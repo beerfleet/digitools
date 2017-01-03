@@ -58,5 +58,12 @@ class LogRepo extends EntityRepository {
     $tags = $em->getConnection()->executeQuery($sql);
     return $tags->fetchAll();
   }
+  
+  public function fetch_tag_by_desc($desc) {
+    $em = $this->getEntityManager();
+    $sql = "SELECT * FROM tag WHERE tag_desc = '" . $desc . "'";
+    $tag = $em->getConnection()->executeQuery($sql);
+    return $tag->fetch();
+  }
 
 }

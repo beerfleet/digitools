@@ -119,13 +119,17 @@ class LogController extends Controller {
     }
   }
 
-  /** 
+  /**
    * Listing of logs filtered by 1 or several tags: entry point
    */
   public function show_logs_filter_by_tags() {
-    /* @var $app Slim */    
-    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());        
-    $list = $srv->get_filtered_logs_and_tags();
+    
+    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());
+    if (array_key_exists('tags_chk', $_POST) === false) {
+      $this->app->flash('error', 'Filter niet gelukt. Selecteer 1 of meerdere tags.');
+      $this->app->redirect($this->app->urlFor('log_new'));
+    }
+    $list = $srv->get_filtered_logs_and_tags();    
     $this->app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags']));
   }
 

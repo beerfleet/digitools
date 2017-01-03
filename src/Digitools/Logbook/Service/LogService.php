@@ -156,46 +156,33 @@ class LogService {
       var_dump($this->errors);
     }
   }
-
-  private function build_condition_for_filtered_search($tags) {
-
-    /* $select = "SELECT * FROM log as l, log_tag as lt WHERE id IN (";
-     */
-    $current_user_id = $this->user->getId();
-    $select = "SELECT * "
-            . "FROM log as l "
-            . "JOIN log_tag as lt ON l.id = lt.log_id "
-            . "JOIN tag as t ON lt.tag_id = t.id ";
-
-    if (sizeof($tags) > 1) {
-      $select .= "WHERE lt.tag_id IN (";
-      foreach ($tags as $id => $value) {
-        if ($id == key($tags)) {
-          $select .= $id;
-        } else {
-          $select .= ",$id";
-        }
+  
+  /**
+   * 
+   * @param Log $logs colleciton of logs
+   * @param Tag $tags tags used to filter the given logs
+   */
+  private function filter_logs_by_tags($logs, $filter_tags) {
+    $result = [];
+    foreach ($logs as $log) {
+      if ($log->contains_tags($filter_tags)) {
+        $result[] = $log;
       }
-      $select .= ")";
-    } else {
-      $id = key($tags);
-      $select = "SELECT * "
-              . "FROM log as l "
-              . "JOIN log_tag as lt ON l.id = lt.log_id "
-              . "JOIN tag as t ON lt.tag_id = t.id "
-              . "WHERE t.id = $id ";
     }
-    $select .= " AND l.user_id = $current_user_id";
-    return $select;
+    return $result;
   }
-
-  public function get_filtered_logs($tags) {
-    $sql = $this->build_condition_for_filtered_search($tags);
-    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
-    $logs = $repo->select_query($sql);
-    return $logs;
+  
+  public function get_filtered_logs_and_tags() {
+    $app = $this->app;    
+    $result = $this->get_logs_and_tags();
+    $unfiltered_log_list = $result['logs'];
+    $tag_list = $result['tags'];
+    $filter_tags = $_POST['tags_chk'];    
+    $filtered_result = $this->filter_logs_by_tags($unfiltered_log_list, $filter_tags);
+    $result['logs'] = $filtered_result;
+    return $result;
   }
-
+  
   public function add_tag_if_not_exists($tag) {
     $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";
     $em = $this->em;

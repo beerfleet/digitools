@@ -23,7 +23,7 @@ class LogController extends Controller {
 
   public function __construct($em, $app) {
     parent::__construct($em, $app);
-    $this->srv = new LogService($em, $app, $this->getUser());        
+    $this->srv = new LogService($em, $app, $this->getUser());
     $this->app = $app;
     //$app->config('debug', false);    
   }
@@ -47,7 +47,7 @@ class LogController extends Controller {
 
   public function process_new_entry() {
     try {
-      $app = $this->getApp();                  
+      $app = $this->getApp();
       $this->srv->store_log_entry();
       $errors = $this->srv->get_errors();
       // Execute only when user is logged on
@@ -83,17 +83,16 @@ class LogController extends Controller {
       /* @var $entry Log */
       $entry = $srv->load_entry_data_by_id($id);
       $entry_tags = $entry->get_tags();
-      
+
       if ($entry == null) {
         $app->flash('error', 'Ongeldige bewerking.');
         $app->redirect($app->urlFor('main_page'));
       }
-      $app->render('Logbook/edit_log_entry.html.twig', 
-              ['globals' => $this->getGlobals(), 
-                  'log' => $entry, 
-                  'tag_list' => $srv->list_tags(),
-                  'entry_tags' => $entry_tags
-              ]);
+      $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(),
+          'log' => $entry,
+          'tag_list' => $srv->list_tags(),
+          'entry_tags' => $entry_tags
+      ]);
     } else {
       $app->flash('error', 'Er is geen gebruiker aangemeld.');
       $app->redirect($app->urlFor('main_page'));
@@ -119,43 +118,44 @@ class LogController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
-  
+
+  /** 
+   * Listing of logs filtered by 1 or several tags: entry point
+   */
   public function show_logs_filter_by_tags() {
-    /* @var $app Slim */
-    $app = $this->app;
-    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
-    $tags = $app->request->post('tags_chk');
-    $logs = $srv->get_filtered_logs($tags);
-    
-    return;
+    /* @var $app Slim */    
+    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());        
+    $list = $srv->get_filtered_logs_and_tags();
+    $this->app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags']));
   }
-  
-  /*
+
+  /**
    * Log Tagging
    */
   public function add_tag_if_new() {
-    $tag = $this->app->request->post('tag');        
+    $tag = $this->app->request->post('tag');
     $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());
     $srv->add_tag_if_not_exists($tag);
   }
-  
+
   public function manage_tags() {
     /* @var $user User */
     $user = $this->getUser();
     $admin = $user->isAdmin();
-    $app = $this->app;    
+    $app = $this->app;
     if ($admin == 1) {
       $em = $this->getEntityManager();
       $srv = new LogService($em, $app, $user);
       $app->render('Logbook/manage_tags.html.twig', ['globals' => $this->getGlobals(), 'tag_list' => $srv->list_tags()]);
     } else {
-      echo "Need admin rights";      
+      echo "Need admin rights";
     }
   }
-  
- /*
- * VOORBEELD: AJAX, JSON, ASYNC
- */
+
+  /*
+   * VOORBEELD: AJAX, JSON, ASYNC
+   */
+
   public function store_tag_status() {
     $app = $this->app;
     $log_id = $app->request->post("log_id");
@@ -163,4 +163,5 @@ class LogController extends Controller {
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
     $srv->store_new_tag_status($log_id, $tag_id);
   }
+
 }

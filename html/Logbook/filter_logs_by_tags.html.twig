@@ -1,0 +1,23 @@
+{% extends 'base_with_right_sidebar.html.twig' %}
+
+{% block title %}
+  Digitools - Zoek getagd
+{% endblock title %}
+
+{% block main_column %}
+
+  <ul>
+    {% for log in log_list %}
+      {% set tags = log.get_tags %}
+      <li> {{ log.get_entry }} </li>
+        {% if tags != null %}
+        <ul>
+          {% for tag in tags %}
+            <li> {{ tag.get_tag_desc }} </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+{% endblock main_column %}

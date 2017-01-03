@@ -38,3 +38,7 @@ $app->get('/tag', function() use ($contr) {
 $app->post('/tags/edit', function() use ($contr) {
   $contr->store_tag_status();
 });
+
+$app->post('/tag/search', function() use ($contr) {
+  $contr->find_tag_by_desc();
+});

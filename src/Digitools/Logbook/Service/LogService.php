@@ -211,6 +211,12 @@ class LogService {
     $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
     $repo->toggle_log_tag_entry($log_id, $tag_id);
   }
+  
+  public function find_tag_by_description($desc) {
+    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Tag');
+    $result = $repo->findBy(['tag_desc' => $desc]);
+    return $result;
+  }
 
   public function get_errors() {
     return $this->errors;

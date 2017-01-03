@@ -167,5 +167,14 @@ class LogController extends Controller {
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
     $srv->store_new_tag_status($log_id, $tag_id);
   }
+  
+  public function find_tag_by_desc() {
+    $tag_desc = $_POST['tag'];
+    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());    
+    $tag = $srv->find_tag_by_description($tag_desc);    
+    var_dump($tag);
+    $json_tag = json_encode( ['id' => $tag->get_id()] );
+    return $json_tag;
+  }
 
 }

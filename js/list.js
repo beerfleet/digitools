@@ -73,14 +73,24 @@ function add_make_button() {
         $(".nieuwe-tag a").show();
 
         if (status == 1) {
-          $div = $('<div class="tag">' + tag + '</div>');
-          $('.tag-bag').append($div);        
+          $li = $('<li class="tag">' + tag + ' </li>');
+          $li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
+          $('.tag-bag .tag-list').append($li);
         }
       },
       fail: function (xhr, error) {
         console.debug(xhr);
         console.debug(error);
         console.log("problem storing tag.");
+      }
+    });
+    $.ajax({
+      url: "/tag/search",
+      type: "POST",
+      data: {tag: tag_text},
+      dataType: 'json',
+      succes: function (result) {
+        
       }
     });
   });

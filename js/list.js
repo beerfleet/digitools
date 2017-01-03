@@ -74,7 +74,7 @@ function add_make_button() {
 
         if (status == 1) {
           $li = $('<li class="tag">' + tag + ' </li>');
-          $li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
+          //$li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
           $('.tag-bag .tag-list').append($li);
         }
       },

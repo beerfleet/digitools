@@ -11,8 +11,8 @@ class EmailNotBlankValidation extends Validation {
 
   public function addRules() {
     $val = $this->getVal();
-    $val->rule('required', 'email');
-    $val->rule('email', 'email');    
+    $val->rule('required', 'e-mail');
+    $val->rule('email', 'e-mail');    
     
   }
 

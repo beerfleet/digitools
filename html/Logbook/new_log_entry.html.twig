@@ -33,34 +33,9 @@
       </form>
     </div>
 
-    <section id="search_by_tags">
-      <div class="container form">
-        <h1>Filter getagd</h1>
-        <form action="{{ app.urlFor('logs_per_tags') }} " method="POST" novalidate>
-          <div class="tag-collection">
-            <div class="tag-bag">
-              {% include 'Logbook/show_tags_selectable.html.twig' %}
-            </div>
-          </div>
-          <div class="form-group spacing">
-            <ul>
-              <li><input class="form-control btn submit action-button" type="submit" id="verzend" name="register" value="Toon" /></li>
-            </ul>
-          </div>  
-        </form>
-      </div>
-    </section>
+    {% include 'Logbook/logs_by_tags.html.twig' %}
+  {% endblock main_column %}
 
-    <section id="log_list">
-      <div class="container">      
-        <h1>Mijn entries</h1>
-        <input type="text" class="form-control search_box" placeholder="search here" />
-        {% include 'Logbook/show_log_entries.html.twig' %}
-      </div>
-    </section>
-  </section>
-{% endblock main_column %}
-
-{% block extrajs %}
-  <script src="../js/list.js"></script>
-{% endblock extrajs %}
+  {% block extrajs %}
+    <script src="../js/list.js"></script>
+  {% endblock extrajs %}

@@ -6,18 +6,6 @@
 
 {% block main_column %}
 
-  <ul>
-    {% for log in log_list %}
-      {% set tags = log.get_tags %}
-      <li> {{ log.get_entry }} </li>
-        {% if tags != null %}
-        <ul>
-          {% for tag in tags %}
-            <li> {{ tag.get_tag_desc }} </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endfor %}
-  </ul>
+  {% include 'Logbook/logs_by_tags.html.twig' %}
 
 {% endblock main_column %}

@@ -53,6 +53,56 @@ function add_input_box() {
   $('.tag-collection .controls').append($("<input type='textbox' id='tag-input' name='tag-input' class='form-control'/>"));
 }
 
+function ajax_retrieve_tag_id(tag_text) {
+  result = $.ajax({
+    url: "/tag/search",
+    type: "POST",
+    data: {tag: tag_text},
+    dataType: 'json',
+    success: function (result) {
+      console.log("+HAHAHA " + result['id']);
+    }
+  });
+  /*result.done(function (data) {
+    console.log("+HAHAHA " + data['id']);
+  });
+  result.fail(function (jqXHR, textStatus) {
+    console.log(textStatus);
+  });*/
+}
+
+function ajax_add_new_tag(tag_text) {
+// Add new tag
+  $.ajax({
+    url: "/tags/add",
+    type: "POST",
+    data: {tag: tag_text},
+    dataType: "json",
+    success: function (result) {
+      tag = result['tag'];
+      status = result['status'];
+      $('.maak-tag').remove();
+      $('#tag-input').remove();
+      $(".nieuwe-tag a").show();
+
+      // tag is valid and stored
+      if (status == 1) {
+        $li = $('<li class="tag">' + tag + ' </li>');
+        $li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
+        $('.tag-bag .tag-list').append($li);
+      }
+
+      ajax_retrieve_tag_id(tag_text);
+      
+    },
+    fail: function (xhr, error) {
+      console.debug(xhr);
+      console.debug(error);
+      console.log("problem storing tag.");
+    }
+  });
+}
+
 function add_make_button() {
   console.log("START ADD MAKE BUTTON");
   $('.tag-collection .controls').append($("<a href='#' class='maak-tag'>Maak</a>"));
@@ -60,29 +110,19 @@ function add_make_button() {
 
   $('.maak-tag').on('click', function () {
     tag_text = $('.tag-collection .controls input').val();
-    $.ajax({
-      url: "/tags/add",
-      type: "POST",
-      data: {tag: tag_text},
-      dataType: "json",
-      success: function (result) {
-        tag = result['tag'];
-        status = result['status'];
-        $('.maak-tag').remove();
-        $('#tag-input').remove();
-        $(".nieuwe-tag a").show();
-
-        if (status == 1) {
-          $li = $('<li class="tag">' + tag + ' </li>');
-          //$li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
-          $('.tag-bag .tag-list').append($li);
-        }
-      },
-      fail: function (xhr, error) {
-        console.debug(xhr);
-        console.debug(error);
-        console.log("problem storing tag.");
-      }
-    });    
+    ajax_add_new_tag(tag_text);
+    /*result = $.ajax({
+     url: "/tag/search",
+     type: "POST",
+     data: {tag: tag_text},
+     dataType: 'json',
+     });
+     
+     result.done(function (data) {
+     console.log("+HAHAHA " + data['id']);
+     });
+     result.fail(function (jqXHR, textStatus) {
+     console.log(textStatus);
+     });*/
   });
 }

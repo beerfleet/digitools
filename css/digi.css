@@ -35,6 +35,11 @@ h4 {
 
 
 /* COMMON */
+.current_page {
+  background-color: #cfe1e6;
+  border-radius: 12px;
+}
+
 #menu-section {
   background-image: url('../img/top-image.png');
   background-repeat: no-repeat;    

@@ -14,7 +14,6 @@ use Digitools\EslTools\Entities\User;
  */
 class LogController extends Controller {
   /* @var $srv LogService */
-
   private $srv;
   private $em;
   private $app;
@@ -30,7 +29,7 @@ class LogController extends Controller {
 
   public function new_log_entry() {
     /* @var $app Slim */
-    $app = $this->app;
+    $app = $this->app;    
     /* @var $srv LogService */
     $srv = $this->srv;
 

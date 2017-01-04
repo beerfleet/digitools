@@ -74,7 +74,7 @@ function add_make_button() {
 
         if (status == 1) {
           $li = $('<li class="tag">' + tag + ' </li>');
-          $li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
+          //$li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
           $('.tag-bag .tag-list').append($li);
         }
       },
@@ -83,18 +83,6 @@ function add_make_button() {
         console.debug(error);
         console.log("problem storing tag.");
       }
-    });
-    result = $.ajax({
-      url: "/tag/search",
-      type: "POST",
-      data: {tag: tag_text},
-      dataType: 'json',
-    });
-    result.done(function (data) {
-      console.log("+HAHAHA " + data['id']);
-    });
-    result.fail(function (jqXHR, textStatus) {
-      console.log(textStatus);
-    });
+    });    
   });
 }

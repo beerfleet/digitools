@@ -64,21 +64,19 @@ function add_input_box() {
 }
 
 function ajax_retrieve_tag_id(tag_text) {
-  result = $.ajax({
+  $.ajax({
     url: "/tag/search",
     type: "POST",
     data: {tag: tag_text},
     dataType: 'json',
     success: function (result) {
       console.log("+HAHAHA " + result['id']);
+      tag_id = result['id'];
+      $li = $('<li class="tag" data-tag-id="' + tag_id + '">' + tag + ' </li>');
+      $li.append('<span><input id="tags" name="tags_chk['+tag_id+']" type="checkbox" class="placeholder"> </span>');
+      $('.tag-bag .tag-list').append($li);
     }
   });
-  /*result.done(function (data) {
-   console.log("+HAHAHA " + data['id']);
-   });
-   result.fail(function (jqXHR, textStatus) {
-   console.log(textStatus);
-   });*/
 }
 
 function ajax_add_new_tag(tag_text) {
@@ -97,12 +95,8 @@ function ajax_add_new_tag(tag_text) {
 
       // tag is valid and stored
       if (status == 1) {
-        $li = $('<li class="tag">' + tag + ' </li>');
-        $li.append('<span><input id="tags" type="checkbox" class="placeholder"> </span>');
-        $('.tag-bag .tag-list').append($li);
+        ajax_retrieve_tag_id(tag_text);
       }
-
-      ajax_retrieve_tag_id(tag_text);
 
     },
     fail: function (xhr, error) {
@@ -121,18 +115,5 @@ function add_make_button() {
   $('.maak-tag').on('click', function () {
     tag_text = $('.tag-collection .controls input').val();
     ajax_add_new_tag(tag_text);
-    /*result = $.ajax({
-     url: "/tag/search",
-     type: "POST",
-     data: {tag: tag_text},
-     dataType: 'json',
-     });
-     
-     result.done(function (data) {
-     console.log("+HAHAHA " + data['id']);
-     });
-     result.fail(function (jqXHR, textStatus) {
-     console.log(textStatus);
-     });*/
   });
 }

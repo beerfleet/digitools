@@ -14,6 +14,7 @@ use Digitools\Logbook\Entities\Repo\LogRepo;
 use Digitools\Logbook\Entities\Log;
 use Digitools\EslTools\Entities\User;
 use Digitools\Logbook\Entities\Tag;
+use Digitools\Common\Entities\Constants;
 
 /**
  *
@@ -96,7 +97,7 @@ class LogService {
   private function append_tags_to_log($log, $tags) {
     $em = $this->em;
     foreach ($tags as $id => $value) {
-      $tag = $em->getRepository('Digitools\Logbook\Entities\Tag')->find($id);
+      $tag = $em->getRepository(Constants::TAG)->find($id);
       $log->add_tag($tag);
     }
     $em->persist($log);
@@ -110,13 +111,13 @@ class LogService {
 
   public function list_tags() {
     $em = $this->em;
-    $repo = $em->getRepository('Digitools\Logbook\Entities\Tag');
+    $repo = $em->getRepository(Constants::TAG);
     return $repo->findAll();
   }
 
   public function list_log_entries_lifo() {
     $em = $this->em;
-    $repo = $em->getRepository('Digitools\Logbook\Entities\Log');
+    $repo = $em->getRepository(Constants::LOG);
 
     /* @var $repo LogRepo */
     return $repo->find_ordered_lifo($this->user);
@@ -124,7 +125,7 @@ class LogService {
 
   public function load_entry_data_by_id($id) {
 
-    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
+    $repo = $this->em->getRepository(Constants::LOG);
     /* @var $log Log */
     $log = $repo->find($id);
 
@@ -142,7 +143,7 @@ class LogService {
     $val = new LogbookValidation($app, $em);
     if ($val->validate()) {
       /* @var $log Log */
-      $repo = $em->getRepository('Digitools\Logbook\Entities\Log');
+      $repo = $em->getRepository(Constants::LOG);
       $log = $repo->find($id);
       $log->set_entry($app->request->post('log_entry'));
       try {
@@ -156,7 +157,7 @@ class LogService {
       var_dump($this->errors);
     }
   }
-  
+
   /**
    * 
    * @param Log $logs colleciton of logs
@@ -171,18 +172,18 @@ class LogService {
     }
     return $result;
   }
-  
+
   public function get_filtered_logs_and_tags() {
-    $app = $this->app;    
+    $app = $this->app;
     $result = $this->get_logs_and_tags();
     $unfiltered_log_list = $result['logs'];
     $tag_list = $result['tags'];
-    $filter_tags = $_POST['tags_chk'];    
+    $filter_tags = $_POST['tags_chk'];
     $filtered_result = $this->filter_logs_by_tags($unfiltered_log_list, $filter_tags);
     $result['logs'] = $filtered_result;
     return $result;
   }
-  
+
   public function add_tag_if_not_exists($tag) {
     $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";
     $em = $this->em;
@@ -208,14 +209,29 @@ class LogService {
   }
 
   public function store_new_tag_status($log_id, $tag_id) {
-    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Log');
+    $repo = $this->em->getRepository(Constants::LOG);
     $repo->toggle_log_tag_entry($log_id, $tag_id);
   }
-  
+
   public function find_tag_by_description($desc) {
-    $repo = $this->em->getRepository('Digitools\Logbook\Entities\Tag');
-    $result = $repo->fetch_tag_by_desc($desc);    
+    $repo = $this->em->getRepository(Constants::TAG);
+    $result = $repo->fetch_tag_by_desc($desc);
     return $result;
+  }
+  
+  public function delete_tag($id) {
+    $em = $this->em;
+    $repo = $em->getRepository(Constants::TAG);
+    $tag = $repo->find($id);
+    $em->remove($tag);
+    $em->flush();
+  }
+
+  public function delete_tags() {
+    $tags = $this->app->request->post('tags');
+    foreach ($tags as $tag) {
+      $this->delete_tag($tag);
+    }    
   }
 
   public function get_errors() {

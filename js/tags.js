@@ -5,10 +5,11 @@
 $(document).ready(function () {
   init_onchange_event();
   new_tag();
+  init_verwijder_tags();
 });
 
 function init_onchange_event() {
-  $('.tag-list .tag span input:checkbox').each(function (index, value) {
+  $('.tag-bag.modify .tag-list .tag span input:checkbox').each(function (index, value) {
 
     $(this).on('click', function () {
       t_id = $(this).parent().parent().data('tag-id');
@@ -29,8 +30,7 @@ function init_onchange_event() {
         },
         fail: function (xhr, error) {
           console.debug(xhr);
-          console.debug(error);
-          console.log("problem storing tag.");
+          console.debug(error);          
         }
       });
     });
@@ -69,11 +69,10 @@ function ajax_retrieve_tag_id(tag_text) {
     type: "POST",
     data: {tag: tag_text},
     dataType: 'json',
-    success: function (result) {
-      console.log("+HAHAHA " + result['id']);
+    success: function (result) {      
       tag_id = result['id'];
       $li = $('<li class="tag" data-tag-id="' + tag_id + '">' + tag + ' </li>');
-      $li.append('<span><input id="tags" name="tags_chk['+tag_id+']" type="checkbox" class="placeholder"> </span>');
+      $li.append('<span><input id="tags" name="tags_chk[' + tag_id + ']" data-tag-id="' + tag_id + '" type="checkbox" class="placeholder"> </span>');
       $('.tag-bag .tag-list').append($li);
     }
   });
@@ -99,21 +98,47 @@ function ajax_add_new_tag(tag_text) {
       }
 
     },
-    fail: function (xhr, error) {
+    error: function (xhr, error) {
       console.debug(xhr);
       console.debug(error);
-      console.log("problem storing tag.");
     }
   });
 }
 
 function add_make_button() {
-  console.log("START ADD MAKE BUTTON");
   $('.tag-collection .controls').append($("<a href='#' class='maak-tag'>Maak</a>"));
   $('.maak-tag').hide();
 
   $('.maak-tag').on('click', function () {
     tag_text = $('.tag-collection .controls input').val();
     ajax_add_new_tag(tag_text);
+  });
+}
+
+function init_verwijder_tags() {
+  $(".verwijder-tag").on('click', function () {
+    tag_arr = new Array();
+    $(".tag-list input[type='checkbox'").each(function () {
+      if ($(this).prop('checked') === true) {
+        tag_arr.push($(this).data('tag-id'));
+
+      }
+    });
+    $.ajax({
+      url: "/tags/delete",
+      type: "POST",
+      data: {tags: tag_arr},
+      dataType: "json",
+      success: function (result) {
+        tag_arr.forEach(function(index) {
+          $li = $(".tag-list").find('[data-tag-id="'+ index +'"]');
+          $li.remove();          
+        });
+      },      
+      error: function (xhr, error) {
+        console.debug(xhr);
+        console.debug(error);        
+      }
+    });
   });
 }

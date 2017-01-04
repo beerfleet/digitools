@@ -42,3 +42,7 @@ $app->post('/tags/edit', function() use ($contr) {
 $app->post('/tag/search', function() use ($contr) {
   $contr->find_tag_by_desc();
 });
+
+$app->post('/tags/delete', function() use ($contr) {
+  $contr->delete_tags();
+});

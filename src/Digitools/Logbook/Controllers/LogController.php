@@ -162,6 +162,7 @@ class LogController extends Controller {
 
   /*
    * VOORBEELD: AJAX, JSON, ASYNC
+   * Edit tags live while modifying a log entry
    */
   public function store_tag_status() {
     $app = $this->app;
@@ -178,6 +179,13 @@ class LogController extends Controller {
     $tag = $srv->find_tag_by_description($tag_desc);        
     $json_tag = json_encode( ['id' => $tag['id']] );
     echo $json_tag;
+  }
+  
+  public function delete_tags() {    
+    $app = $this->getApp();
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
+    $srv->delete_tags();
+    echo json_encode(['deleted' => 1]);
   }
 
 }

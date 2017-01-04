@@ -163,7 +163,6 @@ class LogController extends Controller {
   /*
    * VOORBEELD: AJAX, JSON, ASYNC
    */
-
   public function store_tag_status() {
     $app = $this->app;
     $log_id = $app->request->post("log_id");

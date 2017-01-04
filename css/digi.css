@@ -131,10 +131,11 @@ nav#topmenu {
 }
 
 /* registrations */
-#registration input,
 #registration select,
-#registration textarea {
+#registration textarea,
+.tag-list input {
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 #registration p {

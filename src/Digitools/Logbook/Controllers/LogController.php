@@ -14,6 +14,7 @@ use Digitools\EslTools\Entities\User;
  */
 class LogController extends Controller {
   /* @var $srv LogService */
+
   private $srv;
   private $em;
   private $app;
@@ -29,7 +30,7 @@ class LogController extends Controller {
 
   public function new_log_entry() {
     /* @var $app Slim */
-    $app = $this->app;    
+    $app = $this->app;
     /* @var $srv LogService */
     $srv = $this->srv;
 
@@ -123,7 +124,7 @@ class LogController extends Controller {
    */
   public function show_logs_filter_by_tags() {
     $app = $this->app;
-    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());        
+    $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
     if (array_key_exists('tags_chk', $app->request->post()) === false) {
       $app->flash('error', 'Filter niet gelukt. Selecteer 1 of meerdere tags.');
       $app->redirect($this->app->urlFor('log_new'));
@@ -148,14 +149,17 @@ class LogController extends Controller {
   public function manage_tags() {
     /* @var $user User */
     $user = $this->getUser();
-    $admin = $user->isAdmin();
+    /* @var $app Slim */
     $app = $this->app;
+    if ($user === null || !$user->isAdmin()) {
+      $app->flash('error', 'Invalid operation.');
+      $app->redirect($app->urlFor('main_page'));
+    }
+    $admin = $user->isAdmin();
     if ($admin == 1) {
       $em = $this->getEntityManager();
       $srv = new LogService($em, $app, $user);
       $app->render('Logbook/manage_tags.html.twig', ['globals' => $this->getGlobals(), 'tag_list' => $srv->list_tags()]);
-    } else {
-      echo "Need admin rights";
     }
   }
 
@@ -163,6 +167,7 @@ class LogController extends Controller {
    * VOORBEELD: AJAX, JSON, ASYNC
    * Edit tags live while modifying a log entry
    */
+
   public function store_tag_status() {
     $app = $this->app;
     $log_id = $app->request->post("log_id");
@@ -170,17 +175,18 @@ class LogController extends Controller {
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
     $srv->store_new_tag_status($log_id, $tag_id);
   }
-  
+
   /* EXAMPLE: how to pass data to Javascript from PHP through AJAX */
+
   public function find_tag_by_desc() {
     $tag_desc = $_POST['tag'];
-    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());    
-    $tag = $srv->find_tag_by_description($tag_desc);        
-    $json_tag = json_encode( ['id' => $tag['id']] );
+    $srv = new LogService($this->getEntityManager(), $this->app, $this->getUser());
+    $tag = $srv->find_tag_by_description($tag_desc);
+    $json_tag = json_encode(['id' => $tag['id']]);
     echo $json_tag;
   }
-  
-  public function delete_tags() {    
+
+  public function delete_tags() {
     $app = $this->getApp();
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
     $srv->delete_tags();

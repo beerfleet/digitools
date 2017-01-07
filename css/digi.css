@@ -81,6 +81,10 @@ h4 {
   border-image: url(../img/Logbook/separator.png) 30 round;  
 }
 
+.nav-lvl-2 {
+  border-top: none;  
+}
+
 .container #topmenu .nav-tabs li a {
   font-family: MenuFont;
   font-size: 1.12em;

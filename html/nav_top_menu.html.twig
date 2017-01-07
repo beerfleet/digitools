@@ -1,26 +1,37 @@
 {% set app = globals.app %}
 
+{# IN ORDER TO ADD A NEW MENU ITEM #}
 <div class="container cf">  
   <nav id="topmenu" class="">
     <ul class="nav nav-tabs">      
-      <li {% if app.request.getPath == app.urlFor('main_page') %} class="current_page" {% endif %}>
+      
+      {# ADD PATH COMPARISON #}
+      {% set is_main_page = app.request.getPath == app.urlFor('main_page') %}
+      {% set is_todo_home = app.request.getPath == app.urlFor('todo_home') %}
+      {% set is_log_new = app.request.getPath == app.urlFor('log_new') %}
+      {% set is_tags_manage = app.request.getPath == app.urlFor('tags_manage') %}
+      
+      {# ADD THE HTML LI IF ITEM POINTS TO CURRENT PAGE #}
+      <li {% if is_main_page %} class="current_page" {% endif %}>
         <a href="{{ app.urlFor('main_page') }}">Home</a>
       </li>
-      <li {% if app.request.getPath == app.urlFor('todo_home') %} class="current_page" {% endif %}>
+      <li {% if is_todo_home %} class="current_page" {% endif %}>
         <a href="{{ app.urlFor('todo_home') }}">Todo</a>
       </li>        
-      <li {% if app.request.getPath == app.urlFor('log_new') %} class="current_page" {% endif %}>
+      <li {% if is_log_new %} class="current_page" {% endif %}>
         <a href="{{ app.urlFor('log_new') }}">Logs</a>
       </li>      
       {% if (globals.user.isAdmin == 1)  %}
-        <li {% if app.request.getPath == app.urlFor('tags_manage') %} class="current_page" {% endif %}>
+        <li {% if is_tags_manage %} class="current_page" {% endif %}>
           <a href="{{ app.urlFor('tags_manage') }}">Tags</a>
         </li>
       {% endif %}
     </ul>
+    
+    {# FOR ADMIN EYES ONLY #}
     {% if (globals.user.isAdmin == 1)  %}
-      <ul class="nav nav-tabs nav-lvl-2">
-        <li><a href="">test</a></li>
+      <ul class="nav nav-lvl-2">
+        {% if is_log_new %}<li><a href="#">Manage</a></li>{% endif %}
       </ul>        
     {% endif %}
 

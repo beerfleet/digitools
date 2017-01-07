@@ -18,5 +18,11 @@
         </li>
       {% endif %}
     </ul>
+    {% if (globals.user.isAdmin == 1)  %}
+      <ul class="nav nav-tabs nav-lvl-2">
+        <li><a href="">test</a></li>
+      </ul>        
+    {% endif %}
+
   </nav>
 </div>

@@ -20,7 +20,17 @@ class Log {
   private $tags;
   private $entry;
   private $modified;
+  private $delete_flag;
 
+  function get_delete_flag() {
+    return $this->delete_flag;
+  }
+
+  function set_delete_flag($delete_flag) {
+    $this->delete_flag = $delete_flag;
+  }
+
+    
   function get_modified() {
     return $this->modified;
   }

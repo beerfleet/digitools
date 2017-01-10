@@ -136,11 +136,25 @@ class LogController extends Controller {
     }
     $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags']));
   }
-  
-  /**/
+
+  /* Management of all users logs, ADMIN only */
+
   public function admin_logs_manage() {
     $app = $this->app;
-    $app->render('Logbook/admin_manage_logs.html.twig', ['globals' => $this->getGlobals()]);
+    if ($this->isUserAdmin()) {
+      $srv = $this->srv;
+      $logs = $srv->list_log_entries_lifo();
+      $app->render('Logbook/admin_manage_logs.html.twig', ['globals' => $this->getGlobals(), 'logs' => $logs]);
+    } else {
+      $app->flash('error', 'Ongeldige bewerking.');
+      $app->redirect($app->urlFor('main_page'));
+    }
+  }
+  
+  public function log_toggle_deletion_request() {    
+    $srv = $this->srv;
+    $srv->log_set_delete_state();
+    echo json_encode(['result' => 'log marked']);
   }
 
   /**

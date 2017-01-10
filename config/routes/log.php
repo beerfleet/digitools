@@ -29,6 +29,10 @@ $app->get('/logs/manage', function() use ($contr) {
   $contr->admin_logs_manage();
 })->name('admin_logs_manage');
 
+$app->post('/log/mark-for-deletion', function() use ($contr) {
+  $contr->log_toggle_deletion_request();
+});
+
 /* tags */
 $app->post('/tags/add', function() use ($contr) {
   $contr->add_tag_if_new();

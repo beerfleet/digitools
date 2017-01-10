@@ -91,6 +91,10 @@ nav#topmenu {
   padding-top: 30px;
 }
 
+#topmenu li {
+
+}
+
 /* ERROR OUTPUT */
 .flagged {
   margin-top: 20px;
@@ -253,6 +257,9 @@ nav#topmenu {
 
 #log-tags {
   margin-bottom: 30px;
+}
+.mark-delete {
+  color: red;
 }
 
 /* SIDEBAR */

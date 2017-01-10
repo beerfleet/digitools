@@ -1,3 +1,37 @@
 {% extends 'base_with_right_sidebar.html.twig' %}
 
-{% block title %}Digi Tools{% endblock title %}
+{% block title %}Digi Tools - Beheer logs{% endblock title %}
+
+{% block extracss %}  
+  <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css"/>
+  <link rel="stylesheet" href="../css/_dataTables.jqueryui.min.css" type="text/css"/>
+{% endblock extracss %}
+
+{% block main_column %}
+  <div class="container">
+    <div id="listing">
+      <h1>Logbeheer</h1>
+      <table class="dataTable table table-bordered table-responsive table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Inhoud</th>
+          </tr>
+        </thead>
+        <tbody>          
+          {% for log in logs %}
+            <tr>
+              <td>{{ log.get_id }}</td>
+              <td>{{ log.get_entry }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock main_column %}
+
+{% block extrajs %}
+  <script src="../js/jquery.dataTables.min.js"></script>
+  <script src="../js/list.js"></script>
+{% endblock extrajs %}

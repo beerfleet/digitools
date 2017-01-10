@@ -40,3 +40,7 @@ Digitools\Logbook\Entities\Log:
     modified:
       type: datetime
       nullable: false
+      
+    delete_flag: 
+      type: integer      
+    

@@ -108,6 +108,27 @@ class LogService {
     $result = ['logs' => $this->list_log_entries_lifo(), 'tags' => $this->list_tags()];
     return $result;
   }
+  
+  public function get_log_by_id($id) {
+    $repo = $this->em->getRepository(Constants::LOG);
+    return $repo->find($id);
+  }
+  
+  /**
+   * Sets delete state for a logbook entry. Admin / moderator decides if it is deleted.
+   * @return true if succeeded, otherwise false
+   */
+  public function log_set_delete_state() {
+    $app = $this->app;
+    $log_id = $app->request->post('id');
+    $deletion_flag = $app->request->post('state');
+    /* @var $log Log */
+    $log = $this->get_log_by_id($log_id);
+    $log->set_delete_flag($deletion_flag == 'true' ? 1 : 0);
+    $em = $this->em;
+    $em->persist($log);
+    $em->flush();
+  }
 
   public function list_tags() {
     $em = $this->em;
@@ -127,8 +148,7 @@ class LogService {
 
     $repo = $this->em->getRepository(Constants::LOG);
     /* @var $log Log */
-    $log = $repo->find($id);
-
+    $log = $repo->find($id);    
     // check whether the logged on user is the one who wrote this entry
     /* @var $entry_usr_obj User */
     $entry_usr_id = $log->get_user()->getId();

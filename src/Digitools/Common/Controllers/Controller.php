@@ -58,13 +58,13 @@ abstract class Controller {
     $em = $this->getEntityManager();
     $repo = $em->getRepository('Digitools\EslTools\Entities\User');
     $user = $repo->findBy(array('username' => $username));
-    return $user;
+    return $user[0];
   }
 
   public function getUser() {
     if (isset($_SESSION['user']) && $_SESSION['user'] != null ) {
       $user = $this->queryUserByUserName($_SESSION['user']);
-      return isset($user[0]) ? $user[0] : null;
+      return isset($user) ? $user : null;
     }
     return null;
   }
@@ -79,7 +79,8 @@ abstract class Controller {
 
   public function isUserAdmin() {
     if (isset($_SESSION['user'])) {
-      $user = $_SESSION['user'];
+      $username = $_SESSION['user'];
+      $user = $this->queryUserByUserName($username);
       return $user->isAdmin() == 1 ? true : false;
     }
     return false;

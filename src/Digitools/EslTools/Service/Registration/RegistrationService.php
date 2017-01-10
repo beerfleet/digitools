@@ -4,6 +4,8 @@ namespace Digitools\EslTools\Service\Registration;
 
 use Digitools\EslTools\Entities\User;
 use Digitools\EslTools\Service\Validation\RegistrationValidation as Val;
+use Digitools\Common\Entities\Constants;
+use Doctrine\ORM\EntityManager;
 
 /**
  * RegistrationService registration services
@@ -11,7 +13,7 @@ use Digitools\EslTools\Service\Validation\RegistrationValidation as Val;
  * @author jan van biervliet
  */
 class RegistrationService {
-
+  /* @var $em EntityManager */
   private $em;
   private $app;
   private $errors;

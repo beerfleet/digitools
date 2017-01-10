@@ -13,44 +13,8 @@
   <section id="registration">
     <div class="container form">
       <h1>Mijn Profiel</h1>      
-      <form action="{{ globals.app.urlFor('profile_edit_store') }}" method="post" novalidate>
-        <div class="form-group">
-          <label for="username">Gebruikersnaam</label>
-          <input class="form-control" type="text" id="username" name="gebruikersnaam" value="{{ user.username }}" readonly />
-          <label for="email">E-mail adres</label> 
-          <input class="form-control" type="email" id="email" name="e-mail" value="{{ user.email }}" readonly />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Wachwoord</label>
-          <input class="form-control" type="password" id="password" name="wachtwoord" />
-          <label for="password_repeat">Herhaal wachtwoord</label>
-          <input class="form-control" type="password" id="password_repeat" name="herhaal_wachtwoord" />
-        </div>
-
-        <div class="form-group">
-          <label for="voornaam">Voornaam</label>
-          <input class="form-control" type="text" id="first_name" name="voornaam" value="{{ user.firstName }}"  />
-          <label for="naam">Naam</label>
-          <input class="form-control" type="text" id="surname" name="naam" value="{{ user.surname }}" />
-        </div>
-
-        <div class="form-group">
-          <label for="postcode">Postcode</label>
-          <select class="form-control" id="postcode" name="postcode">
-            {% for pc in postcodes %}
-              <option {% if pc.id == user.postcode.id %} selected {% endif %}  value="{{ pc.id }}">{{ pc.postcode }} -- {{ pc.town }}</option>
-            {% endfor %}
-          </select>
-          <label for="adres">Adres</label>
-          <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}"  />
-        </div>
-
-        <div class="form-group spacing">
-          <input class="form-control btn submit action-button" type="submit" id="wijzig" name="save" value="Bewaar" />
-          <a href="/" id="return_to_main" class="form-control btn action-button">Home</a>
-        </div>
-      </form>
+      
+      {% include 'Profile/profile_edit_form_template.html.twig' %}
     </div>
   </section>
 {% endblock main_column %}

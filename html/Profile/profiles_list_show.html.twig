@@ -5,7 +5,7 @@
   {% block main_column %}
     <section id="users_list">
 
-      <table>
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Username</th>
@@ -16,12 +16,12 @@
         </thead>
         <tbody>
           {% for usr in users_list %}
+            {% set app = globals.app %}
             <tr>
               <td>{{ usr.username }}</td>
               <td> <input type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isAdmin() == 1 ? "checked='checked'" }} /> </td>
               <td> <input type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isEnabled() == 1 ? "checked='checked'" }} /> </td>
-
-              <td> <a href=""> edit </a> </td>
+              <td> <a href="{{ app.urlFor('admin_profile_view', {'id': usr.id}) }}" class="btn action-button btn-default"> edit </a> </td>
             </tr>
           {% endfor %}
         </tbody>

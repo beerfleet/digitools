@@ -11,4 +11,5 @@ class Constants {
   // constant for namespaces DRY
   const LOG = 'Digitools\Logbook\Entities\Log';
   const TAG = 'Digitools\Logbook\Entities\Tag';
+  const USER = 'Digitools\EslTools\Entities\User';
 }

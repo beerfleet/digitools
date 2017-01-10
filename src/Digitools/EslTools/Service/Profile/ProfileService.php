@@ -7,6 +7,7 @@ use Digitools\eslTools\Entities\User;
 use Digitools\eslTools\Service\Validation\ProfileValidation as Val;
 use Digitools\eslTools\Service\Registration\RegistrationService;
 use Digitools\eslTools\Service\Validation\PasswordValidation;
+use Digitools\Common\Entities\Constants;
 
 /**
  * ProfileService
@@ -164,6 +165,13 @@ class ProfileService {
 
   public function getUser() {
     return $this->user;
+  }
+  
+  public function get_user_by_id($id) {    
+    $em = $this->em;
+    $repo = $em->getRepository(Constants::USER);
+    $user = $repo->find($id);
+    return $user;
   }
 
   public function searchUserByToken($token) {

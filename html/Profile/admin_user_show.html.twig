@@ -3,14 +3,14 @@
 {% set app = globals.app %}
 
 {% block title %}
-  Digi Tools - Toon mijn profiel
+  Digi Tools - Toon gebruikersprofiel
 {% endblock title %}
 
 {% block main_column %}  
   <section id="registration">
     <div class="container form">
-      <h1>Mijn Profiel</h1>
-      {% set url = app.urlFor('profile_edit') %}      
+      <h1>Profiel van {{ user.getUsername() }} </h1>
+      {% set url = app.urlFor('admin_profile_edit', {'id': user.getId()}) %}      
       {% include 'Profile/profile_show_form_template.html.twig' %}
     </div>
   </section>

@@ -21,6 +21,10 @@ $app->post('/profiel/wijzig', function() use ($contr) {
   $contr->editProfile();
 })->name('profile_edit');
 
+$app->post('/profile/edit', function() use ($contr) {
+  $contr->admin_profile_edit();
+})->name('admin_profile_edit');
+
 $app->get('/profiel/id/:id', function($id) use ($contr) {
   $contr->showProfileOfUserWithId($id);
 })->name('profile_show_by_id');
@@ -32,6 +36,11 @@ $app->get('/profiel/gebruiker/:username', function($username) use ($contr) {
 $app->get('/profielen', function() use ($contr) {
   $contr->showProfilesList();
 })->name('admin_list_profiles');
+
+$app->get('/profile/view/:id', function ($id) use ($contr) {
+  $contr->view_profile_with_id($id);
+})->name('admin_profile_view');
+
 
 /* olivier */
 $app->get('/editadmin/:username', function($username) use ($contr) {

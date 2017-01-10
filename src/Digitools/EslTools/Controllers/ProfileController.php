@@ -87,6 +87,15 @@ class ProfileController extends Controller {
     $postcodes = $reg_srv->getPostcodes();
     $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
+  
+  public function view_profile_with_id($id) {
+    $app = $this->getApp();
+    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {
+      $srv = new ProfileService($this->getEntityManager(), $app);
+      $user = $srv->get_user_by_id($id);
+      $app->render('Profile/admin_user_show.html.twig', ['globals' => $this->getGlobals(), 'user' => $user]);
+    }
+  }
 
   public function showProfilesList() {
     $app = $this->getApp();

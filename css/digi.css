@@ -5,7 +5,7 @@
 }
 @font-face {
   font-family: MenuFont;
-  src: url('../Fonts/modern_squared2.ttf');
+  src: url('../Fonts/modern_squa#E9EDED2.ttf');
 }
 @font-face {
   font-family: MainFont;
@@ -112,7 +112,7 @@ nav#topmenu {
 }
 .errors {
   text-align: center;
-  color: red;
+  color: #E9EDED;
 }
 
 /* MAIN CONTENT */
@@ -176,6 +176,18 @@ nav#topmenu {
 .action-button {
   font-size: 1.36em;
   color: #999999;
+}
+.btn.action-button.btn-default {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-left: none;
+  border-right: none;
+  /*background: #E9EDED; /* For browsers that do not support gradients */*/
+  background: -webkit-linear-gradient(#E9EDED, white); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#E9EDED, white); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#E9EDED, white); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#E9EDED, white); /* Standard syntax */  
+  font-size: 1em;
 }
 .container #head h1 {
   color: #78b1a3;
@@ -249,7 +261,7 @@ nav#topmenu {
 
 /* SIDEBAR */
 #sidebar-wrapper {
-   
+
   /*border-radius: 12px;
   /*border-top: 1px #e5e5e5 solid;*/
   margin-top: 30px;   
@@ -264,11 +276,11 @@ nav#topmenu {
 
 #reg-menu {
  /* background-color: #EBF1F2;*/
-  border: 3px #CFE1E6 solid;
-  border-radius: 12px;
-  padding: 10px;
-  clear: both;
-  box-shadow: 5px 5px 5px #888888;
+ border: 3px #CFE1E6 solid;
+ border-radius: 12px;
+ padding: 10px;
+ clear: both;
+ box-shadow: 5px 5px 5px #888888;
 
 }
 #reg-menu .nav li a {

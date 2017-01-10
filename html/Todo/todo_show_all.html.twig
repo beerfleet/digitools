@@ -2,18 +2,22 @@
 
 {% block title %} Todo - Show all {% endblock title %}
 
+{% block extracss %}
+  <link rel="stylesheet" href="../css/jquery.dataTables.min.css" type="text/css"/>
+{% endblock extracss %}
+
 {% block main_column %}
   {% set app = globals.app %}
   <section id="listing">
     <h1>Show items</h1>    
-    <table class="table">
-      <thead class="thead-inverse">
+    <table class="table dataTable table-striped">
+      <thead>
         <tr>
           <th>Title</th> 
           <th>Creation Date</th>
           <th>Due Date</th>
           <th>Priority</th>
-          <th>Finished ?</th>
+          <th>Finished</th>
         </tr>
       </thead>
       <tbody>        
@@ -30,3 +34,8 @@
     </table>
   </section>
 {% endblock main_column %}
+
+{% block extrajs %}
+  <script src="../js/jquery.dataTables.min.js"></script>
+  <script src="../js/todo.js"></script>
+{% endblock extrajs %}

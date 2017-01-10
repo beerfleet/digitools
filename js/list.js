@@ -8,7 +8,7 @@ $(document).ready(function () {
 function init_search() {
   $('.search_list li').each(function () {
     srch_terms = $(this).find(".item_created").text().toLowerCase() + " " + $(this).find(".item_entry_box").text().toLowerCase();
-    //console.log(srch_terms);
+    console.log(srch_terms);
     $(this).attr('data-search-term', srch_terms);
   });
 }

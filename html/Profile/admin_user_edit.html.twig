@@ -11,7 +11,7 @@
     <div class="container form">
       <h1>Profiel van {{ user.getUsername() }} </h1>
       {% set url = app.urlFor('admin_profile_edit', {'id': user.getId()}) %}      
-      {% include 'Profile/profile_show_form_template.html.twig' %}
+      {% include 'Profile/profile_edit_form_template.html.twig' %}
     </div>
   </section>
 {% endblock main_column %}

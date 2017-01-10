@@ -21,8 +21,8 @@ $app->post('/profiel/wijzig', function() use ($contr) {
   $contr->editProfile();
 })->name('profile_edit');
 
-$app->post('/profile/edit', function() use ($contr) {
-  $contr->admin_profile_edit();
+$app->post('/profile/edit/:id', function($id) use ($contr) {  
+  $contr->admin_profile_edit($id);
 })->name('admin_profile_edit');
 
 $app->get('/profiel/id/:id', function($id) use ($contr) {

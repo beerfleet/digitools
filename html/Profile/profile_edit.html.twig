@@ -13,7 +13,7 @@
   <section id="registration">
     <div class="container form">
       <h1>Mijn Profiel</h1>      
-      
+      {% set url = globals.app.urlFor('profile_edit_store') %}
       {% include 'Profile/profile_edit_form_template.html.twig' %}
     </div>
   </section>

@@ -68,7 +68,7 @@ class ProfileController extends Controller {
   }
 
   /* profile */
-
+  /* user views own profile */
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
@@ -81,6 +81,7 @@ class ProfileController extends Controller {
     }
   }
 
+  /* user edits own profile */
   public function editProfile() {
     $app = $this->getApp();
     $reg_srv = new RegistrationService($this->getEntityManager(), $app);
@@ -88,15 +89,26 @@ class ProfileController extends Controller {
     $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
   
+  /* admin edits user profile */
+  public function admin_profile_edit($id) {
+    $srv = $this->srv;
+    $app = $this->getApp();
+    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {      
+      $user = $this->srv->get_user_by_id($id);
+      $app->render('Profile/admin_user_edit.html.twig', ['globals' => $this->getGlobals(), 'user' => $user]);
+    }
+  }
+  
+  /* admin views user profile by id */
   public function view_profile_with_id($id) {
     $app = $this->getApp();
-    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {
-      $srv = new ProfileService($this->getEntityManager(), $app);
-      $user = $srv->get_user_by_id($id);
+    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {      
+      $user = $this->srv->get_user_by_id($id);
       $app->render('Profile/admin_user_show.html.twig', ['globals' => $this->getGlobals(), 'user' => $user]);
     }
   }
 
+  /* admin gets to see all users list */
   public function showProfilesList() {
     $app = $this->getApp();
     if (!$this->isUserLoggedIn()) {

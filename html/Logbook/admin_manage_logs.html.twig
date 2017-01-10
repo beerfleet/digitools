@@ -16,6 +16,7 @@
           <tr>
             <th>Id</th>
             <th>Inhoud</th>
+            <th>verwijderen ?</th>
           </tr>
         </thead>
         <tbody>          
@@ -23,6 +24,7 @@
             <tr>
               <td>{{ log.get_id }}</td>
               <td>{{ log.get_entry }}</td>
+              <td class="mark-delete"><input data-entry-id="{{ log.get_id }}" type="checkbox" name="mark-delete" {% if log.get_delete_flag == 1 %} checked {% endif %} ></td>
             </tr>
           {% endfor %}
         </tbody>

@@ -29,7 +29,7 @@ function init_search_handling() {
 }
 
 function init_datatable() {
-  $('.dataTable').DataTable;
+  $('.dataTable').DataTable();
 }
 
 function init_mark_for_deletion() {

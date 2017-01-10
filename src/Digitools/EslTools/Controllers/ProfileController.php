@@ -24,6 +24,7 @@ class ProfileController extends Controller {
   }
 
   /* logon */
+
   public function logon() {
     $globals = $this->getGlobals();
     $this->getApp()->render('Profile\logon.html.twig', array('globals' => $globals));
@@ -69,6 +70,7 @@ class ProfileController extends Controller {
 
   /* profile */
   /* user views own profile */
+
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
@@ -82,41 +84,50 @@ class ProfileController extends Controller {
   }
 
   /* user edits own profile */
+
   public function editProfile() {
     $app = $this->getApp();
     $reg_srv = new RegistrationService($this->getEntityManager(), $app);
     $postcodes = $reg_srv->getPostcodes();
     $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
-  
+
   /* admin edits user profile */
+
   public function admin_profile_edit($id) {
     $srv = $this->srv;
     $app = $this->getApp();
-    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {      
-      $user = $this->srv->get_user_by_id($id);
-      $app->render('Profile/admin_user_edit.html.twig', ['globals' => $this->getGlobals(), 'user' => $user]);
+    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {
+      $result = $srv->get_user_by_id_and_postcodes($id);
+      $app->render('Profile/admin_user_edit.html.twig', ['globals' => $this->getGlobals(), 'user' => $result['user'], 'postcodes' => $result['postcodes']]);
+    } else {
+      $app->flash('error', 'Ongeldige bewerking');
+      $app->redirect($app->urlFor('main_page'));
     }
   }
-  
+
   /* admin views user profile by id */
   public function view_profile_with_id($id) {
     $app = $this->getApp();
-    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {      
+    if ($this->isUserLoggedIn() && $this->isUserAdmin()) {
       $user = $this->srv->get_user_by_id($id);
       $app->render('Profile/admin_user_show.html.twig', ['globals' => $this->getGlobals(), 'user' => $user]);
+    } else {
+      $app->flash('error', 'Ongeldige bewerking');
+      $app->redirect($app->urlFor('main_page'));
     }
   }
 
   /* admin gets to see all users list */
+
   public function showProfilesList() {
     $app = $this->getApp();
     if (!$this->isUserLoggedIn()) {
-      $app->flash('error', 'U moet hiervoor aangemeld zijn');
+      $app->flash('error', 'Ongeldige bewerking');
       $app->redirect($app->urlFor('main_page'));
     }
     if (!$this->getUser()->isAdmin()) {
-      $app->flash('error', 'U moet hiervoor admin zijn');
+      $app->flash('error', 'Ongeldige bewerking');
       $app->redirect($app->urlFor('main_page'));
     }
     $srv = $this->srv;
@@ -153,6 +164,18 @@ class ProfileController extends Controller {
       $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
       $pc = $reg_srv->getPostcodes();
       $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'postcodes' => $pc));
+    }
+  }
+
+  public function admin_profile_edit_store($id) {
+    $app = $this->getApp();
+    if ($this->srv->dataIsValid()) {
+      $this->srv->update_user_by_id($id);
+      $app->flash('info', 'De wijzigingen in uw profiel zijn bewaard.');
+      $app->redirect($app->urlFor('admin_profile_view', ['id' => $id]));
+    } else {
+      $errors = $this->srv->getErrors();
+      $app->render('Profile/admin_user_show.html.twig', array('globals' => $this->getGlobals(), 'user' => $this->srv->get_user_by_id($id), 'errors' => $errors));
     }
   }
 
@@ -198,7 +221,7 @@ class ProfileController extends Controller {
     $app = $this->getApp();
     if ($srv->isPasswordValid()) {
       $srv->changePassword();
-      $srv->clearToken();      
+      $srv->clearToken();
       $app->flash('info', 'Uw wachtwoord is gewijzigd.');
       $app->redirect($app->urlFor('main_page'));
     } else {

@@ -25,6 +25,14 @@ $app->post('/profile/edit/:id', function($id) use ($contr) {
   $contr->admin_profile_edit($id);
 })->name('admin_profile_edit');
 
+$app->get('/profile/view/:id', function ($id) use ($contr) {
+  $contr->view_profile_with_id($id);
+})->name('admin_profile_view');
+
+$app->post('/profile/edit/:id/store', function($id) use ($contr) {
+  $contr->admin_profile_edit_store($id);
+})->name('admin_profile_edit_store');
+
 $app->get('/profiel/id/:id', function($id) use ($contr) {
   $contr->showProfileOfUserWithId($id);
 })->name('profile_show_by_id');
@@ -37,9 +45,6 @@ $app->get('/profielen', function() use ($contr) {
   $contr->showProfilesList();
 })->name('admin_list_profiles');
 
-$app->get('/profile/view/:id', function ($id) use ($contr) {
-  $contr->view_profile_with_id($id);
-})->name('admin_profile_view');
 
 
 /* olivier */

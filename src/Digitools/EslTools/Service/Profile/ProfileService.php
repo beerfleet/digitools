@@ -5,7 +5,7 @@ namespace Digitools\eslTools\Service\Profile;
 use Doctrine\ORM\EntityManager;
 use Digitools\eslTools\Entities\User;
 use Digitools\eslTools\Service\Validation\ProfileValidation as Val;
-use Digitools\eslTools\Service\Registration\RegistrationService;
+use Digitools\EslTools\Service\Registration\RegistrationService;
 use Digitools\eslTools\Service\Validation\PasswordValidation;
 use Digitools\Common\Entities\Constants;
 
@@ -61,6 +61,11 @@ class ProfileService {
     $validated = $val->validate();
     $this->errors = $val->getErrors();
     return $validated;
+  }
+  
+  public function update_user_by_id($id) {
+    $user = $this->get_user_by_id($id);
+    $this->updateUser($user);
   }
 
   public function updateUser(User $user) {
@@ -165,6 +170,13 @@ class ProfileService {
 
   public function getUser() {
     return $this->user;
+  }
+  
+  public function get_user_by_id_and_postcodes($id) {
+    $result['user'] = $this->get_user_by_id($id);
+    $reg_srv = new RegistrationService($this->em, $this->app);
+    $result['postcodes'] = $reg_srv->getPostcodes();
+    return $result;
   }
   
   public function get_user_by_id($id) {    

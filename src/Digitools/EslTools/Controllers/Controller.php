@@ -74,7 +74,7 @@ abstract class Controller {
   }
   
   public function isUserLoggedIn() {
-    return $this->getUser() != null;
+    return $this->getUser() !== null;
   }
 
   public function isUserAdmin() {

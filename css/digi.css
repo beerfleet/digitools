@@ -264,10 +264,12 @@ nav#topmenu {
 
 #reg-menu {
  /* background-color: #EBF1F2;*/
-  border: 3px white solid;
+  border: 3px #CFE1E6 solid;
   border-radius: 12px;
   padding: 10px;
   clear: both;
+  box-shadow: 5px 5px 5px #888888;
+
 }
 #reg-menu .nav li a {
   font-size: 1;

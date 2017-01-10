@@ -10,42 +10,8 @@
   <section id="registration">
     <div class="container form">
       <h1>Mijn Profiel</h1>
-      <form action="{{ app.urlFor('profile_edit') }}" method="post">
-        <div class="form-group">
-          <label for="username">Gebruikersnaam</label>
-          <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
-        </div>
-
-        <div class="form-group">
-          <label for="email">E-mail adres</label> 
-          <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly/>
-        </div>
-
-        <div class="form-group">
-          <label for="first_name">Voornaam</label>
-          <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}" readonly />
-        </div>
-        <div class="form-group">
-          <label for="surname">Naam</label>
-          <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" readonly/>
-        </div>
-
-        <div class="form-group">
-          <label for="postcode">Postcode</label>
-          <input class="form-control" type="text" id="postcode" name="postcode" value="{{ user.postcode.postcode }}" readonly />
-        </div>
-        <div class="form-group">
-          <label for="adres">Adres</label>
-          <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}" readonly />
-        </div>
-
-        <div class="form-group spacing">
-          <ul>
-            <li><input class="form-control btn submit action-button" type="submit" id="wijzig" name="edit" value="Editeer profiel" /></li>
-            <li><a href="/" id="return_to_main" class="form-control btn action-button">Home</a></li>
-          </ul>
-        </div>
-      </form>      
+      {% set url = app.urlFor('profile_edit') %}      
+      {% include 'Profile/profile_form_template.html.twig' %}
     </div>
   </section>
 {% endblock main_column %}

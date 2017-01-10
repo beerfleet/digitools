@@ -136,6 +136,12 @@ class LogController extends Controller {
     }
     $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags']));
   }
+  
+  /**/
+  public function admin_logs_manage() {
+    $app = $this->app;
+    $app->render('Logbook/admin_manage_logs.html.twig', ['globals' => $this->getGlobals()]);
+  }
 
   /**
    * Log Tagging

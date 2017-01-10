@@ -10,6 +10,7 @@
       {% set is_todo_home = app.request.getPath == app.urlFor('todo_home') %}
       {% set is_log_new = app.request.getPath == app.urlFor('log_new') %}
       {% set is_tags_manage = app.request.getPath == app.urlFor('tags_manage') %}
+      {% set is_admin_logs_manage = app.request.getPath == app.urlFor('admin_logs_manage') %}
 
       {# ADD THE HTML LI IF ITEM POINTS TO CURRENT PAGE #}
       <li {% if is_main_page %} class="current_page" {% endif %}>
@@ -32,9 +33,16 @@
 
     {# FOR ADMIN EYES ONLY #}
     {% if (globals.user.isAdmin == 1)  %}
-      <ul class="nav nav-lvl-2">
-        {% if is_log_new %}<li><a href="#">Manage</a></li>{% endif %}
-      </ul>        
+      {% if is_log_new %}
+        <ul class="nav nav-tabs nav-lvl-2">
+          <li><a href="{{ app.urlFor('admin_logs_manage') }}">Manage</a></li>
+        </ul>
+      {% elseif is_admin_logs_manage %}
+        <ul class="nav nav-tabs nav-lvl-2">
+          <li class="current_page"><a href="{{ app.urlFor('admin_logs_manage') }}">Manage</a></li>
+        </ul>
+      {% endif %}
+
     {% endif %}
 
   </nav>

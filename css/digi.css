@@ -74,15 +74,11 @@ h4 {
 
 /* HEADER */
 .container #topmenu .nav-tabs {
-  border-top: 6px solid #ccccff;
+  
   border-bottom: 6px solid #ccccff;
   -webkit-border-image: url(../img/Logbook/separator.png) 30 round; /* Safari 3.1-5 */
   -o-border-image: url(../img/Logbook/separator.png) 30 round; /* Opera 11-12.1 */
   border-image: url(../img/Logbook/separator.png) 30 round;  
-}
-
-.nav-lvl-2 {
-  border-top: none;  
 }
 
 .container #topmenu .nav-tabs li a {

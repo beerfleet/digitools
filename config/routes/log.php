@@ -25,6 +25,9 @@ $app->post('/log/tag', function() use ($contr) {
   $contr->show_logs_filter_by_tags();
 })->name('logs_per_tags');
 
+$app->get('/logs/manage', function() use ($contr) {
+  $contr->admin_logs_manage();
+})->name('admin_logs_manage');
 
 /* tags */
 $app->post('/tags/add', function() use ($contr) {

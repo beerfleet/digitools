@@ -36,3 +36,7 @@ Digitools\Logbook\Entities\Log:
     entry:
       type: text
       nullable: false
+      
+    modified:
+      type: datetime
+      nullable: false

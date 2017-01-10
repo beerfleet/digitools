@@ -146,6 +146,7 @@ class LogService {
       $repo = $em->getRepository(Constants::LOG);
       $log = $repo->find($id);
       $log->set_entry($app->request->post('log_entry'));
+      $log->set_modified(new \DateTime());
       try {
         $em->persist($log);
         $em->flush();

@@ -19,11 +19,20 @@ class Log {
   private $created;
   private $tags;
   private $entry;
-  
+  private $modified;
+
+  function get_modified() {
+    return $this->modified;
+  }
+
+  function set_modified(\DateTime $modified) {
+    $this->modified = $modified;
+  }
+
   public function __construct() {
     $this->tags = new ArrayCollection();
   }
-  
+
   function get_id() {
     return $this->id;
   }
@@ -31,7 +40,7 @@ class Log {
   function get_user() {
     return $this->user;
   }
-  
+
   public function getUserID() {
     return $this->user->getId();
   }
@@ -58,12 +67,12 @@ class Log {
 
   function set_tags($tags) {
     $this->tags = $tags;
-  } 
-  
+  }
+
   public function add_tag($tag) {
     $this->tags[] = $tag;
   }
-  
+
   function get_entry() {
     return $this->entry;
   }
@@ -71,21 +80,21 @@ class Log {
   function set_entry($entry) {
     $this->entry = $entry;
   }
-    
+
   function contains_tags($tags) {
     $owned_tags = $this->get_tags();
     $tag_id_arr = [];
     foreach ($owned_tags as $tag) {
       $tag_id_arr[] = $tag->get_id();
     }
-    
+
     foreach ($tags as $tag_id => $checked) {
       if (array_search($tag_id, $tag_id_arr) === false) {
         return false;
       }
     }
-    
+
     return true;
   }
-  
+
 }

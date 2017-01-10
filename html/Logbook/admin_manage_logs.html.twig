@@ -11,18 +11,20 @@
   <div class="container">
     <div id="listing">
       <h1>Logbeheer</h1>
-      <table class="dataTable table table-bordered table-responsive table-striped">
+      <table class="dataTable table table-bordered table-responsive table-condensed table-striped">
         <thead>
           <tr>
             <th>Id</th>
+            <th>Gebruiker</th>
             <th>Inhoud</th>
-            <th>verwijderen ?</th>
+            <th>Verwijder</th>
           </tr>
         </thead>
         <tbody>          
           {% for log in logs %}
             <tr>
               <td>{{ log.get_id }}</td>
+              <td>{{ log.get_user.getUsername }}</td>
               <td>{{ log.get_entry }}</td>
               <td class="mark-delete"><input data-entry-id="{{ log.get_id }}" type="checkbox" name="mark-delete" {% if log.get_delete_flag == 1 %} checked {% endif %} ></td>
             </tr>

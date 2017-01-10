@@ -143,7 +143,7 @@ class LogController extends Controller {
     $app = $this->app;
     if ($this->isUserAdmin()) {
       $srv = $this->srv;
-      $logs = $srv->list_log_entries_lifo();
+      $logs = $srv->retrieve_all_logs();
       $app->render('Logbook/admin_manage_logs.html.twig', ['globals' => $this->getGlobals(), 'logs' => $logs]);
     } else {
       $app->flash('error', 'Ongeldige bewerking.');

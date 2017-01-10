@@ -136,12 +136,20 @@ class LogService {
     return $repo->findAll();
   }
 
+  /**
+   * Return logs for the active user
+   * @return Log[]
+   */
   public function list_log_entries_lifo() {
     $em = $this->em;
     $repo = $em->getRepository(Constants::LOG);
 
     /* @var $repo LogRepo */
     return $repo->find_ordered_lifo($this->user);
+  }
+  
+  public function retrieve_all_logs() {
+    return $this->em->getRepository(Constants::LOG)->findAll();
   }
 
   public function load_entry_data_by_id($id) {

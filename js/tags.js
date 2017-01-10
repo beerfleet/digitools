@@ -4,7 +4,7 @@
 
 $(document).ready(function () {
   init_onchange_event();
-  new_tag();
+  //new_tag();
   init_verwijder_tags();
 });
 
@@ -39,7 +39,7 @@ function init_onchange_event() {
 
 // tags
 function new_tag() {
-  $('.tag-collection .nieuwe-tag a').on('click', function () {
+  $('.tag-collection .nieuwe-tag a').on('click', function () {    
     $(this).hide();
     add_input_box();
     tag_input_not_empty();

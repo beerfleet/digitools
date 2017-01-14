@@ -31,7 +31,9 @@ function init_search_handling() {
 }
 
 function init_datatable() {
-  $('.dataTable').DataTable();
+  if ($('.dataTable').length > 0) {
+    $('.dataTable').DataTable();
+  }
 }
 
 function init_mark_for_deletion() {
@@ -49,9 +51,9 @@ function init_mark_for_deletion() {
  */
 function init_delete_selected() {
   $('#delete_selected').on('click', function () {
-    
+
     $('#logs_table_manage .mark-delete').each(function () {
-      
+
     });
     alert("ALLOWED DELETIONS: " + count);
   });

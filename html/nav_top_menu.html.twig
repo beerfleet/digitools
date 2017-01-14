@@ -12,6 +12,8 @@
       {% set is_tags_manage = app.request.getPath == app.urlFor('tags_manage') %}
       {% set is_admin_logs_manage = app.request.getPath == app.urlFor('admin_logs_manage') %}
       {% set is_todo_new = app.request.getPath == app.urlFor('todo_new') %}
+      {% set is_todos_unfinished = app.request.getPath == app.urlFor('todos_unfinished') %}
+      {% set is_todo_path = app.urlFor('todo_home') in app.request.getPath %}
 
       {# ADD THE HTML LI IF ITEM POINTS TO CURRENT PAGE #}
       <li {% if is_main_page %} class="current_page" {% endif %}>
@@ -34,14 +36,11 @@
 
     {# LOGGED ON SECOND LEVEL MENU #}
     {% if (globals.logged_in) %}
-      {% if (is_todo_home) %}
+      {% if (is_todo_path) %}
         <ul class="nav nav-tabs nav-lvl-2">
-          <li><a href="{{ app.urlFor('todo_new') }}">New</a></li>
-        </ul>
-      {% elseif (is_todo_new)  %}
-        <ul class="nav nav-tabs nav-lvl-2">
-          <li class="current_page"><a href="{{ app.urlFor('todo_new') }}">New</a></li>
-        </ul>
+          <li {% if is_todo_new %} class="current_page" {% endif %}><a href="{{ app.urlFor('todo_new') }}">Nieuwe</a></li>
+          <li {% if is_todos_unfinished %} class="current_page" {% endif %}><a href="{{ app.urlFor('todos_unfinished') }}">Onvoltooide</a></li>
+        </ul>         
       {% endif %}
     {% endif %}
 

@@ -35,7 +35,18 @@ class TodoController extends Controller {
       $app->render('Todo/todo_new.html.twig', ['globals' => $this->getGlobals(),
           'priorities' => $priorities]);
     } else {
-      $app->flash('error', 'Sign up or log in to add a todo item');
+      $app->flash('error', 'Aanmelding vereist.');
+      $app->redirect($app->urlFor('main_page'));
+    }
+  }
+  
+  public function todos_show_unfinished() {
+    $app = $this->getApp();
+    if ($this->isUserLoggedIn()) {
+      $app->render('Todo/todo_show_all_from_user.html.twig', 
+              ['globals' => $this->getGlobals(), 'items' => $this->srv->get_unfinished_user_todos()]);
+    } else {
+      $app->flash('error', 'Aanmelding vereist.');
       $app->redirect($app->urlFor('main_page'));
     }
   }

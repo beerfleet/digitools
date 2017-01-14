@@ -43,6 +43,16 @@ class TodoService {
     $user_todos = $todo_repo->find_user_todos($user);
     return $user_todos;
   }
+  public function get_unfinished_user_todos() {
+    $app = $this->app;
+    $profile_srv = new ProfileService($this->em, $app);
+    $user = $profile_srv->get_current_user();
+    /* @var $em EntityManager */
+    $em = $this->em;
+    $todo_repo = $em->getRepository(Constants::TODO);
+    $user_todos = $todo_repo->find_unfinished_user_todos($user);
+    return $user_todos;
+  }
 
   public function getPriorities() {
     $repo = $this->em->getRepository('Digitools\Todo\Entities\Priority');

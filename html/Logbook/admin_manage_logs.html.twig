@@ -3,14 +3,18 @@
 {% block title %}Digi Tools - Beheer logs{% endblock title %}
 
 {% block extracss %}  
-  <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css"/>
-  <link rel="stylesheet" href="../css/_dataTables.jqueryui.min.css" type="text/css"/>
+  <link rel="stylesheet" href="../css/dataTables.jqueryui.min.css" type="text/css"/>  
 {% endblock extracss %}
 
 {% block main_column %}
   <div class="container">
-    <div id="listing">
+    <div id="logs_table_manage">
       <h1>Logbeheer</h1>
+      
+      <div class="spacing20px">
+        <span id="delete_selected" class="btn form-control action-button" >Verwijder selectie</span>        
+      </div>
+      
       <table class="dataTable table table-bordered table-responsive table-condensed table-striped">
         <thead>
           <tr>
@@ -36,6 +40,6 @@
 {% endblock main_column %}
 
 {% block extrajs %}
-  <script src="../js/jquery.dataTables.min.js"></script>
+  <script src="../js/jquery.dataTables.min.js"></script>  
   <script src="../js/list.js"></script>
 {% endblock extrajs %}

@@ -3,6 +3,8 @@ $(document).ready(function () {
   init_search_handling();
   init_mark_for_deletion();
   init_datatable();
+  init_delete_selected();
+
 });
 
 // list
@@ -33,12 +35,25 @@ function init_datatable() {
 }
 
 function init_mark_for_deletion() {
-  $('.mark-delete input[type="checkbox"]').on('click', function() {
+  $('.mark-delete input[type="checkbox"]').on('click', function () {
     log_id = $(this).data('entry-id');
     chk_state = $(this).is(':checked');
     $.post('/log/mark-for-deletion', {id: log_id, state: chk_state}, function (result) {
       console.log(result['kaka']);
     });
+  });
+}
+
+/**
+ * Allows for deletion of filtered results only
+ */
+function init_delete_selected() {
+  $('#delete_selected').on('click', function () {
+    
+    $('#logs_table_manage .mark-delete').each(function () {
+      
+    });
+    alert("ALLOWED DELETIONS: " + count);
   });
 }
 

@@ -116,6 +116,9 @@ nav#topmenu {
 }
 
 /* MAIN CONTENT */
+.spacing20px {
+  margin-bottom: 20px;
+}
 #submenu,
 #client-form {
   margin-top: 30px;
@@ -186,7 +189,8 @@ nav#topmenu {
 
 .action-button {
   font-size: 1.36em;
-  color: #999999;
+  /*color: #999999;*/
+  color: #90BEB2;
 }
 .btn.action-button.btn-default {
   padding-top: 1px;

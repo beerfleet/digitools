@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use Digitools\Todo\Entities\Todo;
 use Digitools\Todo\Entities\Priority;
+use Digitools\eslTools\Service\Profile\ProfileService;
+use Digitools\Common\Entities\Constants;
 
 class TodoService {
 
@@ -27,6 +29,15 @@ class TodoService {
   public function getAllTodos() {
     $repo = $this->em->getRepository('Digitools\Todo\Entities\Todo');
     return $repo->findAll();
+  }
+  
+  public function getTodosFromUser() {
+    $app = $this->app;
+    $profile_srv = new ProfileService($this->em, $app);
+    $user = $profile_srv->get_current_user();
+    $todo_repo = $this->em->getRepository(Constants::TODO);
+    
+    return $user;
   }
 
   public function getPriorities() {

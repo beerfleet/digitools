@@ -15,6 +15,11 @@ Digitools\EslTools\Entities\User:
       joinColumn:
         name: postcode_id
         referencedColumnName: id
+        
+  oneToMany:
+    todos:
+      targetEntity: Digitools\Todo\Entities\Todo
+      mappedBy: user
 
   fields:
     username:

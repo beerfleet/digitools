@@ -14,6 +14,14 @@ Digitools\Todo\Entities\Todo:
         name: priorityid
         referencedColumnName: id
 
+  manyToOne:
+    user:
+      targetEntity: Digitools\EslTools\Entities\User
+      inversedBy: todos
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+
   fields:
     title:
       type: string

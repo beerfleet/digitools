@@ -12,4 +12,5 @@ class Constants {
   const LOG = 'Digitools\Logbook\Entities\Log';
   const TAG = 'Digitools\Logbook\Entities\Tag';
   const USER = 'Digitools\EslTools\Entities\User';
+  const TODO = 'Digitools\Todo\Entities\Todo';
 }

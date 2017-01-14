@@ -14,12 +14,21 @@ class Todo {
   private $id;
   private $title;
   private $finishstate;
-
   private $creationdate;
   private $tododate;
   private $finishdate;
+  private $user;
+
+  function getUser() {
+    return $this->user;
+  }
+
+  function setUser($user) {
+    $this->user = $user;
+  }
 
   /* @var $priority Priority */
+
   private $priority;
 
   function __construct() {
@@ -57,11 +66,11 @@ class Todo {
   function setPriority(Priority $priority) {
     $this->priority = $priority;
   }
-  
+
   public function __toString() {
     return $this->title;
   }
-  
+
   function getTododate() {
     return $this->tododate == null ? "" : $this->tododate->format('Y-m-d H:i');
   }
@@ -74,7 +83,7 @@ class Todo {
     return $this->finishstate;
   }
 
-  function setFinishstate($state) {    
+  function setFinishstate($state) {
     $this->finishstate = $state;
     var_dump($this->creationdate);
   }

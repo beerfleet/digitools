@@ -27,7 +27,7 @@ class ProfileService {
   }
 
   public function retrieveUserByUsername($username) {
-    $repo = $this->em->getRepository('Digitools\eslTools\Entities\User');
+    $repo = $this->em->getRepository('Digitools\EslTools\Entities\User');
     $user = $repo->findBy(array('username' => $username));
     return count($user) > 0 ? $user[0] : null;
   }
@@ -170,6 +170,12 @@ class ProfileService {
 
   public function getUser() {
     return $this->user;
+  }
+  
+  public function get_current_user() {
+    $username = $_SESSION['user'];
+    $this->retrieveUserByUsername($username);
+    return $this->retrieveUserByUsername($username);
   }
   
   public function get_user_by_id_and_postcodes($id) {

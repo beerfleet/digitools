@@ -8,8 +8,8 @@ use Digitools\Common\Controllers\Controller;
 use Digitools\Todo\Service\TodoService;
 
 class TodoController extends Controller {
-  
   /* @var $srv TodoService */
+
   private $srv;
 
   public function __construct($em, $app) {
@@ -19,14 +19,21 @@ class TodoController extends Controller {
 
   public function todo_home() {
     $app = $this->getApp();
-    $app->render('Todo/todo_show_all.html.twig', ['globals' => $this->getGlobals(), 'items' => $this->srv->getAllTodos()]);
+    if ($this->getUser()) {
+      $app->render('Todo/todo_show_all_from_user.html.twig', 
+              ['globals' => $this->getGlobals(), 'items' => $this->srv->getTodosFromUser()]);
+    } else {
+      $app->flash('error', 'Aanmelding vereist.');
+      $app->redirect($app->urlFor('main_page'));
+    }
   }
 
   public function todo_new() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
       $priorities = $this->srv->getPriorities();
-      $app->render('Todo/todo_new.html.twig', ['globals' => $this->getGlobals(), 'priorities' => $priorities]);
+      $app->render('Todo/todo_new.html.twig', ['globals' => $this->getGlobals(),
+          'priorities' => $priorities]);
     } else {
       $app->flash('error', 'Sign up or log in to add a todo item');
       $app->redirect($app->urlFor('main_page'));
@@ -40,7 +47,7 @@ class TodoController extends Controller {
   }
 
   // ajax
-  public function ajax_set_todo_state() {        
+  public function ajax_set_todo_state() {
     $srv = $this->srv->setState();
   }
 

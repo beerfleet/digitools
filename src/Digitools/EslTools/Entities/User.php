@@ -22,9 +22,52 @@ class User {
   private $surname;
   /* @var $postcode Postcode */
   private $postcode;
-  private $address;  
+  private $address;
   private $is_admin;
-  private $password_token;    
+  private $password_token;
+  private $todos;
+  
+  
+
+  function getLast_login() {
+    return $this->last_login;
+  }
+
+  function getFirst_name() {
+    return $this->first_name;
+  }
+
+  function getIs_admin() {
+    return $this->is_admin;
+  }
+
+  function getPassword_token() {
+    return $this->password_token;
+  }
+
+  function get_todos() {
+    return $this->todos;
+  }
+
+  function setLast_login($last_login) {
+    $this->last_login = $last_login;
+  }
+
+  function setFirst_name($first_name) {
+    $this->first_name = $first_name;
+  }
+
+  function setIs_admin($is_admin) {
+    $this->is_admin = $is_admin;
+  }
+
+  function setPassword_token($password_token) {
+    $this->password_token = $password_token;
+  }
+
+  function set_todos($todos) {
+    $this->todos = $todos;
+  }
 
   function __construct() {
     $this->user_likes = new ArrayCollection();
@@ -33,7 +76,7 @@ class User {
     $this->whisky_likes = new ArrayCollection();
     $this->whiskys_created = new ArrayCollection();
     $this->events_created = new ArrayCollection();
-    
+    $this->todos = new ArrayCollection();
   }
 
   function getId() {
@@ -83,8 +126,8 @@ class User {
   function isAdmin() {
     return $this->is_admin == 1;
   }
-  
-  function isDeleted(){
+
+  function isDeleted() {
     return $this->is_deleted == 1;
   }
 
@@ -139,8 +182,9 @@ class User {
   function setPasswordToken() {
     $this->password_token = uniqid(mt_rand(), true);
   }
-  
-  function setDeleted($is_deleted){
+
+  function setDeleted($is_deleted) {
     $this->is_deleted = $is_deleted;
   }
+
 }

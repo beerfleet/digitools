@@ -7,7 +7,7 @@ function initPickers() {
   if ( $(".datepick").size() <= 0 ) {
     return;
   }
-  $(".datepick").datepicker();
+  $(".datepick").datepicker({ dateFormat: 'yy-mm-dd' });
   $(".timepick").timepicker();
   $(".datepick, .timepick").on('mouseover', function() {
   	$('.datepick, .timepick').css( 'cursor', 'pointer' );

@@ -70,13 +70,15 @@ class TodoService {
       }
       $tododatetime_str = str_replace('/', '-', $tododate) . " " . $todotime;
       $tododatetime = date_create($tododatetime_str);
-
       $priority_id = $app->request->post('priority');
       $priority = $this->getPriorityById($priority_id);
 
       $creationdate_str = date('Y-m-d H:i:s');
       $creationdate = date_create($creationdate_str);
       $todo = new Todo();
+      $profile_srv = new ProfileService($this->em, $this->app);
+      $todo->setUser($profile_srv->get_current_user());
+      
       $todo->setCreationdate($creationdate);
       $todo->setTitle($title);
       if ($tododate != "") {
@@ -102,7 +104,8 @@ class TodoService {
     $state = $app->request->post('state');
     /* @var $todo Todo */
     $todo = $this->getTodoById($id);
-    $todo->setFinishstate($state);
+    $todo->setFinishstate($state);    
+    $todo->setFinishdate($state == 1 ? new \DateTime() : new \DateTime('0000-00-00 00:00:00'));
     $em = $this->em;
     $em->persist($todo);
     $em->flush();

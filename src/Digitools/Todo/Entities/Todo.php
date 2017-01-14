@@ -94,7 +94,7 @@ class Todo {
     var_dump($this->creationdate);
   }
 
-  function setFinishdate(\DateTime $finishdate) {
+  function setFinishdate($finishdate) {
     $this->finishdate = $finishdate;
   }
 

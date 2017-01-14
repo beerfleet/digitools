@@ -9,6 +9,7 @@ use Digitools\Todo\Entities\Priority;
 use Digitools\eslTools\Service\Profile\ProfileService;
 use Digitools\Common\Entities\Constants;
 use Doctrine\ORM\Repository;
+use Digitools\Todo\Service\Validation\TodoValidation;
 
 class TodoService {
 
@@ -21,7 +22,7 @@ class TodoService {
     $this->app = $app;
     $this->errors = null;
   }
-  
+
   public function getTodoById($id) {
     $repo = $this->em->getRepository('Digitools\Todo\Entities\Todo');
     return $repo->find($id);
@@ -31,7 +32,7 @@ class TodoService {
     $repo = $this->em->getRepository('Digitools\Todo\Entities\Todo');
     return $repo->findAll();
   }
-  
+
   public function get_todos_from_user() {
     $app = $this->app;
     $profile_srv = new ProfileService($this->em, $app);
@@ -54,36 +55,45 @@ class TodoService {
   }
 
   public function storeTodo() {
+
     $app = $this->app;
-    $title = $app->request->post('title');
-    $tododate = $app->request->post('tododate');
-    $todotime = $app->request->post('todotime');
-    if ($todotime == "") {
-      $todotime = "00:00:00";
-    }
-    $tododatetime_str = str_replace('/', '-', $tododate) . " " . $todotime;
-    $tododatetime = date_create($tododatetime_str);
-
-    $priority_id = $app->request->post('priority');
-    $priority = $this->getPriorityById($priority_id);
-
-    $creationdate_str = date('Y-m-d H:i:s');
-    $creationdate = date_create($creationdate_str);
-    $todo = new Todo();
-    $todo->setCreationdate($creationdate);
-    $todo->setTitle($title);
-    if ($tododate != "") {
-      $todo->setTododate($tododatetime);
-    }
-    $todo->setPriority($priority);
-
     $em = $this->em;
-    $em->persist($todo);
-    $em->flush();
 
-    $app->flash("info", "'" . $todo . "' is added");
+    $val = new TodoValidation($app, $em);
+    if ($val->validate()) {
+
+      $title = $app->request->post('title');
+      $tododate = $app->request->post('tododate');
+      $todotime = $app->request->post('todotime');
+      if ($todotime == "") {
+        $todotime = "00:00:00";
+      }
+      $tododatetime_str = str_replace('/', '-', $tododate) . " " . $todotime;
+      $tododatetime = date_create($tododatetime_str);
+
+      $priority_id = $app->request->post('priority');
+      $priority = $this->getPriorityById($priority_id);
+
+      $creationdate_str = date('Y-m-d H:i:s');
+      $creationdate = date_create($creationdate_str);
+      $todo = new Todo();
+      $todo->setCreationdate($creationdate);
+      $todo->setTitle($title);
+      if ($tododate != "") {
+        $todo->setTododate($tododatetime);
+      }
+      $todo->setPriority($priority);
+
+      $em->persist($todo);
+      $em->flush();
+
+      $app->flash("info", "'" . $todo . "' is added");
+    } else {
+      $app->flash("errors", $val->getErrors());
+      
+    }
   }
-  
+
   // ajax
   public function setState() {
     /* @var $app Slim */

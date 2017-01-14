@@ -14,7 +14,9 @@
       
       <input type="text" class="form-control search_box" placeholder="doorzoek tags" />
       <div class="controls">
-        <div class="nieuwe-tag form-control btn submit action-button"><a href="#">Nieuwe tag</a></div>
+        <div class="nieuwe-tag">
+          <a class="form-control btn submit action-button" href="#">Nieuwe tag</a>
+        </div>
       </div>
       
       <form action="{{ app.urlFor('log_new') }}" method="POST" novalidate>

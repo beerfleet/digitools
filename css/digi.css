@@ -139,6 +139,17 @@ nav#topmenu {
   margin-bottom: 12px;
 }
 
+/* color of datatables interface fields */
+#DataTables_Table_0_length,
+#DataTables_Table_0_filter,
+#DataTables_Table_0_info,
+#listing #DataTables_Table_0_paginate,
+#listing #DataTables_Table_0_previous,
+#listing .dataTables_paginate .paging_simple_numbers,
+#listing .paginate_button .previous .disabled {
+  color: gray;
+}
+
 /* registrations */
 #registration select,
 #registration textarea,

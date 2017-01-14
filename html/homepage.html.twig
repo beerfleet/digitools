@@ -1,6 +1,6 @@
 {% extends 'base_with_bottom_menu.html.twig' %}
 
-{% block title %}Digi Tools{% endblock title %}
+{% block title %}Digi Tools - Welkom{% endblock title %}
 
 
   {% block main_column %}
@@ -9,7 +9,7 @@
       {% if globals.user is defined and globals.user is not null %}
       {% set user = globals.user %}
         <h1>{{ globals.user.username }} is aangemeld</h1>
-        {% if user.isAdmin() %}
+        {% if user.isAdmin %}
           <span class="status">als admin</span>
         {% else %}
           <span class="status">als user</span>
@@ -20,7 +20,3 @@
     
   {% endblock main_column %}
 
-
-{% block extrajs %}
-  <script src="js/main.js"></script>
-{% endblock extrajs %}

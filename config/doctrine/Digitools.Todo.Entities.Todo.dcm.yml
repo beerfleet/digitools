@@ -1,5 +1,6 @@
 Digitools\Todo\Entities\Todo:
-  type: entity  
+  type: entity
+  repositoryClass: Digitools\Todo\Entities\Repo\TodoRepo
   table: todo  
   id:
     id:

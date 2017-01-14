@@ -21,7 +21,7 @@ class TodoController extends Controller {
     $app = $this->getApp();
     if ($this->getUser()) {
       $app->render('Todo/todo_show_all_from_user.html.twig', 
-              ['globals' => $this->getGlobals(), 'items' => $this->srv->getTodosFromUser()]);
+              ['globals' => $this->getGlobals(), 'items' => $this->srv->get_todos_from_user()]);
     } else {
       $app->flash('error', 'Aanmelding vereist.');
       $app->redirect($app->urlFor('main_page'));

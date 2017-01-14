@@ -3,6 +3,7 @@
 namespace Digitools\Todo\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Digitools\EslTools\Entities\User;
 
 /**
  * Postcode entity
@@ -17,7 +18,12 @@ class Todo {
   private $creationdate;
   private $tododate;
   private $finishdate;
+  /* @var $user User */
   private $user;
+  
+  public function user_id() {
+    return $user->getId();
+  }
 
   function getUser() {
     return $this->user;

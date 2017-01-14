@@ -16,10 +16,10 @@
       <li {% if is_main_page %} class="current_page" {% endif %}>
         <a href="{{ app.urlFor('main_page') }}">Home</a>
       </li>
-      <li {% if is_todo_home %} class="current_page" {% endif %}>
-        <a href="{{ app.urlFor('todo_home') }}">Todo</a>
-      </li>      
       {% if (globals.logged_in ) %}
+        <li {% if is_todo_home %} class="current_page" {% endif %}>
+          <a href="{{ app.urlFor('todo_home') }}">Todo</a>
+        </li>      
         <li {% if is_log_new %} class="current_page" {% endif %}>
           <a href="{{ app.urlFor('log_new') }}">Logs</a>
         </li>      

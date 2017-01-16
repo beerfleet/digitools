@@ -9,29 +9,36 @@
 {% block main_column %}
   {% set app = globals.app %}
   <section id="listing">
-    <h1>Show items</h1>    
-    <table class="table dataTable table-striped">
-      <thead>
-        <tr>
-          <th>Title</th> 
-          <th>Creation Date</th>
-          <th>Due Date</th>
-          <th>Priority</th>
-          <th>Finished</th>
-        </tr>
-      </thead>
-      <tbody>        
-        {% for item in items %}
+
+    <h1>Show items</h1>
+    {% if (items is not null and items|length > 0) %}
+      <table class="table dataTable table-striped">
+        <thead>
           <tr>
-            <td>{{ item.title }}</td>
-            <td>{{ item.creationdate }}</td>
-            <td>{{ item.tododate }}</td>
-            <td>{{ item.priority }}</td>
-            <td><input class="finishstate" data-todo-id={{ item.id }} name="finishstate" type="checkbox" {% if item.finishstate == 1 %} checked="checked" {% endif %}></td>
+            <th>Titel</th> 
+            <th>Aanmaakdatum</th>
+            <th>Limietdatum</th>
+            <th>Prioriteit</th>
+            <th>Klaar</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>        
+          {% for item in items %}
+            <tr>
+              <td>{{ item.title }}</td>
+              <td>{{ item.creationdate }}</td>
+              <td>{{ item.tododate }}</td>
+              <td>{{ item.priority }}</td>
+              <td><input class="finishstate" data-todo-id={{ item.id }} name="finishstate" type="checkbox" {% if item.finishstate == 1 %} checked="checked" {% endif %}></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Er zijn geen onvoltooide items</p>
+    {% endif %}
+
+
   </section>
 {% endblock main_column %}
 

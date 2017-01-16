@@ -12,7 +12,8 @@
       <div class="controls">
         <div class="nieuwe-tag"><a class="form-control btn submit action-button" href="#">Nieuwe tag</a></div>
       </div>
-      <div class="tag-bag">          
+      <div class="tag-bag">
+        {% set log_count = 1 %}
         {% include 'Logbook/show_tags_selectable.html.twig' %}
       </div>
       <div>

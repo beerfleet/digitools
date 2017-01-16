@@ -1,10 +1,16 @@
-{# empty Twig template #}
+{# set log_count = 1 in including file for showing log count in tags #}
+
 <section id="registration">
   <ul class="tag-list search_list"> 
 
     {% for tag in tag_list %}
       <li class="tag" data-log-id="{{ log.get_id }}" data-tag-id="{{ tag.get_id }}"> 
-        <span class="item_entry_box">{{ tag.get_tag_desc }} </span>      
+
+        <span class="item_entry_box">{{ tag.get_tag_desc }} </span>
+        {% if (log_count == 1) %}
+          <span class="log_count">({{ tag.get_logs|length }})</span>
+        {% endif %}
+
         <span>
           <input type="checkbox" name="tags_chk[{{ tag.get_id }}]" data-tag-id="{{ tag.get_id }}" id="tags" 
                  {% for et in entry_tags %}
@@ -13,6 +19,7 @@
                    {% endif %}
                  {% endfor %} />
         </span>
+
       </li>
     {% endfor %}
 </section>

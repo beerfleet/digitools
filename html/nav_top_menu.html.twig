@@ -20,10 +20,10 @@
         <a href="{{ app.urlFor('main_page') }}">Home</a>
       </li>
       {% if (globals.logged_in ) %}
-        <li {% if is_todo_home %} class="current_page" {% endif %}>
+        <li {% if is_todo_home or is_todo_new or is_todos_unfinished %} class="current_page" {% endif %}>
           <a href="{{ app.urlFor('todo_home') }}">Todo&rsquo;s</a>
         </li>      
-        <li {% if is_log_new %} class="current_page" {% endif %}>
+        <li {% if is_log_new or is_admin_logs_manage %} class="current_page" {% endif %}>
           <a href="{{ app.urlFor('log_new') }}">Logs</a>
         </li>      
       {% endif %}

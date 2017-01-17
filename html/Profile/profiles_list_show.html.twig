@@ -2,30 +2,36 @@
 
 {% block title %}Digi Tools - ESL{% endblock title %}
 
-  {% block main_column %}
-    <section id="users_list">
+{% block main_column %}
+  <section id="users_list">
 
-      <table class="table table-striped">
-        <thead>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Admin</th>
+          <th>Enabled</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usr in users_list %}
+          {% set app = globals.app %}
           <tr>
-            <th>Username</th>
-            <th>Admin</th>
-            <th>Enabled</th>
-            <th> </th>
+            <td >{{ usr.username }}</td>
+            <td> 
+              <input {% if globals.user.username == usr.username %} disabled {% endif %} type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isAdmin() == 1 ? "checked='checked'" }} /> 
+            </td>
+            <td> 
+              <input {% if globals.user.username == usr.username %} disabled {% endif %} type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isEnabled() == 1 ? "checked='checked'" }} /> 
+            </td>
+            <td> 
+              <a href="{{ app.urlFor('admin_profile_view', {'id': usr.id}) }}" class="action-button"> Wijzig </a> 
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {% for usr in users_list %}
-            {% set app = globals.app %}
-            <tr>
-              <td>{{ usr.username }}</td>
-              <td> <input type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isAdmin() == 1 ? "checked='checked'" }} /> </td>
-              <td> <input type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isEnabled() == 1 ? "checked='checked'" }} /> </td>
-              <td> <a href="{{ app.urlFor('admin_profile_view', {'id': usr.id}) }}" class="action-button"> Wijzig </a> </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        {% endfor %}
+      </tbody>
+    </table>
 
-    </section>
-  {% endblock main_column %}
+  </section>
+{% endblock main_column %}

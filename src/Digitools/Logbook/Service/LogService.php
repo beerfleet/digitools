@@ -78,6 +78,8 @@ class LogService {
       $log = new Log();
       $log->set_entry($app->request->post('log_entry'));
       $log->set_created(new \DateTime());
+      $log->set_modified(new \DateTime('0000-00-00 00:00:00'));
+      $log->set_delete_flag(0);      
       $log->set_user($this->user);
       $tags = $this->acquire_tags_from_input();
       try { // valid = store

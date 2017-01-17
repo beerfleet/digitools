@@ -13,16 +13,25 @@
     <link href="/css/digi.css" rel="stylesheet" type="text/css" />
 
   </head>
-  <body>
+  <body class="{% if (globals.user.isAdmin == 1) %}indicate-admin{% endif %}">
 
     <div id="wrapper">      
       <div id="menu-section" class="container">
+
         {% block header %}
           {% include 'header.html.twig' %}
         {% endblock header %}
+
         {% block nav_menu %}
           {% include 'nav_top_menu.html.twig' %}
-        {% endblock nav_menu%}
+        {% endblock nav_menu%}     
+
+        {% block show_username %}
+          {% if globals.logged_in %}
+            <span id="show-username" class="floatright">Aangemeld als {{ globals.user.username }}</span>
+          {% endif %}
+        {% endblock show_username %}
+
       </div>
 
       <div class="">

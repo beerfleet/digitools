@@ -73,6 +73,11 @@ h4 {
   border: 1px white solid;  
 }
 
+#show-username {
+  font-family: HeadFont;
+  font-size: 0.8em;
+}
+
 
 /* HEADER */
 .container #topmenu .nav-tabs {
@@ -93,8 +98,8 @@ nav#topmenu {
   padding-top: 30px;
 }
 
-#topmenu li {
-
+.indicate-admin {
+  background-color: #f5fce8;
 }
 
 /* ERROR OUTPUT */

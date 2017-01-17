@@ -20,7 +20,7 @@ class HomepageController extends Controller {
     $em = $this->getEntityManager();
     $app = $this->getApp();
     
-    $globals = $this->getGlobals();
+    $globals = $this->getGlobals();    
     $test = $this->isUserLoggedIn();
     
     $app->render('homepage.html.twig', ['globals' => $this->getGlobals()]);

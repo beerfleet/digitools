@@ -138,6 +138,7 @@ nav#topmenu {
   padding-right: 10px;
 }
 
+
 .context {
   background-color: #f8fbf9;
   padding: 10px;
@@ -198,6 +199,8 @@ nav#topmenu {
   font-size: 1.36em;
   /*color: #999999;*/
   color: #90BEB2;
+  background-color: white;
+  padding: 3px;
 }
 .btn.action-button.btn-default {
   padding-top: 1px;

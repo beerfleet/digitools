@@ -42,6 +42,13 @@ class LogRepo extends EntityRepository {
     return $logs_per_user;
   }
   
+  public function find_all_sorted_by_deletion_mark() {
+    $em = $this->getEntityManager();
+    $dql = "SELECT l FROM Digitools\Logbook\Entities\Log l ORDER BY l.delete_flag DESC";           
+    $result = $em->createQuery($dql)->getResult();
+    return $result;
+  }
+  
   public function toggle_log_tag_entry($log_id, $tag_id) {
     $sql = "SELECT * FROM log_tag WHERE log_tag.log_id = $log_id AND log_tag.tag_id = $tag_id";
     $em = $this->getEntityManager();
@@ -68,5 +75,6 @@ class LogRepo extends EntityRepository {
     $tag = $em->getConnection()->executeQuery($sql);
     return $tag->fetch();
   }
+  
 
 }

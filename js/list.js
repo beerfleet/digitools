@@ -32,7 +32,9 @@ function init_search_handling() {
 
 function init_datatable() {
   if ($('.dataTable').length > 0) {
-    $('.dataTable').DataTable();
+    $('.dataTable').DataTable({
+      "order": []
+    });
   }
 }
 

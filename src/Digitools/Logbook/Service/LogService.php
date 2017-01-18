@@ -151,7 +151,8 @@ class LogService {
   }
   
   public function retrieve_all_logs() {
-    return $this->em->getRepository(Constants::LOG)->findAll();
+    //return $this->em->getRepository(Constants::LOG)->findAll();
+    return $this->em->getRepository(Constants::LOG)->find_all_sorted_by_deletion_mark();
   }
 
   public function load_entry_data_by_id($id) {

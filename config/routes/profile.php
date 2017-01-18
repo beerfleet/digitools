@@ -46,6 +46,14 @@ $app->get('/profielen', function() use ($contr) {
 })->name('admin_list_profiles');
 
 
+/* ajax */
+$app->post('/admin/toggleadmin', function() use ($contr) {
+  $contr->admin_toggle_admin_state();
+});
+$app->post('/admin/toggleenabled', function() use ($contr) {
+  $contr->admin_toggle_enabled_state();
+});
+
 
 /* olivier */
 $app->get('/editadmin/:username', function($username) use ($contr) {

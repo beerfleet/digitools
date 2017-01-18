@@ -20,10 +20,10 @@
           <tr>
             <td >{{ usr.username }}</td>
             <td> 
-              <input {% if globals.user.username == usr.username %} disabled {% endif %} type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isAdmin() == 1 ? "checked='checked'" }} /> 
+              <input class="check-admin" {% if globals.user.username == usr.username %} disabled {% endif %} type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isAdmin() == 1 ? "checked='checked'" }} /> 
             </td>
             <td> 
-              <input {% if globals.user.username == usr.username %} disabled {% endif %} type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isEnabled() == 1 ? "checked='checked'" }} /> 
+              <input class="check-enabled" {% if globals.user.username == usr.username %} disabled {% endif %} type="checkbox" data-user-id="{{ usr.id }}" {{ usr.isEnabled() == 1 ? "checked='checked'" }} /> 
             </td>
             <td> 
               <a href="{{ app.urlFor('admin_profile_view', {'id': usr.id}) }}" class="action-button"> Wijzig </a> 

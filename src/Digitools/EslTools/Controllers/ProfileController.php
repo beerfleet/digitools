@@ -107,6 +107,7 @@ class ProfileController extends Controller {
   }
 
   /* admin views user profile by id */
+
   public function view_profile_with_id($id) {
     $app = $this->getApp();
     if ($this->isUserLoggedIn() && $this->isUserAdmin()) {
@@ -177,6 +178,14 @@ class ProfileController extends Controller {
       $errors = $this->srv->getErrors();
       $app->render('Profile/admin_user_show.html.twig', array('globals' => $this->getGlobals(), 'user' => $this->srv->get_user_by_id($id), 'errors' => $errors));
     }
+  }
+
+  public function admin_toggle_admin_state() {
+    $this->srv->toggle_admin_state();    
+  }
+  
+  public function admin_toggle_enabled_state() {
+    $this->srv->toggle_enabled_state(); 
   }
 
   /* password reset */

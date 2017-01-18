@@ -3,7 +3,7 @@
 namespace Digitools\eslTools\Service\Profile;
 
 use Doctrine\ORM\EntityManager;
-use Digitools\eslTools\Entities\User;
+use Digitools\EslTools\Entities\User;
 use Digitools\eslTools\Service\Validation\ProfileValidation as Val;
 use Digitools\EslTools\Service\Registration\RegistrationService;
 use Digitools\eslTools\Service\Validation\PasswordValidation;
@@ -288,6 +288,29 @@ class ProfileService {
     $members = $userRepository->findAll();
 
     return $members;
+  }
+  
+  /* ajax */
+  public function toggle_admin_state() {
+    $app = $this->app;
+    $state = $app->request->post('state');
+    $user_id = $app->request->post('user_id');
+    $user = $this->get_user_by_id($user_id);
+    $user->setAdmin($state === "true" ? 1 : 0);
+    $em = $this->em;
+    $em->persist($user);
+    $em->flush();
+  }
+  
+  public function toggle_enabled_state() {
+    $app = $this->app;
+    $state = $app->request->post('state');
+    $user_id = $app->request->post('user_id');
+    $user = $this->get_user_by_id($user_id);
+    $user->setEnabled($state === "true" ? 1 : 0);
+    $em = $this->em;
+    $em->persist($user);
+    $em->flush();
   }
 
 }

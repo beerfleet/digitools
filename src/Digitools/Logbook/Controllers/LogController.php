@@ -156,6 +156,12 @@ class LogController extends Controller {
     $srv->log_set_delete_state();
     echo json_encode(['result' => 'log marked']);
   }
+  
+  public function admin_delete_marked_logs() {    
+    $this->srv->delete_marked_logs();
+    
+  }
+  
 
   /**
    * Log Tagging

@@ -268,5 +268,20 @@ class LogService {
   public function get_errors() {
     return $this->errors;
   }
+  
+  /* @var $em EntityManager */
+  public function delete_log_by_id($id) {    
+    $log = $this->get_log_by_id($id);
+    $this->em->remove($log);    
+  }
+  
+  public function delete_marked_logs() {
+    $app = $this->app;
+    $marked = $app->request->post('log_ids');
+    foreach ($marked as $key => $id) {
+      $this->delete_log_by_id($id);
+    }
+    $this->em->flush();
+  }
 
 }

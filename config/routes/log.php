@@ -4,7 +4,7 @@ use Digitools\Logbook\Controllers\LogController;
 
 $contr = new LogController($em, $app);
 
-/* logs */
+/* LOGS */
 $app->get('/log', function() use ($contr) {
   $contr->new_log_entry();
 })->name('log_new');
@@ -33,7 +33,14 @@ $app->post('/log/mark-for-deletion', function() use ($contr) {
   $contr->log_toggle_deletion_request();
 });
 
-/* tags */
+/* ajax */
+$app->post('/admin/delete-marked-logs', function() use ($contr) {
+  $contr->admin_delete_marked_logs();
+});
+
+
+
+/* TAGS */
 $app->post('/tags/add', function() use ($contr) {
   $contr->add_tag_if_new();
 });

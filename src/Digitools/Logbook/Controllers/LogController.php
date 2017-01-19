@@ -82,12 +82,13 @@ class LogController extends Controller {
     if ($this->getUser()) {
       /* @var $entry Log */
       $entry = $srv->load_entry_data_by_id($id);
-      $entry_tags = $entry->get_tags();
 
       if ($entry == null) {
         $app->flash('error', 'Ongeldige bewerking.');
         $app->redirect($app->urlFor('main_page'));
       }
+
+      $entry_tags = $entry->get_tags();
       $app->render('Logbook/edit_log_entry.html.twig', ['globals' => $this->getGlobals(),
           'log' => $entry,
           'tag_list' => $srv->list_tags(),
@@ -150,18 +151,16 @@ class LogController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
-  
-  public function log_toggle_deletion_request() {    
+
+  public function log_toggle_deletion_request() {
     $srv = $this->srv;
     $srv->log_set_delete_state();
     echo json_encode(['result' => 'log marked']);
   }
-  
-  public function admin_delete_marked_logs() {    
+
+  public function admin_delete_marked_logs() {
     $this->srv->delete_marked_logs();
-    
   }
-  
 
   /**
    * Log Tagging

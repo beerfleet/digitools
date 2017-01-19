@@ -155,6 +155,11 @@ class LogService {
     return $this->em->getRepository(Constants::LOG)->find_all_sorted_by_deletion_mark();
   }
 
+  /**
+   * Return Log by id. Returns null if user is not logged on
+   * @param integer $id
+   * @return Log
+   */
   public function load_entry_data_by_id($id) {
 
     $repo = $this->em->getRepository(Constants::LOG);

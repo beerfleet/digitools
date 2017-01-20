@@ -31,6 +31,7 @@ class LogService {
   function __construct($em, $app, $user) {
     $this->errors = null;
     $this->em = $em;
+    /* @var $app Slim */
     $this->app = $app;
     $this->user = $user;
   }
@@ -79,7 +80,7 @@ class LogService {
       $log->set_entry($app->request->post('log_entry'));
       $log->set_created(new \DateTime());
       $log->set_modified(new \DateTime('0000-00-00 00:00:00'));
-      $log->set_delete_flag(0);      
+      $log->set_delete_flag(0);
       $log->set_user($this->user);
       $tags = $this->acquire_tags_from_input();
       try { // valid = store
@@ -110,12 +111,12 @@ class LogService {
     $result = ['logs' => $this->list_log_entries_lifo(), 'tags' => $this->list_tags()];
     return $result;
   }
-  
+
   public function get_log_by_id($id) {
     $repo = $this->em->getRepository(Constants::LOG);
     return $repo->find($id);
   }
-  
+
   /**
    * Sets delete state for a logbook entry. Admin / moderator decides if it is deleted.
    * @return true if succeeded, otherwise false
@@ -149,7 +150,7 @@ class LogService {
     /* @var $repo LogRepo */
     return $repo->find_ordered_lifo($this->user);
   }
-  
+
   public function retrieve_all_logs() {
     //return $this->em->getRepository(Constants::LOG)->findAll();
     return $this->em->getRepository(Constants::LOG)->find_all_sorted_by_deletion_mark();
@@ -164,13 +165,57 @@ class LogService {
 
     $repo = $this->em->getRepository(Constants::LOG);
     /* @var $log Log */
-    $log = $repo->find($id);    
+    $log = $repo->find($id);
     // check whether the logged on user is the one who wrote this entry
     /* @var $entry_usr_obj User */
     $entry_usr_id = $log->get_user()->getId();
     //$entry_usr_id = $log->get_user()->get_id();
     $logged_on_usr = $this->user->getId();
     return $entry_usr_id == $logged_on_usr ? $log : null;
+  }
+
+  public function handle_file_upload() {
+    $files = $_FILES['upload_file'];
+    if (strlen($files['name'][0]) >= 1) {
+      $root_dir = $_SERVER['DOCUMENT_ROOT'];
+      $config = include $root_dir . '/config/config.php';
+
+      $images_root_dir = $config['images']['root_dir'];
+      $target_dir = $images_root_dir . '/' . $this->user->getUsername();
+
+      $upload_allowed = 1;
+
+      $finfo_mime_type = finfo_open(FILEINFO_MIME_TYPE);
+
+      foreach ($files['name'] as $key => $filename) {
+        $allow_upload[$key] = 1;
+      }
+
+      foreach ($files['name'] as $key => $filename) {
+        $target_file[$key] = $target_dir . '/' . basename($files['name'][$key]);
+        
+        $tst[$key] = getimagesize($files['tmp_name'][$key]);
+        
+        $mime_types[$key] = finfo_file($finfo_mime_type, $files['tmp_name'][$key]);
+        if (!array_search($mime_types[$key], $config['images']['allowed_ext'])) {
+          $allow_upload[$key] = 0;
+        }
+        
+        $file_size[$key] = filesize($files['tmp_name'][$key]);
+        if ($file_size[$key] > $config['images']['max_size_bytes']) {
+          $allow_upload[$key] = 0;
+        }
+      }
+
+      foreach ($files['name'] as $key => $filename) {
+        if ($allow_upload[$key] === 1) {
+          if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0755, true);
+          }
+          move_uploaded_file($files['tmp_name'][$key], $target_file[$key]);
+        }
+      }
+    }
   }
 
   public function store_modified_entry($id) {
@@ -183,6 +228,9 @@ class LogService {
       $log = $repo->find($id);
       $log->set_entry($app->request->post('log_entry'));
       $log->set_modified(new \DateTime());
+
+      $this->handle_file_upload();
+
       try {
         $em->persist($log);
         $em->flush();
@@ -255,7 +303,7 @@ class LogService {
     $result = $repo->fetch_tag_by_desc($desc);
     return $result;
   }
-  
+
   public function delete_tag($id) {
     $em = $this->em;
     $repo = $em->getRepository(Constants::TAG);
@@ -268,19 +316,20 @@ class LogService {
     $tags = $this->app->request->post('tags');
     foreach ($tags as $tag) {
       $this->delete_tag($tag);
-    }    
+    }
   }
 
   public function get_errors() {
     return $this->errors;
   }
-  
+
   /* @var $em EntityManager */
-  public function delete_log_by_id($id) {    
+
+  public function delete_log_by_id($id) {
     $log = $this->get_log_by_id($id);
-    $this->em->remove($log);    
+    $this->em->remove($log);
   }
-  
+
   public function delete_marked_logs() {
     $app = $this->app;
     $marked = $app->request->post('log_ids');

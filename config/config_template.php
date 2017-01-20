@@ -40,9 +40,11 @@ return array(
         'root_dir' => "",
         'max_size_bytes' => 100,
         'allowed_ext' => array(
-            'jpg',
-            'jpeg',
-            'png'
+            'image/jpg',
+            'image/jpeg',
+            'image/png',
+            'application/msword',
+            'application/pdf'
         )
     )
 );

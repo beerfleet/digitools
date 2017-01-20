@@ -11,8 +11,9 @@
   <section id="registration">
     <div class="container form">
       <h1>Log Entry</h1>      
-      <form action="{{ app.urlFor('log_edit_store', {'id': log.get_id} ) }}" method="POST" novalidate>
+      <form action="{{ app.urlFor('log_edit_store', {'id': log.get_id} ) }}" method="POST" enctype="multipart/form-data" novalidate>
         
+        {# TAGS #}
         <div id="listing" class="tag-collection" >     
           <div class="controls">
             <div class="nieuwe-tag action-button"><a href="#">Nieuwe tag</a></div>
@@ -22,6 +23,7 @@
           </div>
         </div>
           
+        {# LOG #}
         <div id="log_id" hidden="true"> {{ log.get_id }} </div>
         <div class="form-group">          
           <textarea class="form-control" rows="8" id="log_entry" name="log_entry" value="{% if app.request.isPost() %}{{app.request.post('log_entry')}}{% endif %}">{{ log.get_entry }} </textarea>
@@ -30,6 +32,13 @@
           <label for="mark-delete" >Markeer om te verwijderen</label>
           <input type="checkbox" data-entry-id="{{ log.get_id }}" name="mark-delete">
         </div>
+        
+        {# IMAGES #}
+        <div class="form-group">
+          <label for="upload-file">Upload een of meer bestanden</label>
+          <input type="file" name="upload_file[]" multiple>
+        </div>
+        
         <div class="form-group spacing">
           <ul>
             <li><input class="form-control btn submit action-button" type="submit" id="verzend" name="register" value="Opslaan" /></li>            

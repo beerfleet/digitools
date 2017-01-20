@@ -8,6 +8,11 @@ Digitools\Logbook\Entities\Log:
       generator:
         strategy: AUTO
 
+  oneToMany:
+    logfiles:
+      targetEntity: Digitools\Logbook\Entities\Logfile
+      mappedBy: log
+
   manyToOne:
     user:
       targetEntity: Digitools\EslTools\Entities\User

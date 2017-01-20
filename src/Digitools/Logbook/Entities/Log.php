@@ -21,6 +21,24 @@ class Log {
   private $entry;
   private $modified;
   private $delete_flag;
+  private $logfiles;
+
+  public function __construct() {
+    $this->tags = new ArrayCollection();
+    $this->logfiles = new ArrayCollection();
+  }
+
+  function get_logfiles() {
+    return $this->logfiles;
+  }
+
+  function set_logfiles($logfiles) {
+    $this->logfiles = $logfiles;
+  }
+  
+  function add_logfile(Logfile $logfile) {
+    $this->logfiles[] = $logfile;
+  }
 
   function get_delete_flag() {
     return $this->delete_flag;
@@ -30,17 +48,12 @@ class Log {
     $this->delete_flag = $delete_flag;
   }
 
-    
   function get_modified() {
     return $this->modified;
   }
 
   function set_modified(\DateTime $modified) {
     $this->modified = $modified;
-  }
-
-  public function __construct() {
-    $this->tags = new ArrayCollection();
   }
 
   function get_id() {

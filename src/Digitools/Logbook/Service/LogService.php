@@ -12,6 +12,7 @@ use Digitools\Exceptions\LogExistsException;
 use Digitools\Logbook\Service\Validation\LogbookValidation;
 use Digitools\Logbook\Entities\Repo\LogRepo;
 use Digitools\Logbook\Entities\Log;
+use Digitools\Logbook\Entities\Logfile;
 use Digitools\EslTools\Entities\User;
 use Digitools\Logbook\Entities\Tag;
 use Digitools\Common\Entities\Constants;
@@ -179,12 +180,8 @@ class LogService {
     if (strlen($files['name'][0]) >= 1) {
       $root_dir = $_SERVER['DOCUMENT_ROOT'];
       $config = include $root_dir . '/config/config.php';
-
       $images_root_dir = $config['images']['root_dir'];
       $target_dir = $images_root_dir . '/' . $this->user->getUsername();
-
-      $upload_allowed = 1;
-
       $finfo_mime_type = finfo_open(FILEINFO_MIME_TYPE);
 
       foreach ($files['name'] as $key => $filename) {
@@ -193,29 +190,30 @@ class LogService {
 
       foreach ($files['name'] as $key => $filename) {
         $target_file[$key] = $target_dir . '/' . basename($files['name'][$key]);
-        
-        $tst[$key] = getimagesize($files['tmp_name'][$key]);
-        
+
         $mime_types[$key] = finfo_file($finfo_mime_type, $files['tmp_name'][$key]);
         if (!array_search($mime_types[$key], $config['images']['allowed_ext'])) {
           $allow_upload[$key] = 0;
         }
-        
+
         $file_size[$key] = filesize($files['tmp_name'][$key]);
         if ($file_size[$key] > $config['images']['max_size_bytes']) {
           $allow_upload[$key] = 0;
         }
       }
-
+      $uploaded_files = [];
       foreach ($files['name'] as $key => $filename) {
         if ($allow_upload[$key] === 1) {
           if (!is_dir($target_dir)) {
             mkdir($target_dir, 0755, true);
           }
           move_uploaded_file($files['tmp_name'][$key], $target_file[$key]);
+          $uploaded_files[$key]['filename'] = basename($files['name'][$key]);
         }
       }
+      return ['dir' => $target_dir, 'files' => $uploaded_files];
     }
+    return null;
   }
 
   public function store_modified_entry($id) {
@@ -229,7 +227,17 @@ class LogService {
       $log->set_entry($app->request->post('log_entry'));
       $log->set_modified(new \DateTime());
 
-      $this->handle_file_upload();
+      $uploaded_files = $this->handle_file_upload();
+      if ($uploaded_files) {
+        foreach ($uploaded_files['files'] as $key => $filename) {
+          $logfile = new Logfile();                    
+          
+          $logfile->set_path($uploaded_files['dir']);
+          $logfile->set_filename($filename['filename']);
+          $logfile->set_log($log);
+          $em->persist($logfile);
+        }
+      }
 
       try {
         $em->persist($log);

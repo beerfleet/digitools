@@ -5,3 +5,7 @@ nbproject/
 composer.lock
 logs/
 config/config.php
+uploads/
+uploads/*
+uploads/jvb/
+uploads/jvb/*

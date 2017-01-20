@@ -217,5 +217,10 @@ class LogController extends Controller {
     $srv->delete_tags();
     echo json_encode(['deleted' => 1]);
   }
+  
+  public function ajax_fetch_images() {    
+    $image_paths = $this->srv->fetch_log_image_paths();
+    echo json_encode($image_paths);
+  }
 
 }

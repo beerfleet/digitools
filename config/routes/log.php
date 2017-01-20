@@ -37,7 +37,9 @@ $app->post('/log/mark-for-deletion', function() use ($contr) {
 $app->post('/admin/delete-marked-logs', function() use ($contr) {
   $contr->admin_delete_marked_logs();
 });
-
+$app->post('/images/fetch', function() use ($contr) {
+  $contr->ajax_fetch_images();
+});
 
 
 /* TAGS */

@@ -27,5 +27,14 @@ class LogfileRepo extends EntityRepository {
     $query->execute();
     return $query->fetch();
   }
+  
+  public function fetch_log_files($log_id) {
+    $sql = "SELECT * "
+            . "FROM log_file "
+            . "WHERE log_id = $log_id";
+    $query = $this->getEntityManager()->getConnection()->prepare($sql);    
+    $query->execute();
+    return $query->fetchAll();
+  }
 
 }

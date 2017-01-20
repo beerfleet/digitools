@@ -118,6 +118,10 @@ nav#topmenu {
   text-align: center;
   color: #12711e;
 }
+#registration p.error {
+  color:red;
+  text-align: center;
+}
 .errors {
   text-align: center;
   color: red;

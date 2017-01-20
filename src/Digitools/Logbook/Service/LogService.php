@@ -361,5 +361,19 @@ class LogService {
     }
     $this->em->flush();
   }
+  
+  public function fetch_log_files($log_id) {
+    return $this->em->getRepository(Constants::LOGFILE)->fetch_log_files($log_id);
+  }
+  
+  public function fetch_log_image_paths() {
+    $log_id = $this->app->request->post('log_id');
+    $log_files = $this->fetch_log_files($log_id);
+    $result = [];
+    foreach ($log_files as $log_file) {
+      $result[] = $log_file['path'] . '/' . $log_file['filename'];      
+    }
+    return $result;
+  }
 
 }

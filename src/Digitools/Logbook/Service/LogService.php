@@ -216,6 +216,30 @@ class LogService {
     return null;
   }
 
+  public function check_if_logfile_exists($log_id, $dir, $filename) {
+    $result = $this->em->getRepository(Constants::LOGFILE)
+            ->find_double($log_id, $dir, $filename);
+    return $result;
+  }
+
+  /* @var $log Log */
+
+  public function store_file_data_to_db($log, $files) {
+
+    if ($files) {
+      foreach ($files['files'] as $key => $filename) {
+        $logfile_exists = $this->check_if_logfile_exists($log->get_id(), $files['dir'], $filename['filename']);
+        if (!$logfile_exists) {
+          $logfile = new Logfile();
+          $logfile->set_path($files['dir']);
+          $logfile->set_filename($filename['filename']);
+          $logfile->set_log($log);
+          $this->em->persist($logfile);
+        }
+      }
+    }
+  }
+
   public function store_modified_entry($id) {
     $app = $this->app;
     $em = $this->em;
@@ -228,16 +252,7 @@ class LogService {
       $log->set_modified(new \DateTime());
 
       $uploaded_files = $this->handle_file_upload();
-      if ($uploaded_files) {
-        foreach ($uploaded_files['files'] as $key => $filename) {
-          $logfile = new Logfile();                    
-          
-          $logfile->set_path($uploaded_files['dir']);
-          $logfile->set_filename($filename['filename']);
-          $logfile->set_log($log);
-          $em->persist($logfile);
-        }
-      }
+      $this->store_file_data_to_db($log, $uploaded_files);
 
       try {
         $em->persist($log);

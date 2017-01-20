@@ -1,5 +1,6 @@
 Digitools\Logbook\Entities\Logfile:
   type: entity
+  repositoryClass: Digitools\Logbook\Entities\Repo\LogfileRepo
   table: log_file
   id:
     id:

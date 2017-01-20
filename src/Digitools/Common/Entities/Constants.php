@@ -10,6 +10,7 @@ namespace Digitools\Common\Entities;
 class Constants {
   // constant for namespaces DRY
   const LOG = 'Digitools\Logbook\Entities\Log';
+  const LOGFILE = 'Digitools\Logbook\Entities\Logfile';
   const TAG = 'Digitools\Logbook\Entities\Tag';
   const USER = 'Digitools\EslTools\Entities\User';
   const TODO = 'Digitools\Todo\Entities\Todo';

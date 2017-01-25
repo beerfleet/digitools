@@ -282,6 +282,14 @@ class LogService {
     }
     return $result;
   }
+  
+  public function get_tag_names_from_ids($tag_ids) {
+    $tag_name_array = [];
+    foreach ($tag_ids as $id => $tag_id) {
+      $tag_name_array[] = $this->em->getRepository(Constants::TAG)->find($id);
+    }
+    return $tag_name_array;
+  }
 
   public function get_filtered_logs_and_tags() {
     $app = $this->app;
@@ -291,6 +299,15 @@ class LogService {
     $filter_tags = $_POST['tags_chk'];
     $filtered_result = $this->filter_logs_by_tags($unfiltered_log_list, $filter_tags);
     $result['logs'] = $filtered_result;
+        
+    $selected_tags = $this->get_tag_names_from_ids($filter_tags);    
+    $selected_tags_string = "";
+    /* @var $tag Tag */
+    foreach ($selected_tags as $tag) {
+      $selected_tags_string .= $tag->get_tag_desc() . ", ";
+    }
+    $result['selected_tags_string'] = rtrim($selected_tags_string, ", ");
+    
     return $result;
   }
 

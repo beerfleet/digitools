@@ -135,7 +135,8 @@ class LogController extends Controller {
       $app->flash('error', 'Geen resultaten gevonden.');
       $app->redirect($this->app->urlFor('log_new'));
     }
-    $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags']));
+    
+    $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags'], 'info' => 'Zoeken gefilterd op tags: ' . $list['selected_tags_string']));
   }
 
   /* Management of all users logs, ADMIN only */

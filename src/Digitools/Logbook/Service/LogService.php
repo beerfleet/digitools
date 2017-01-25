@@ -114,6 +114,23 @@ class LogService {
     $result = ['logs' => $this->list_log_entries_lifo(), 'tags' => $this->list_tags()];
     return $result;
   }
+  
+  public function get_logs() {
+    return $this->list_log_entries_lifo();
+  }
+  
+  public function get_untagged_logs() {
+    $logs = $this->get_logs_and_tags();
+    $untagged = [];
+    foreach ($logs['logs'] as $log) {
+      if (!$log->has_tags()) {
+        $untagged[] = $log;
+      }
+    }
+    $result['logs'] = $untagged;
+    $result['tags'] = $logs['tags'];
+    return $result;
+  }
 
   public function get_log_by_id($id) {
     $repo = $this->em->getRepository(Constants::LOG);
@@ -310,7 +327,7 @@ class LogService {
     
     return $result;
   }
-
+  
   public function add_tag_if_not_exists($tag) {
     $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";
     $em = $this->em;

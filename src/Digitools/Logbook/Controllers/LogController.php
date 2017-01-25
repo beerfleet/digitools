@@ -126,17 +126,24 @@ class LogController extends Controller {
   public function show_logs_filter_by_tags() {
     $app = $this->app;
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
-    if (array_key_exists('tags_chk', $app->request->post()) === false) {
-      $app->flash('error', 'Filter niet gelukt. Selecteer 1 of meerdere tags.');
-      $app->redirect($this->app->urlFor('log_new'));
-    }
-    $list = $srv->get_filtered_logs_and_tags();
-    if (sizeof($list['logs']) < 1) {
-      $app->flash('error', 'Geen resultaten gevonden.');
-      $app->redirect($this->app->urlFor('log_new'));
-    }
+
+    // log has no tags attached
+    if (array_key_exists('tags_chk', $app->request->post()) === false) {      
+      $list = $srv->get_untagged_logs();
+      $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags'], 'info' => 'Hieronder een overzicht van ongetagde logs.'));
     
-    $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags'], 'info' => 'Zoeken gefilterd op tags: ' . $list['selected_tags_string']));
+    // log has tags attached
+    } else {
+
+      // tags attached
+      $list = $srv->get_filtered_logs_and_tags();
+      if (sizeof($list['logs']) < 1) {
+        $app->flash('error', 'Geen resultaten gevonden.');
+        $app->redirect($this->app->urlFor('log_new'));
+      }
+
+      $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags'], 'info' => 'Hieronder een overzicht van logs met tags: ' . $list['selected_tags_string']));
+    }
   }
 
   /* Management of all users logs, ADMIN only */
@@ -218,8 +225,8 @@ class LogController extends Controller {
     $srv->delete_tags();
     echo json_encode(['deleted' => 1]);
   }
-  
-  public function ajax_fetch_images() {    
+
+  public function ajax_fetch_images() {
     $image_paths = $this->srv->fetch_log_image_paths();
     echo json_encode($image_paths);
   }

@@ -95,6 +95,10 @@ class Log {
   public function add_tag($tag) {
     $this->tags[] = $tag;
   }
+  
+  public function has_tags() {
+    return sizeof($this->tags) > 0;
+  }
 
   function get_entry() {
     return $this->entry;

@@ -10,7 +10,7 @@
 
   <section id="registration">
     <div class="container form">
-      <h1>Log Entry</h1>      
+      <h1>Log detail</h1>
       <form action="{{ app.urlFor('log_edit_store', {'id': log.get_id} ) }}" method="POST" enctype="multipart/form-data" novalidate>
         
         {# TAGS #}
@@ -35,17 +35,21 @@
         </div>
         
         {# IMAGES #}
-        <div id="carousel"></div>
+        <div id="carousel" class="outer_frame"></div>
         
-        <div class="form-group">
+        <div class="form-group outer_frame">
           <label for="upload-file">Upload een of meer bestanden</label>
           <input type="file" name="upload_file[]" multiple>
         </div>
         
-        <div class="form-group spacing">
+        <div class="form-group spacing outer_frame">
           <ul>
-            <li><input class="form-control btn submit action-button" type="submit" id="verzend" name="register" value="Opslaan" /></li>            
-          </ul>
+            <li><input class="form-control btn submit action-button" type="submit" id="verzend" name="register" value="Opslaan" /></li>                        
+          </ul>          
+        </div>        
+        
+        <div class="form-group spacing outer_frame">
+          <span class="btn action-button"><a href="{{ app.urlFor('log_new') }}">Terug naar log lijst</a></span>
         </div>
         
       </form>

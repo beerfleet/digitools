@@ -1,9 +1,9 @@
 <section id="search_by_tags">
-  <div class="container form">
+  <div class="container form outer_frame">
     <h1>Filter getagd</h1>
     <form action="{{ app.urlFor('logs_per_tags') }} " method="POST" novalidate>
       <div class="tag-collection">
-        <div class="tag-bag">
+        <div class="tag-bag">          
           {% include 'Logbook/show_tags_selectable.html.twig' %}
         </div>
       </div>
@@ -17,7 +17,7 @@
 </section>
 
 <section id="log_list">
-  <div class="container">
+  <div class="container outer_frame">
     <h1>Mijn entries</h1>
     <input type="text" class="form-control search_box" placeholder="search here" />
     {% include 'Logbook/show_log_entries.html.twig' %}

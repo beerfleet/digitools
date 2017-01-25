@@ -76,5 +76,10 @@ class LogRepo extends EntityRepository {
     return $tag->fetch();
   }
   
+  public function find_tags_sort_alfabetic() {
+    $dql = "SELECT t FROM Digitools\Logbook\Entities\Tag t ORDER BY t.tag_desc";
+    return $this->getEntityManager()->createQuery($dql)->getResult();
+  }
+  
 
 }

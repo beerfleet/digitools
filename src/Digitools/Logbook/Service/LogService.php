@@ -137,7 +137,7 @@ class LogService {
   public function list_tags() {
     $em = $this->em;
     $repo = $em->getRepository(Constants::TAG);
-    return $repo->findAll();
+    return $repo->find_tags_sort_alfabetic();
   }
 
   /**

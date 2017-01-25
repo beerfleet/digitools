@@ -128,11 +128,16 @@ class LogController extends Controller {
     $srv = new LogService($this->getEntityManager(), $app, $this->getUser());
 
     // log has no tags attached
-    if (array_key_exists('tags_chk', $app->request->post()) === false) {      
+    if (array_key_exists('tags_chk', $app->request->post()) === false) {
       $list = $srv->get_untagged_logs();
-      $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags'], 'info' => 'Hieronder een overzicht van ongetagde logs.'));
-    
-    // log has tags attached
+      $app->render('Logbook/filter_logs_by_tags.html.twig', array(
+          'globals' => $this->getGlobals(),
+          'log_list' => $list['logs'],
+          'tag_list' => $list['tags'],
+          'info' => 'Hieronder een overzicht van ongetagde logs.')
+      );
+
+      // log has tags attached
     } else {
 
       // tags attached
@@ -141,7 +146,6 @@ class LogController extends Controller {
         $app->flash('error', 'Geen resultaten gevonden.');
         $app->redirect($this->app->urlFor('log_new'));
       }
-
       $app->render('Logbook/filter_logs_by_tags.html.twig', array('globals' => $this->getGlobals(), 'log_list' => $list['logs'], 'tag_list' => $list['tags'], 'info' => 'Hieronder een overzicht van logs met tags: ' . $list['selected_tags_string']));
     }
   }

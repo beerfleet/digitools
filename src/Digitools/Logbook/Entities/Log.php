@@ -107,8 +107,21 @@ class Log {
   function set_entry($entry) {
     $this->entry = $entry;
   }
+  
+  function contains_some_of_the_tags($tags) {
+    $owned_tags = $this->get_tags();
+    $tag_id_arr = [];
+    foreach ($owned_tags as $tag) {
+      $tag_id_arr[] = $tag->get_id();
+    }
+    foreach ($tags as $tag_id => $checked) {
+      if (array_search($tag_id, $tag_id_arr) !== false) {
+        return true;
+      }
+    }
+  }
 
-  function contains_tags($tags) {
+  function contains_all_tags($tags) {
     $owned_tags = $this->get_tags();
     $tag_id_arr = [];
     foreach ($owned_tags as $tag) {

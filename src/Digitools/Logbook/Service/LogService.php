@@ -114,11 +114,11 @@ class LogService {
     $result = ['logs' => $this->list_log_entries_lifo(), 'tags' => $this->list_tags()];
     return $result;
   }
-  
+
   public function get_logs() {
     return $this->list_log_entries_lifo();
   }
-  
+
   public function get_untagged_logs() {
     $logs = $this->get_logs_and_tags();
     $untagged = [];
@@ -286,20 +286,30 @@ class LogService {
   }
 
   /**
-   * 
+   * Filter the logs containing ALL provided filter_tags
    * @param Log $logs colleciton of logs
    * @param Tag $tags tags used to filter the given logs
    */
   private function filter_logs_by_tags($logs, $filter_tags) {
     $result = [];
     foreach ($logs as $log) {
-      if ($log->contains_tags($filter_tags)) {
+      if ($log->contains_all_tags($filter_tags)) {
         $result[] = $log;
       }
     }
     return $result;
   }
   
+  public function filter_logs_by_one_or_more_tags($logs, $filter_tags) {
+    $result = [];
+    foreach ($logs as $log) {
+      if ($log->contains_some_of_the_tags($filter_tags)) {
+        $result[] = $log;
+      }
+    }
+    return $result;
+  }
+
   public function get_tag_names_from_ids($tag_ids) {
     $tag_name_array = [];
     foreach ($tag_ids as $id => $tag_id) {
@@ -310,24 +320,32 @@ class LogService {
 
   public function get_filtered_logs_and_tags() {
     $app = $this->app;
+
     $result = $this->get_logs_and_tags();
     $unfiltered_log_list = $result['logs'];
     $tag_list = $result['tags'];
-    $filter_tags = $_POST['tags_chk'];
-    $filtered_result = $this->filter_logs_by_tags($unfiltered_log_list, $filter_tags);
+    $filter_tags = $app->request->post('tags_chk');
+
+    if ($app->request->post('search_logic') === 'and') {
+      $filtered_result = $this->filter_logs_by_tags($unfiltered_log_list, $filter_tags);
+    } else {
+      $filtered_result = $this->filter_logs_by_one_or_more_tags($unfiltered_log_list, $filter_tags);       
+    }
+
+
     $result['logs'] = $filtered_result;
-        
-    $selected_tags = $this->get_tag_names_from_ids($filter_tags);    
+
+    $selected_tags = $this->get_tag_names_from_ids($filter_tags);
     $selected_tags_string = "";
     /* @var $tag Tag */
     foreach ($selected_tags as $tag) {
       $selected_tags_string .= $tag->get_tag_desc() . ", ";
     }
     $result['selected_tags_string'] = rtrim($selected_tags_string, ", ");
-    
+
     return $result;
   }
-  
+
   public function add_tag_if_not_exists($tag) {
     $query = "SELECT * FROM tag WHERE tag_desc = '" . strtolower($tag) . "'";
     $em = $this->em;

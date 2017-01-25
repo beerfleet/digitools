@@ -2,6 +2,12 @@
   <div class="container form outer_frame">
     <h1>Filter getagd</h1>
     <form action="{{ app.urlFor('logs_per_tags') }} " method="POST" novalidate>
+      <div id="search-logic" >
+        <div class="form-control">
+          <input type="radio" name="search_logic" value="and" checked> Alle
+          <input type="radio" name="search_logic" value="or"> Een van
+        </div>
+      </div>
       <div class="tag-collection">
         <div class="tag-bag">          
           {% include 'Logbook/show_tags_selectable.html.twig' %}

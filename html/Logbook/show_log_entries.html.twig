@@ -13,8 +13,10 @@
         {% include 'Logbook/show_tags.html.twig' %}
         </div>
         <li>
-          <div class="outer_frame">
-            <div class="floatright editeer"><a href="{{ app.urlFor('log_edit', {"id":log_item.get_id}) }}">Wijzig / Bekijk</a></div>
+          <div class="outer_frame {% if log_item.get_delete_flag == 1 %} mark-delete {% endif %}">            
+            <div class="floatright editeer">
+              <a href="{{ app.urlFor('log_edit', {"id":log_item.get_id}) }}">Wijzig / Bekijk</a>              
+            </div>
             <h4 class="item_created"> {{ log_item.get_created|date('Y-m-d H:i') }} </h4>
             <div class="item_entry_box"> {{ log_item.get_entry }} </div>
           </div>

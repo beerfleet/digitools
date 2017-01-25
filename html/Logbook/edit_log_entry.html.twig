@@ -31,7 +31,7 @@
         
         <div class="form-group mark-delete">
           <label for="mark-delete" >Markeer om te verwijderen</label>
-          <input type="checkbox" data-entry-id="{{ log.get_id }}" name="mark-delete">
+          <input type="checkbox" data-entry-id="{{ log.get_id }}" name="mark-delete" {% if log.get_delete_flag == 1 %}checked{% endif %}>
         </div>
         
         {# IMAGES #}

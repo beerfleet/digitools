@@ -1,0 +1,107 @@
+{% extends 'Yahtzee/yahtzee_base.html.twig' %}
+
+{% block title %}
+  THE MAGNIFICENT YAHTZEE
+{% endblock title %}
+
+{% block header %}
+  <div class="container">
+    <h1>YAHTZEE</h1>
+  </div>
+{% endblock header %}
+
+{% block content %}
+  {% set app = globals.app %}
+  <div class="container">
+
+    <div id="dice-controls">
+      <form action="{{ app.urlFor('yahtzee_subsequent_roll') }}" method="POST">
+
+        <div id="dice" class="form-group">
+          <input class="die" type="text" name="die1" value="{{ dice[0]['die'].value }}" readonly>
+          <input class="die" type="text" name="die2" value="{{ dice[1]['die'].value }}" readonly>
+          <input class="die" type="text" name="die3" value="{{ dice[2]['die'].value }}" readonly>
+          <input class="die" type="text" name="die4" value="{{ dice[3]['die'].value }}" readonly>
+          <input class="die" type="text" name="die5" value="{{ dice[4]['die'].value }}" readonly>
+        </div>
+
+        <div id="die-locks" class="form-group">
+          <input type="checkbox" id="lock-die1" name="lock_die1" hidden>
+          <input type="checkbox" id="lock-die2" name="lock_die2" hidden>
+          <input type="checkbox" id="lock-die3" name="lock_die3" hidden>
+          <input type="checkbox" id="lock-die4" name="lock_die4" hidden>
+          <input type="checkbox" id="lock-die5" name="lock_die5" hidden>
+        </div>
+
+        <div id="score-bloc" class="form-group">
+          
+          <div id="upper-half">
+            <div class="form-group">
+              <label for="ones">Ones</label>
+              <input class="field score-field" type="text" name="ones" readonly value="{{ score['ones'] }}">
+            </div>            
+            <div class="form-group">
+              <label for="twos">Twos</label>
+              <input class="field score-field" type="text" name="twos" readonly value="{{ score['twos'] }}">
+            </div>   
+            <div class="form-group">
+              <label for="threes">Threes</label>
+              <input class="field score-field" type="text" name="threes" readonly value="{{ score['threes'] }}">
+            </div>
+            <div class="form-group">
+              <label for="fours">Fours</label>
+              <input class="field score-field" type="text" name="fours" readonly value="{{ score['fours'] }}">
+            </div>
+            <div class="form-group">
+              <label for="fives">Fives</label>
+              <input class="field score-field" type="text" name="fives" readonly value="{{ score['fives'] }}">
+            </div>
+            <div class="form-group">
+              <label for="sixes">Sixes</label>
+              <input class="field score-field" type="text" name="sixes" readonly value="{{ score['sixes'] }}">
+            </div>
+          </div>
+
+          <div id="lower-half">
+            <div class="form-group">
+              <label for="toak">Three of a kind</label>
+              <input class="field score-field" type="text" name="toak" readonly value="{{ score['toak'] }}">
+            </div>
+            <div class="form-group">
+              <label for="carre">Carr&eacute;</label>
+              <input class="field score-field" type="text" name="carre" readonly value="{{ score['carre'] }}">
+            </div>
+            <div class="form-group">
+              <label for="full-house">Full House</label>
+              <input class="field score-field" type="text" name="full-house" readonly value="{{ score['full_house'] }}">
+            </div>
+            <div class="form-group">
+              <label for="small-straight">Small Straight</label>
+              <input class="field score-field" type="text" name="small-straight" readonly value="{{ score['small_straight'] }}">
+            </div>
+            <div class="form-group">
+              <label for="large-straight">Large Straight</label>
+              <input class="field score-field" type="text" name="large-straight" readonly value="{{ score['large_straight'] }}">
+            </div>
+            <div class="form-group">
+              <label for="yahtzee">Yahtzee</label>
+              <input class="field score-field" type="text" name="yahtzee" readonly value="{{ score['yahtzee'] }}">
+            </div>
+            <div class="form-group">
+              <label for="chance">Chance</label>
+              <input class="field score-field" type="text" name="chance" readonly value="{{ score['chance'] }}">
+            </div>
+            
+          </div>
+            
+        </div>
+
+        <input class="btn btn-info form-control" type="submit" name="roll" value="Rol">
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block extrajs %}
+  <script src="js/yahtzee.js"></script>
+{% endblock extrajs %}

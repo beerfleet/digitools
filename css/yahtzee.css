@@ -1,0 +1,52 @@
+/* DICE */
+html,
+body {
+  background-color: #dcf0bd;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+#score-bloc .form-group {
+  margin-bottom: 10px;
+}
+
+.die, .score-field {
+  width: 46px;
+  height: 46px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#dice, .score-field, #score-bloc label {
+  font-size: 1.347em;
+}
+
+input[type="checkbox"] {
+  width: 40px;
+  height: 40px;
+}
+
+.locked {
+  border: red 1px solid;
+}
+
+.unlocked {
+  border: black;
+}
+
+#score-bloc label {
+  width: 200px;
+}
+
+#upper-half .form-group:nth-child(odd),
+#lower-half .form-group:nth-child(odd) {
+  background-color: #fafad5;
+}
+
+#upper-half .form-group:nth-child(even),
+#lower-half .form-group:nth-child(even) {
+  background-color: #f5fbea;
+}
+

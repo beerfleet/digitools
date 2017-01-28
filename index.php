@@ -14,6 +14,7 @@ try {
   include 'config/routes/main.php';  
   include 'config/routes/todo.php';
   include 'config/routes/log.php';
+  include 'config/routes/yahtzee.php';
   
   $app->run();
     
